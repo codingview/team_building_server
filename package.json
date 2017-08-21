@@ -1,0 +1,37 @@
+{
+  "name": "team_building",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "script": "./app.js",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "connect-flash": "^0.1.1",
+    "connect-redis": "^3.3.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.6",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.4",
+    "express-session": "^1.15.2",
+    "log4js": "^1.1.1",
+    "mysql": "^2.13.0",
+    "path": "^0.12.7",
+    "request": "^2.81.0",
+    "sequelize": "^3.30.4",
+    "serve-favicon": "^2.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "webpack": "^2.4.1"
+  }
+}

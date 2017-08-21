@@ -1,0 +1,27 @@
+
+# webstorm
+.idea
+
+# svn
+.svn
+
+# .bak
+*.bak
+
+# node_modules
+node_modules/
+
+# sql
+sql/
+
+# logs
+logs/
+
+# config
+config/config_test.js
+config/config_experience.js
+config/config_stage.js
+config/config_production.js
+
+# security
+doc/Security.md
