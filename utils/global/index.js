@@ -6,9 +6,8 @@
 
 'use strict';
 
-const packageConfig = require('../../package.json');
-
-const _ = {
+const packageConfig = require('../../package.json')
+    , _ = {
     ENV: process.env.NODE_ENV || 'development' // 环境变量
     , SYS_NAME: packageConfig.name // 项目名称
     , SYS_VERSION: packageConfig.version // 项目版本

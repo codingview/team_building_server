@@ -6,21 +6,18 @@
 
 'use strict';
 
-const ENV = process.env.NODE_ENV || 'development';
-
-// 配置log4js
-const log4js = ()=> {
-    const _ = require('log4js');
-    _.configure(require('../../config/log4js')[ENV]);
-    return _;
-};
-
-// 日志记录器
-const logger = (name, level = 'info')=> {
-    const _ = log4js().getLogger(name);
-    _.setLevel(level);
-    return _;
-};
+const ENV = process.env.NODE_ENV || 'development'
+    , log4js =
+    ()=> { // 配置log4js
+        const _ = require('log4js');
+        _.configure(require('../../config/log4js')[ENV]);
+        return _;
+    }, logger =
+    (name, level = 'info')=> {// 日志记录器
+        const _ = log4js().getLogger(name);
+        _.setLevel(level);
+        return _;
+    };
 
 // 抛出引用
 module.exports = {
@@ -36,7 +33,7 @@ module.exports = {
      * @param req       request，请求体
      * @returns {string}
      */
-    , http: (req)=> {
+    , http: req=> {
         const ip = require('./method').ip(req)
             , _ = ip
                 + '  ' + req.originalUrl

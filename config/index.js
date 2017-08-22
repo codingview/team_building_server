@@ -5,3 +5,11 @@
  */
 
 'use strict';
+
+const CONFIG = {
+    development: require('./config_development')
+    // , test: require('./config_test')
+    // , production: require('./config_production')
+};
+
+module.exports = CONFIG[process.env.NODE_ENV || 'development'];

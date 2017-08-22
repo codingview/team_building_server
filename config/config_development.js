@@ -5,3 +5,10 @@
  */
 
 'use strict';
+
+module.exports = {
+    host: ''
+    , port: 3000
+    , mysql: {
+    }
+};
