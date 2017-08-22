@@ -8,8 +8,9 @@
 # .bak
 *.bak
 
-# node_modules
+# node modules
 node_modules/
+npm-debug.log
 
 # sql
 sql/

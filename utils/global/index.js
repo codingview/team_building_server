@@ -34,4 +34,4 @@ const _ = {
     }
 };
 
-module.exports = Object.assign(_);
+module.exports = Object.assign(_, require('./logger'));
