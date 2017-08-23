@@ -6,3 +6,13 @@
 
 'use strict';
 
+const express = require('express')
+    , router = new express.Router();
+
+// 请求日志
+router.use((req, res, next)=> {
+    GLO.http(req);
+    next();
+});
+
+module.exports = router;

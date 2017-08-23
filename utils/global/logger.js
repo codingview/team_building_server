@@ -1,6 +1,6 @@
 /**
  * Created by zrz on 2017/4/27.
- * Copyright© 2015-2020 occultskyrong (https://github.com/occultskyrong)
+ * Copyright© 2015-2020 codingview (https://github.com/codingview)
  * @version 0.0.1 created
  */
 
@@ -15,7 +15,7 @@ const ENV = process.env.NODE_ENV || 'development'
     }, logger =
     (name, level = 'info')=> {// 日志记录器
         const _ = log4js().getLogger(name);
-        _.setLevel(level);
+        _.level = level;
         return _;
     };
 
