@@ -18,7 +18,11 @@
     "serve-favicon": "^2.4.3"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-latest": "^6.24.1",
     "eslint": "^4.5.0",
-    "eslint-config-google": "^0.9.1"
+    "eslint-config-google": "^0.9.1",
+    "webpack": "^3.5.5"
   }
 }
