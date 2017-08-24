@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEI,kCAAU,CACR,gBAAgB,CAAE,uBAAuB",
+"sources": ["../general/headers.scss"],
+"names": [],
+"file": "home.min.css"
+}
