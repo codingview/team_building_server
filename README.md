@@ -24,3 +24,7 @@ team building server
   npm install -g eslint-config-google
   ```
 - `WebStorm`配置`eslint` ......
+- `WebStorm`配置`file watcher`
+  ```
+  --no-cache  --style compressed --update $FileName$:$FileNameWithoutExtension$.min.css
+  ```

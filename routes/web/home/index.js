@@ -13,6 +13,8 @@ const express = require('express')
 router.get('/', (req, res)=>
     res.render('./home/view.ejs', {
         title: '首页'
+        , menu: require('../../../config/menu')
+        , active: 'home'
     })
 );
 

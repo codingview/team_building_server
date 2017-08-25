@@ -8,7 +8,7 @@
 
 const express = require('express')
     , router = new express.Router()
-    , log4js = require('../utils/global/logger').log4js;
+    , log4js = GLO.log4js;
 
 // 请求日志
 router.use((req, res, next)=> {
