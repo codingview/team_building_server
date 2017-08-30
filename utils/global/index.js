@@ -14,7 +14,7 @@ const packageConfig = require('../../package.json')
     , SYS_VERSION: packageConfig.version // 项目版本
     , isDev: ()=>GLO.ENV === 'development' // 是否为开发环境
     , isPro: ()=>GLO.ENV === 'production' // 是否为生产环境
-    , success: (data)=>({status: 1, message: '', data: data}) // 成功的返回
+    , success: data=>({status: 1, message: '', data: data}) // 成功的返回
     // 错误返回并记录相关信息
     , error: (error, status = -1, msg = '')=> {
         if (typeof error === 'string') { // error为错误信息时直接输出

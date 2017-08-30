@@ -38,5 +38,5 @@ app.listen(config.port, ()=> {
         GLO.SYS_NAME + ' >> Http服务监听启动'
         + '  当前环境:' + GLO.ENV
         + '  监听端口:' + config.port
-    );
+        , 'start');
 });
