@@ -13,9 +13,11 @@
   "script": "./app.js",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "connect-redis": "^3.3.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
     "log4js": "^2.3.3",
     "serve-favicon": "^2.4.3"
   },

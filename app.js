@@ -10,6 +10,8 @@ global.GLO = require('./utils/global');
 
 // 加载modules
 const express = require('express')
+    , session = require('express-session')
+    , RedisStore = require('connect-redis')(session)
     , app = express()// 创建项目实例
     , bodyParser = require('body-parser')
     , path = require('path')
@@ -28,6 +30,14 @@ app.use(bodyParser.json({limit: '50mb'})); // 设置body结构体最大值
 app.use(bodyParser.urlencoded({extended: true})); // 设置body结构体键值数据类型
 app.use(cookieParser()); // 加载cookie解析中间件
 app.use(express.static(path.join(__dirname, 'public'))); // 设置静态资源解析地址
+// 配置session
+app.use(session({
+    store: new RedisStore(config.redis)
+    , resave: false
+    , saveUninitialized: true
+    , secret: config.redis.secret
+    , key: config.redis.key // key不同，基于redis的session不会出现多系统冲突
+}));
 
 // 加载路由
 app.use('/', require('./routes'));

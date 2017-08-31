@@ -19,7 +19,7 @@ module.exports = {
             }, http: { // 请求日志
                 type: 'file'
                 , filename: path.join(__dirname, '../logs/http.log')
-            }, error: {
+            }, error: { // 错误日志
                 type: 'file'
                 , filename: path.join(__dirname, '../logs/error.log')
             }

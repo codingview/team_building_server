@@ -9,6 +9,12 @@
 module.exports = {
     host: ''
     , port: 3000
-    , mysql: {
+    , mysql: {}, redis: {
+        host: 'localhost'
+        , port: 6379
+        , db: 6
+        , ttl: 86000
+        , secret: 'team_building'
+        , key: 'team_building'
     }
 };
