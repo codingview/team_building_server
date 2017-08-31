@@ -22,8 +22,11 @@ router.use(log4js.connectLogger(log4js.getLogger('http'), {
     , format: ':remote-addr  :method  :url  :status  :response-time' + 'ms'
 }));
 
-// todo 路由 - 接口
+// todo 路由 - web端接口
 router.use('/api', require('./api'));
+
+// todo 路由 - 管理端页面
+router.use('/admin', require('./admin'));
 
 // todo 路由 - web端页面
 router.use('/', require('./web'));
