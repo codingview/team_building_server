@@ -1,0 +1,73 @@
+@charset "utf-8";
+/*!
+ * team_building v0.0.1
+ * Copyright 2016-2018 CodingView, Inc.
+ */
+body {
+  line-height: 1.4;
+  color: #333;
+  font-size: 12px;
+  background: white;
+  -ms-overflow-style: scrollbar !important;
+}
+
+input, textarea, select {
+  font-size: 100%;
+  font-family: inherit
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, form {
+  margin: 0
+}
+
+h4, h5, h6 {
+  font-size: 1em
+}
+
+ul, ol {
+  padding-left: 0;
+  list-style-type: none
+}
+
+button, img {
+  border: 0;
+}
+
+.image-img {
+  width: 320px;
+  height: 320px
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  outline: none;
+  color: #fff;
+}
+
+.p0 {
+  padding: 0
+}
+
+.m0 {
+  margin: 0
+}
+
+* {
+  font-family: Microsoft YaHei, Helvetica, Arial, sans-serif;
+  -webkit-backface-visibility: hidden;
+}
+
+button, input {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
