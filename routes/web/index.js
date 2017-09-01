@@ -21,9 +21,6 @@ router.use('/production', require('./prodution'));
 // 基地资源
 router.use('/resource', require('./resource'));
 
-// 师资实力
-router.use('/teacher', require('./teacher'));
-
 // 精彩案例
 router.use('/case', require('./case'));
 
