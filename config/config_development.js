@@ -9,7 +9,8 @@
 module.exports = {
     host: ''
     , port: 3000
-    , mysql: {}, redis: {
+    , mysql: {}
+    , redis: {
         host: 'localhost'
         , port: 6379
         , db: 6
