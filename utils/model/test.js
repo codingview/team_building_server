@@ -7,18 +7,19 @@
 'use strict';
 
 const model = require('./mysql')
-    , User = require('../../models').User
-    , createUser = callback=>User(model.Sequelize, mod=> callback(model.sequelize.define('user', mod)));
+    , Admin = require('../../models').Admin
+    , crypt = require('../crypt')
+    , createAdmin = callback=>Admin(model.Sequelize, mod=> callback(model.sequelize.define('admin', mod)));
 
 model.sequelize
     .sync()
-    .then(function () {
-        return createUser(User=> {
-            User.create({
-                name: 'zz'
+    .then(() => createAdmin(Admin=> {
+            Admin.create({
+                name: '超级管理员'
+                , password: crypt.encode('123456')
+                , login_name: 'admin'
             });
-        });
-    })
-    .then(function (data) {
-        console.info(data);
-    });
+        })
+    )
+    .then(data=>console.info(data))
+    .catch(e=>console.error(e));

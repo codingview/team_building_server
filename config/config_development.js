@@ -11,13 +11,13 @@ module.exports = {
     , port: 3000
     , mysql: {
         read: { // 读写分离
-            database: 'mall'
+            database: 'team_building'
             , host: '127.0.0.1'
             , username: 'root' // 账号
             , password: 'root' // 密码
             , dialect: 'mysql'
         }, write: {
-            database: 'mall'
+            database: 'team_building'
             , host: '127.0.0.1'
             , username: 'root'
             , password: 'root'

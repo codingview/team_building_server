@@ -6,8 +6,9 @@
 
 'use strict';
 
-// 表名及表字段均使用驼峰规范
+// 表名及表字段均使用 _ 进行连接
+
 module.exports = {
     // 管理员 - 用户信息表
-    admin: require('./admin')
+    Admin: require('./admin')
 };

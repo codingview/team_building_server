@@ -9,8 +9,7 @@
 /* 使用Sequelize实现SQL数据库连接 */
 
 const Sequelize = require('sequelize')
-    , dbConfig = require('../../config/db')
-    , mysql = dbConfig.mysql
+    , mysql = require('../../config').mysql
     , sequelize =
     (config = mysql.write)=>
         new Sequelize(
