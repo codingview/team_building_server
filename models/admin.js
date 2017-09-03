@@ -9,7 +9,7 @@
 /* 管理人员表 */
 
 module.exports = DataTypes=>({
-    mod: {
+    fields: {
         id: {
             type: DataTypes.INTEGER
             , primaryKey: true
@@ -28,5 +28,5 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: false
         }
-    }
+    }, tableName: 'admin'
 });

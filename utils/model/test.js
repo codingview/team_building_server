@@ -6,18 +6,17 @@
 
 'use strict';
 
-const model = require('./mysql')
-    , admin = require('../../models').Admin(model.Sequelize).mod;
+console.info(require('../../models'));
 
-const Admin = model.sequelize.define('admin', admin)
+const mysql = require('./mysql')
+    , Admin = require('../../models').admin
     , crypt = require('../crypt')
+    , {pwd, salt}= crypt.encode('123456')
     ;
-
-const {pwd, salt}= crypt.encode('123456');
 
 console.info(pwd, salt);
 
-model.sequelize
+mysql.sequelize
     .sync()
     .then(() => Admin.create({
             name: '超级管理员'
