@@ -20,7 +20,6 @@
     "express": "^4.15.4",
     "express-session": "^1.15.5",
     "log4js": "^2.3.3",
-    "mysql": "^2.14.1",
     "mysql2": "^1.4.2",
     "redis": "^2.8.0",
     "sequelize": "^4.8.0",

@@ -24,6 +24,9 @@ module.exports = DataTypes=>({
         }, password: {
             type: DataTypes.STRING
             , allowNull: false
+        }, salt: { // 加盐
+            type: DataTypes.STRING
+            , allowNull: false
         }
     }
 });

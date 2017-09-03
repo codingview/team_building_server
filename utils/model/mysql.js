@@ -23,8 +23,12 @@ const Sequelize = require('sequelize')
                 , timezone: '+08:00'
                 , logging: 'logging' in config ? config.logging : console.log
                 , define: {
-                    // 字段以 true:下划线（_）来分割（默认是false:驼峰命名风格）
-                    underscored: false
+                    underscored: true // 字段以 true:下划线（_）来分割
+                    , freezeTableName: true // 锁定表名
+                }, pool: {
+                    max: 5
+                    , min: 0
+                    , idle: 10000 // 连接释放时间(ms)
                 }
             }
         );

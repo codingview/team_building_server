@@ -7,18 +7,23 @@
 'use strict';
 
 const model = require('./mysql')
-    , Admin = require('../../models').Admin
+    , admin = require('../../models').Admin(model.Sequelize).mod;
+
+const Admin = model.sequelize.define('admin', admin)
     , crypt = require('../crypt')
-    , createAdmin = callback=>Admin(model.Sequelize, mod=> callback(model.sequelize.define('admin', mod)));
+    ;
+
+const {pwd, salt}= crypt.encode('123456');
+
+console.info(pwd, salt);
 
 model.sequelize
     .sync()
-    .then(() => createAdmin(Admin=> {
-            Admin.create({
-                name: '超级管理员'
-                , password: crypt.encode('123456')
-                , login_name: 'admin'
-            });
+    .then(() => Admin.create({
+            name: '超级管理员'
+            , password: pwd
+            , salt: salt
+            , login_name: 'admin'
         })
     )
     .then(data=>console.info(data))
