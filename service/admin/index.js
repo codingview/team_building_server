@@ -8,9 +8,11 @@
 
 // 服务 - 管理员
 module.exports = {
-    // 登录
+    // 增加 - 管理员
+    // 删除 - 管理员
+    // 登录 - 管理员
     login: require('./login')
-
-    // 认证
-    , auth: require('./auth')
+    // 查询 - 管理员
+    ,query:require('./query')
+    // 修改 - 管理员
 };

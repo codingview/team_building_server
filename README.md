@@ -41,3 +41,5 @@ team building server
   ```
   --no-cache  --style compressed --update $FileName$:$FileNameWithoutExtension$.min.css
   ```
+  
+## DB表结构创建及数据初始化  
