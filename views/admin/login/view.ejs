@@ -14,7 +14,7 @@
         <h2><%= title %></h2>
     </div>
     <div class="container-content col-lg-12 mt-40">
-        <form class="form-horizontal" action="/admin/login" method="post">
+        <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="user">用户名</label>
                 <div class="col-sm-4">
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="form-submit btn btn-primary" type="submit" id="login_submit">登录</button>
+                    <button class="form-submit btn btn-primary" type="button" id="login_submit">登录</button>
                 </div>
             </div>
         </form>
@@ -37,4 +37,5 @@
 </div>
 <% include ../_base/footer.ejs %>
 <% include ../_base/javascript.ejs %>
+<script src="/src/login.admin.min.js"></script>
 <% include ../_base/foot.ejs %>

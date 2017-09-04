@@ -12,7 +12,7 @@ const express = require('express')
 
 // 请求日志
 router.use((req, res, next)=> {
-    console.info(req.sessionID)
+    GLO.debug(req.sessionID);
     GLO.http(req);
     next();
 });
