@@ -9,6 +9,7 @@ module.exports = {
     }, extends: "google" // 遵循google语法规范
     , rules: { // 自定义规则
         'linebreak-style': 0 // 关闭换行符检查，防止windows和mac开发环境问题
+        , 'camelcase': 0 // 不强制使用驼峰命名
         , 'space-before-function-paren': 0 // 关闭函数前空格检查
         , 'comma-style': [1, 'first'] // 逗号放在下一行起始
         , 'comma-dangle': [1, 'never'] // 禁止使用拖尾逗号
