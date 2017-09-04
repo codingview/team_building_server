@@ -6,9 +6,13 @@
 
 'use strict';
 
-const admin = require('../../models').admin;
+const Admin = require('../../models').admin
+    , crypt = require('../../utils/crypt');
 
 // 根据 用户输入账号密码判别是否可以登录
-module.exports = (login_name, password)=> {
-    admin.find()
-};
+module.exports = (login_name, password)=>
+    new Promise((resolve, reject)=>
+        Admin.findOne({where: {login_name: login_name}})
+            .then(admin=> resolve(!!admin && crypt.equal(password, admin.password))) // 判断密码是否合法
+            .catch(e=>resolve(e))
+    );
