@@ -8,11 +8,15 @@
 
 const path = require('path')
     , webpack = require('webpack')
-    , BASE_URI = './public/javascript';
+    , BASE_URI = {
+    web: './public/javascript/web'
+    , admin: './public/javascript/admin'
+};
 
 module.exports = {
     entry: {
-        home: BASE_URI + '/home'
+        'home': BASE_URI.web + '/home'
+        , 'login.admin': BASE_URI.admin + '/login'
     }, output: {
         path: path.join(__dirname, 'public/src')
         , filename: '[name].min.js'
