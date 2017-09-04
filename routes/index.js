@@ -12,7 +12,7 @@ const express = require('express')
 
 // 请求日志
 router.use((req, res, next)=> {
-    GLO.debug(req.sessionID);
+    console.info(req.sessionID, !!req.session);
     GLO.http(req);
     next();
 });
@@ -31,6 +31,8 @@ router.use('/admin', require('./admin'));
 
 // todo 路由 - web端页面
 router.use('/', require('./web'));
+
+// todo 路由 - 404页面
 
 // 系统错误 - 返回
 router.use((err, req, res, next) => {

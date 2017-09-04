@@ -34,12 +34,23 @@ router.post('/', (req, res)=> {
     adminService.login({_})
         .then(r=> {
             if (r) {
-                return res.json(GLO.success(r));
+                req.session = {
+                    admin: {
+                        name: r.name
+                    }
+                };
+                return res.json(GLO.success(true));
             } else {
                 return res.json(GLO.error('账号和密码不匹配', -20));
             }
         })
-        .catch(e=>res.json(GLO.eLog(e, -99, '登录发生错误')));
+        .catch(e=>res.json(GLO.error(e, -99, '登录发生错误')));
+});
+
+// 登录 - 退出
+router.get('/off', (req, res)=> {
+    req.session.destroy();
+    return res.redirect('/admin');
 });
 
 module.exports = router;

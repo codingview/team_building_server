@@ -13,6 +13,11 @@ const Admin = require('../../models').admin
 module.exports = (login_name, password)=>
     new Promise((resolve, reject)=>
         Admin.findOne({where: {login_name: login_name}})
-            .then(admin=> resolve(!!admin && crypt.equal(password, admin.password))) // 判断密码是否合法
+            .then(admin=>
+                resolve(!!admin
+                    && crypt.equal(password, admin.password) // 判断密码是否合法
+                    && {name: admin.name}
+                )
+            )
             .catch(e=>resolve(e))
     );

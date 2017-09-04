@@ -10,14 +10,20 @@ const express = require('express')
     , router = new express.Router();
 
 // 管理端 - 首页 >> 登录
-router.get('/', (req, res)=>res.redirect('/admin/login'));
+router.get('/', (req, res)=> {
+    if ('session' in req && 'admin' in req.session) {
+        return res.redirect('/admin/home');
+    } else {
+        return res.redirect('/admin/login');
+    }
+});
 
 // 管理端 - 登录
 router.use('/login', require('./login'));
 
 // 管理端 - 拦截
 router.use((req, res, next)=> {
-    if ('session' in req && 'user' in req.session) {
+    if ('session' in req && 'admin' in req.session) {
         next();
     } else {
         return res.redirect('/admin/login');

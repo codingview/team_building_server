@@ -16,7 +16,9 @@ team building server
 |精彩案例||||
 |关于我们||||
 
-## 下载项目、安装modules
+## 开发环境配置
+
+### 下载项目、安装modules
 - `git clone`
   ```
   git clone https://github.com/codingview/team_building_server.git
@@ -26,7 +28,7 @@ team building server
   npm install 
   ```
 
-## 安装&启动项目
+### 安装&启动项目
 
 - 安装`eslint`
   ```
@@ -36,13 +38,17 @@ team building server
   ```
   npm install -g eslint-config-google
   ```
-- `WebStorm`配置`eslint` ......
-- `WebStorm`配置`file watcher`
+- `WebStorm`配置`eslint` ......(略)
+- Scss >> CSS : `WebStorm`配置`file watcher`
   ```
   --no-cache  --style compressed --update $FileName$:$FileNameWithoutExtension$.min.css
   ```
+- `webpack` 自动监听
+  ```
+  webpack --watch
+  ```
   
-## DB表结构创建及数据初始化  
+### DB表结构创建及数据初始化  
 
 - 查看 `config/config_development` 中 mysql 配置信息
 - 新增 username 和 password 对应的用户

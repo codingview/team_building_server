@@ -21,7 +21,16 @@ const printF = msg=>alert(msg)
                     , data: {user_name, pwd}
                     , dataType: 'json'
                     , success: data=> {
-
+                        if (data && 'status' in data && data.status > 0) {
+                            location.href = '/admin';
+                        } else {
+                            printF('message' in data ? data.message : '登录失败');
+                            listener.submit(); // 重新绑定监听
+                        }
+                    }, error: e=> {
+                        console.error(e);
+                        printF('连接超时,请重试');
+                        listener.submit(); // 重新绑定监听
                     }
                 });
             } else {
