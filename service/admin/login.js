@@ -6,11 +6,9 @@
 
 'use strict';
 
-const mysql = require('../../utils/model/mysql')
-    ,admin=require('../../models').Admin(mysql.Sequelize).mod
-    ,Admin=mysql.sequelize.define('admin',admin);
+const admin = require('../../models').admin;
 
 // 根据 用户输入账号密码判别是否可以登录
 module.exports = (login_name, password)=> {
-   mysql.read.query()
+    admin.find()
 };
