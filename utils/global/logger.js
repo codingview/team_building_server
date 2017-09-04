@@ -73,22 +73,18 @@ module.exports = {
     /**
      * 错误日志,记录错误日志，返回错误说明
      * @param error         错误对象
-     * @param status        错误状态
      * @param message       错误信息
+     * @param status        错误状态
      * @returns {string|*|string}
      */
-    , eLog: function (error, status = -1, message = '') {
+    , eLog: function (error, message, status = -1) {
         let _error = this.Error(error, status, message);
         if (typeof error === 'string') {
             logger('error').error(error, status, message);
         } else {
             logger('error').error(_error);
         }
-        return {
-            status: _error.status
-            , message: _error.message
-            , data: null
-        };
+        return _error.message;
     }
 
     /**
