@@ -8,7 +8,7 @@
 
 // 表名及表字段均使用 _ 进行连接
 
-const mysql = require('../utils/model/mysql')
+const mysql = require('../utils/mysql')
     , fs = require('fs')
     , path = require('path')
     , _ = require('lodash')
