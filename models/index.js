@@ -12,31 +12,16 @@ const mysql = require('../utils/model/mysql')
     , fs = require('fs')
     , path = require('path')
     , _ = require('lodash')
-    // 获取文档名称列表
-    , getFilesName =
-        new Promise((resolve, reject)=>
-            fs.readdir(path.join(__dirname), (err, files)=> {
-                if (err) {
-                    reject(err);
-                } else { // 读取文件列表后移除index.js
-                    resolve(_.remove(files, file=>file !== 'index.js'));
-                }
-            }))
-    // 依次读取文档内容,构造model
-    , files2Model = files=> {
-        console.info(222, files)
+    , files2Model = // 依次读取文档内容,构造model
+    ()=> {
+        // 获取文档名称列表
+        const filesList = _.remove(fs.readdirSync(path.join(__dirname)), file=>file !== 'index.js');
         let models = {};
-        files.forEach(fileName=> {
+        filesList.forEach(fileName=> {
             const model = require(path.join(__dirname, fileName))(mysql.Sequelize);
             models[model.tableName] = mysql.sequelize.define(model.tableName, model.fields);
         });
         return models;
-    }, init = ()=> {
-        getFilesName
-            .then(files=>files2Model(files))
-            .then(models=>models)
-            .catch(e=>console.error(e))
-        ;
     };
 
-module.exports = init();
+module.exports = files2Model();

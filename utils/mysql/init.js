@@ -8,10 +8,7 @@
 
 /* 数据库初始化 */
 
-// 将表结构绑定到Sequelize实例上
-require('./models');
-
-const mysql = require('./mysql');
+const mysql = require('./index');
 
 // 获取mysql实例并创建表结构
 mysql.sequelize

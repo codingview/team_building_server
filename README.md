@@ -43,3 +43,9 @@ team building server
   ```
   
 ## DB表结构创建及数据初始化  
+
+- 查看 `config/config_development` 中 mysql 配置信息
+- 新增 username 和 password 对应的用户
+- 给予数据库操作权限
+- 在localhost的mysql中创建 `team_building` 数据库，字符集 `utf8 -- UTF-8 Unicode`，排序规则 `utf8_general_ci`
+- 执行(node) `utils/model/init.js` 

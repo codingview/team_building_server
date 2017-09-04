@@ -8,7 +8,7 @@
 
 console.info(require('../../models'));
 
-const mysql = require('./mysql')
+const mysql = require('./index')
     , Admin = require('../../models').admin
     , crypt = require('../crypt')
     , {pwd, salt}= crypt.encode('123456')

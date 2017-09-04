@@ -13,14 +13,14 @@ module.exports = {
         read: { // 读写分离
             database: 'team_building'
             , host: '127.0.0.1'
-            , username: 'root' // 账号
-            , password: 'root' // 密码
+            , username: 'dev' // 账号
+            , password: '123456' // 密码
             , dialect: 'mysql'
         }, write: {
             database: 'team_building'
             , host: '127.0.0.1'
-            , username: 'root'
-            , password: 'root'
+            , username: 'dev'
+            , password: '123456'
             , dialect: 'mysql'
         }
     }
