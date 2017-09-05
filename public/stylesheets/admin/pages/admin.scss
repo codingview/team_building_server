@@ -1,0 +1,13 @@
+@import "../general/frame";
+// 通用css
+.app-container {
+  .container-header {
+    margin-top: 20px;
+  }
+  .container-content {
+    margin-top: 20px;
+    .form-submit {
+      width: 120px;
+    }
+  }
+}

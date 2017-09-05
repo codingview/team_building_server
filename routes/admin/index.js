@@ -12,7 +12,7 @@ const express = require('express')
 // 管理端 - 首页 >> 登录
 router.get('/', (req, res)=> {
     if ('session' in req && 'admin' in req.session) {
-        return res.redirect('/admin/home');
+        return res.redirect('/admin/option');
     } else {
         return res.redirect('/admin/login');
     }
@@ -29,6 +29,9 @@ router.use((req, res, next)=> {
         return res.redirect('/admin/login');
     }
 });
+
+// 全局管理
+router.use('/option', require('./option'));
 
 // 首页管理
 router.use('/home', require('./home'));
