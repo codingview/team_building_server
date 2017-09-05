@@ -54,7 +54,7 @@ team building server
 - 新增 username 和 password 对应的用户
 - 给予数据库操作权限
 - 在localhost的mysql中创建 `team_building` 数据库，字符集 `utf8 -- UTF-8 Unicode`，排序规则 `utf8_general_ci`
-- 执行(node) `utils/model/init.js`
+- 建表:执行(node) `service/init/index.js`
 
 
 ## 项目说明
