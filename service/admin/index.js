@@ -13,6 +13,6 @@ module.exports = {
     // 登录 - 管理员
     login: require('./login')
     // 查询 - 管理员
-    ,query:require('./query')
+    , query: require('./query')
     // 修改 - 管理员
 };

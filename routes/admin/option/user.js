@@ -7,7 +7,8 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , adminService = require('../../../service/admin');
 
 // 管理员 - 页面 - 列表
 router.get('/', (req, res)=>
@@ -18,16 +19,35 @@ router.get('/', (req, res)=>
 
 // 管理员 - api - 列表
 router.post('/list', (req, res)=> {
-
+    const body = req.body;
+    let _ = {
+        offset: 'start' in body ? parseInt(body.start) : 0
+        , limit: 'length' in body ? parseInt(body.length) : 10
+    };
+    adminService.query.list(_)
+        .then(r=>res.json({
+            draw: 'draw' in body ? parseInt(body.draw) : 1
+            , data: r.results
+            , recordsTotal: r.count
+            , recordsFiltered: r.count
+        }))
+        .catch(e=> res.json({
+                draw: 'draw' in body ? parseInt(body.draw) : -1
+                , data: []
+                , recordsTotal: 0
+                , recordsFiltered: 0
+                , message: GLO.eLog(e, '读取管理员列表出错', -99)
+            })
+        );
 });
 
 // 管理员 - api - 新增
-router.put('/',(req,res)=>{
+router.put('/', (req, res)=> {
 
 });
 
 // 管理员 - api - 删除
-router.delete('/:uid',(req,res)=>{
+router.delete('/:uid', (req, res)=> {
 
 });
 
