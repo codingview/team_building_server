@@ -16,12 +16,7 @@ router.get('/', (req, res)=>
     })
 );
 
-// 管理员管理
-router.get('/user', (req, res)=>
-    res.render('./admin/option/user/view', {
-        title: '管理员管理'
-    })
-);
-
+// 管理员 - 管理
+router.use('/user', require('./user'));
 
 module.exports = router;
