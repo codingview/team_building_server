@@ -34,10 +34,8 @@ router.post('/', (req, res)=> {
     adminService.login({_})
         .then(r=> {
             if (r) {
-                req.session = {
-                    admin: {
-                        name: r.name
-                    }
+                req.session.admin = {
+                    name: r.name
                 };
                 return res.json(GLO.success(true));
             } else {
