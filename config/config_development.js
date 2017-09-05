@@ -25,7 +25,7 @@ module.exports = {
         }
     }
     , redis: {
-        host: '192.168.1.101'
+        host: 'localhost'
         , port: 6379
         , db: 6
         , ttl: 86000
