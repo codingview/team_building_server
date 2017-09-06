@@ -1,0 +1,43 @@
+/* DataTables 通用标准样式 */
+
+@mixin form-control {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dataTables_wrapper {
+  // 底部
+  .table-footer {
+    margin-bottom: 4em;
+    font-size: 16px;
+    // 每页条数
+    .dataTables_length {
+      padding-top: 0.755em;
+      label {
+        font-weight: normal;
+        select {
+          @include form-control;
+        }
+      }
+    }
+    // 页数
+    .dataTables_info {
+      .dataTables-page-number {
+        @include form-control;
+        width: 4em;
+        text-align: center;
+      }
+    }
+    // 分页器
+    .dataTables_paginate {
+
+    }
+  }
+}

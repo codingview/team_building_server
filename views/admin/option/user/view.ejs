@@ -1,13 +1,18 @@
 <% include ../../_base/head.ejs %>
 <% include ../../_base/css.ejs %>
-<% include ../../../_base/dataTables.css.ejs%>
+<% include ../../../_base/dataTables.css.ejs %>
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
-<div class="app-container">
-
+<div class="app-container container">
+    <div class="container-header container">
+        <h2><%= title %></h2>
+    </div>
+    <div class="container-content col-lg-12 mt-40">
+        <table id="user_list" class="table table-hover table-condensed" width="100%"></table>
+    </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
-<% include ../../../_base/dataTables.js.ejs%>
+<% include ../../../_base/dataTables.js.ejs %>
 <script src="/src/user.option.admin.min.js"></script>
 <% include ../../_base/foot.ejs %>

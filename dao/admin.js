@@ -15,7 +15,9 @@ class Admin {
      * @param {number} uid 用户编号
      */
     constructor(uid) {
-        this.id = uid;
+        if (uid) {
+            this.id = uid;
+        }
     }
 
     //
@@ -31,6 +33,7 @@ class Admin {
         this.title = admin.name;
         this.created_at = admin.created_at;
         this.updated_at = admin.updated_at;
+        delete this.id;
         return this;
     }
 }
