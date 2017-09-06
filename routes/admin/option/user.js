@@ -17,6 +17,16 @@ router.get('/', (req, res)=>
     })
 );
 
+// 管理员 - api - 新增
+router.post('/', (req, res)=> {
+
+});
+
+// 管理员 - api - 删除
+router.delete('/:uid', (req, res)=> {
+
+});
+
 // 管理员 - api - 列表
 router.post('/list', (req, res)=> {
     const body = req.body;
@@ -41,13 +51,8 @@ router.post('/list', (req, res)=> {
         );
 });
 
-// 管理员 - api - 新增
-router.put('/', (req, res)=> {
-
-});
-
-// 管理员 - api - 删除
-router.delete('/:uid', (req, res)=> {
+// 管理员 - api - 更新
+router.put('/uid', (req, res)=> {
 
 });
 

@@ -24,5 +24,6 @@ config/config_experience.js
 config/config_stage.js
 config/config_production.js
 
-# security
-doc/Security.md
+# general css
+public/stylesheets/general/*.css
+public/stylesheets/general/*.css.map

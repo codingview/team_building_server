@@ -59,3 +59,4 @@ team building server
 
 ## 项目说明
 - 所有的`_test.js`均为测试文件，无功能性意义
+- 接口采用`RESFUL`原则,`get`使用`post`替代
