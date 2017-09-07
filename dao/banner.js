@@ -6,4 +6,44 @@
 
 'use strict';
 
+/**
+ * 广告位
+ */
+class Banner {
+    /**
+     * 构造函数
+     * @param {number} bid 广告位编号
+     */
+    constructor(bid) {
+        if (bid) {
+            this.id = bid;
+        }
+    }
 
+    /**
+     * api转db数据
+     * @param {object} banner
+     * @return {Banner}
+     */
+    api2Db(banner) {
+        this.image = banner.img;
+        this.description = banner.dcp;
+        this.link = banner.href;
+        return this;
+    }
+
+    /**
+     * 抛出api应用
+     * @param {object} banner
+     * @return {Banner}
+     */
+    db2Api(banner) {
+        this.bid = banner.id;
+        this.img = banner.image;
+        this.dcp = banner.description;
+        this.href = banner.link;
+        return this;
+    }
+}
+
+module.exports = Banner;

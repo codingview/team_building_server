@@ -21,7 +21,7 @@ module.exports = DataTypes=>({
         }, description: {
             type: DataTypes.STRING
             , comment: '描述'
-        }, href: {
+        }, link: {
             type: DataTypes.STRING
             , allowNull: false
             , comment: '跳转链接'
