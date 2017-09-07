@@ -115,7 +115,7 @@ module.exports = [{
             text: '领导艺术'
             , uri: ''
             , children: []
-        },{
+        }, {
             text: ''
             , uri: ''
             , children: []
