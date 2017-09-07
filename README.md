@@ -60,3 +60,4 @@ team building server
 ## 项目说明
 - 所有的`_test.js`均为测试文件，无功能性意义
 - 接口采用`RESFUL`原则,`get`使用`post`替代
+- 接口采用 匿名参数 原则,`router`层将前端参数转换为DB参数后调用`service`中相关方法完成读写

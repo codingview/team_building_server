@@ -6,6 +6,18 @@
 
 'use strict';
 
-const Admin = require('../../models').admin
-    , _Admin = require('../../dao/admin');
+const Admin = require('../../models').admin;
 
+module.exports = admin=> new Promise((resolve, reject)=>
+    // 是否已经存在
+    Admin.findOne({where: {login_name: admin.login_name}})
+        .then(_admin=> {
+            if (_admin) {
+                return reject('该登录账号已存在');
+            } else {
+                return Admin.create(admin);
+            }
+        })
+        .then()
+        .catch(e=>reject(e))
+);

@@ -33,7 +33,7 @@ const Table = {
             , {title: '修改时间', class: '', data: 'updated_at'}
             , {
                 title: '操作', width: '136px', data: null, render: d=>
-                '<button class="btn btn-info btn-xs ml-1e" data-bc="' + d.bc + '">修改密码</button>' +
+                '<button class="btn btn-info btn-xs ml-1e" data-bc="' + d.bc + '">修改信息</button>' +
                 '<button class="btn btn-danger btn-xs ml-1e barcode-delete" data-bc="' + d.bc + '">删除</button>'
             }
         ]

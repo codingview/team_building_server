@@ -19,7 +19,27 @@ router.get('/', (req, res)=>
 
 // 管理员 - api - 新增
 router.post('/', (req, res)=> {
-
+    const body = req.body;
+    let _ = {};
+    if ('user_name' in body && body.user_name) {
+        _.login_name = body.user_name;
+    } else {
+        return res.json(GLO.error('未获取到登录账号', -11));
+    }
+    if ('title' in body && body.title) {
+        _.name = body.title;
+    } else {
+        return res.json(GLO.error('未获取到名称', -15));
+    }
+    if ('pwd' in body && body.pwd) {
+        if (body.pwd.toString().length > 6) {
+            _.password = body.pwd;
+        } else {
+            return res.json(GLO.error('密码长度不小于6位', -19));
+        }
+        return res.json(GLO.error('未获取到密码', -18));
+    }
+    adminService.add(_)
 });
 
 // 管理员 - api - 删除
