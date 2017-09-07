@@ -6,6 +6,8 @@
 
 'use strict';
 
+const path = require('path');
+
 module.exports = {
     host: ''
     , port: 3000
@@ -23,13 +25,12 @@ module.exports = {
             , password: 'root'
             , dialect: 'mysql'
         }
-    }
-    , redis: {
+    }, redis: {
         host: '192.168.1.101'
         , port: 6379
         , db: 6
         , ttl: 86000
         , secret: 'team_building'
         , key: 'team_building'
-    }
+    }, uploads_image: path.join(__dirname + '../public/uploads') // 上传图片的路径
 };
