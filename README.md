@@ -1,7 +1,12 @@
 # team_building_server
 team building server
 
-## 团队建设系统前端服务
+## 团队建设系统
+
+## 项目说明
+- 所有的`_test.js`均为测试文件，无功能性意义
+- 接口采用`RESFUL`原则,`get`使用`post`替代
+- 接口采用 匿名参数 原则,`router`层将前端参数转换为DB参数后调用`service`中相关方法完成读写
 
 ## 主要功能点
 |模块|功能点|数据源|数据结构|技术点|节点|备注|
@@ -55,9 +60,3 @@ team building server
 - 给予数据库操作权限
 - 在localhost的mysql中创建 `team_building` 数据库，字符集 `utf8 -- UTF-8 Unicode`，排序规则 `utf8_general_ci`
 - 建表:执行(node) `service/init/index.js`
-
-
-## 项目说明
-- 所有的`_test.js`均为测试文件，无功能性意义
-- 接口采用`RESFUL`原则,`get`使用`post`替代
-- 接口采用 匿名参数 原则,`router`层将前端参数转换为DB参数后调用`service`中相关方法完成读写

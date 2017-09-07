@@ -15,9 +15,8 @@ router.get('/', (req, res)=>res.redirect('/admin/home/banner'));
 // 首页 - banner调整
 router.get('/banner', (req, res)=>
     res.render('./admin/home/banner/view', {
-        title: '广告页调整'
+        title: '广告位调整'
     })
 );
-
 
 module.exports = router;

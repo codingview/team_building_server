@@ -2,3 +2,7 @@
 @import "../../general/lib";
 @import "container";
 @import "footer";
+
+.app-header > .container > .navbar-collapse {
+  margin-left: 199px;
+}
