@@ -7,7 +7,7 @@
 'use strict';
 
 const Admin = require('../../models').admin
-    , _Admin = require('../../dao/admin');
+    , _Admin = require('../../dao').admin;
 
 // 查询 - 管理员
 module.exports = {

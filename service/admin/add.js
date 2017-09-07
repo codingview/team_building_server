@@ -7,7 +7,7 @@
 'use strict';
 
 const Admin = require('../../models').admin
-    , _admin = require('../../dao/admin')
+    , _admin = require('../../dao').admin
     , crypt = require('../../utils/crypt');
 
 module.exports = admin=> new Promise((resolve, reject)=>

@@ -20,8 +20,6 @@ class Admin {
         }
     }
 
-    //
-
     /**
      * 抛出api应用
      * @param {object} admin
