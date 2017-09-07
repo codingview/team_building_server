@@ -13,10 +13,6 @@ const express = require('express')
 router.get('/', (req, res)=>res.redirect('/admin/home/banner'));
 
 // 首页 - banner调整
-router.get('/banner', (req, res)=>
-    res.render('./admin/home/banner/view', {
-        title: '广告位调整'
-    })
-);
+router.use('/banner', require('./banner'));
 
 module.exports = router;

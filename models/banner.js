@@ -25,6 +25,10 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: false
             , comment: '跳转链接'
+        }, sequence: {
+            type: DataTypes.INTEGER
+            , allowNull: false
+            , comment: '序号'
         }
     }, tableName: 'banner'
 });

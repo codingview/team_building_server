@@ -29,6 +29,7 @@ class Banner {
         this.image = banner.img;
         this.description = banner.dcp;
         this.link = banner.href;
+        this.sequence = banner.seq;
         return this;
     }
 
@@ -42,6 +43,7 @@ class Banner {
         this.img = banner.image;
         this.dcp = banner.description;
         this.href = banner.link;
+        this.seq = banner.sequence;
         return this;
     }
 }
