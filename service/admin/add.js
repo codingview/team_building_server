@@ -6,18 +6,23 @@
 
 'use strict';
 
-const Admin = require('../../models').admin;
+const Admin = require('../../models').admin
+    , _admin = require('../../dao/admin')
+    , crypt = require('../../utils/crypt');
 
 module.exports = admin=> new Promise((resolve, reject)=>
     // 是否已经存在
     Admin.findOne({where: {login_name: admin.login_name}})
-        .then(_admin=> {
-            if (_admin) {
-                return reject('该登录账号已存在');
+        .then(result=> {
+            if (result) {
+                reject('该登录账号已存在');
             } else {
+                const {pwd, salt}=crypt.encode(admin.password);
+                admin.password = pwd;
+                admin.salt = salt;
                 return Admin.create(admin);
             }
         })
-        .then()
+        .then(r=>r ? resolve(new _admin().db2Api(r)) : reject('创建管理员账号失败*'))
         .catch(e=>reject(e))
 );

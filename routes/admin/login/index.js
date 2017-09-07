@@ -24,12 +24,12 @@ router.post('/', (req, res)=> {
     if ('user_name' in body && body.user_name) {
         _.login_name = body.user_name;
     } else {
-        return res.json(GLO.error('未获取到用户名', -11));
+        return res.json(GLO.error('未获取到用户名:user_name', -11));
     }
     if ('pwd' in body && body.pwd) {
         _.password = body.pwd;
     } else {
-        return res.json(GLO.error('未获取到密码', -12));
+        return res.json(GLO.error('未获取到密码:pwd', -12));
     }
     adminService.login({_})
         .then(r=> {

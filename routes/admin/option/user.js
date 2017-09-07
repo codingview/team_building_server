@@ -24,12 +24,12 @@ router.post('/', (req, res)=> {
     if ('user_name' in body && body.user_name) {
         _.login_name = body.user_name;
     } else {
-        return res.json(GLO.error('未获取到登录账号', -11));
+        return res.json(GLO.error('未获取到登录账号:user_name', -11));
     }
     if ('title' in body && body.title) {
         _.name = body.title;
     } else {
-        return res.json(GLO.error('未获取到名称', -15));
+        return res.json(GLO.error('未获取到名称:name', -15));
     }
     if ('pwd' in body && body.pwd) {
         if (body.pwd.toString().length > 6) {
@@ -37,9 +37,12 @@ router.post('/', (req, res)=> {
         } else {
             return res.json(GLO.error('密码长度不小于6位', -19));
         }
-        return res.json(GLO.error('未获取到密码', -18));
+    } else {
+        return res.json(GLO.error('未获取到密码:pwd', -18));
     }
     adminService.add(_)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '新增管理员失败')));
 });
 
 // 管理员 - api - 删除
