@@ -6,5 +6,7 @@
 
 'use strict';
 
-// 建表
-require('./mysql').createTables();
+/* 项目初始化、开发预置数据 */
+
+// mysql相关初始化
+require('./mysql')();

@@ -9,20 +9,21 @@
 // 数据初始化
 const mysql = require('../../utils/mysql')
     , models = require('../../models')
-    , Admin = models.admin
     , crypt = require('../../utils/crypt')
     , {pwd, salt}= crypt.encode('123456')
     ;
 
-module.exports = {
+const _ = {
     // 建表
     createTables: ()=> new Promise((resolve, reject)=> {
         Object.keys(models).forEach(model=> {
             models[model].sync();
         });
+        resolve(true);
     })
     // 创建管理员
     , createAdminUser: ()=> {
+        const Admin = models.admin;
         mysql.sequelize
             .sync()
             .then(() => Admin.create({
@@ -36,3 +37,10 @@ module.exports = {
             .catch(e=>console.error(e));
     }
 };
+
+module.exports = ()=> new Promise((resolve, reject)=> {
+    _
+        .createTables()
+    // .createAdminUser()
+    ;
+});
