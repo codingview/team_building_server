@@ -13,8 +13,13 @@ const Data = {};
 const Dom = {
     initSwiper: ()=>
         swiper = new Swiper('.swiper-container', {
-            direction: 'vertical'
+            direction: 'horizontal'
             , loop: true
+            // 分页器
+            , pagination: '.swiper-pagination'
+            // 前进后退按钮
+            , nextButton: '.swiper-button-next'
+            , prevButton: '.swiper-button-prev'
         })
     , init: function () {
         this.initSwiper();

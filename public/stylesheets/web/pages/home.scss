@@ -1,6 +1,9 @@
 @import "../general/frame";
 
 .container-banner {
-  height: 300px;
   width: 100%;
+  .swiper-container {
+    max-height: 360px;
+    max-width: 100%;
+  }
 }
