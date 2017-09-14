@@ -1,0 +1,19 @@
+<%# 首页 - banner %>
+<div class="container-banner">
+    <div class="swiper-container" id="swiper_container">
+        <div class="swiper-wrapper">
+            <% banners.forEach(function (banner) { %>
+            <div class="swiper-slide">
+                <a href="<%= banner.href %>" target="_blank">
+                    <img src="/uploads/<%= banner.img %>" alt="<%= banner.dcp %>" width="100%">
+                </a>
+            </div>
+            <% }); %>
+        </div>
+        <!-- 分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
