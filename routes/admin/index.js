@@ -36,7 +36,8 @@ router.use('/option', require('./option'));
 // 首页管理
 router.use('/home', require('./home'));
 
-// todo 团建产品
+// 团建产品
+router.use('/production', require('./production'));
 
 // todo 基地资源
 
