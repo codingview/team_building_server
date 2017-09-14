@@ -22,7 +22,9 @@ module.exports = {
     // 查询 - 广告 - 列表
     , list: ()=>new Promise((resolve, reject)=>
         Banner
-            .findAll()
+            .findAll({
+                order: [['sequence', 'ASC']]
+            })
             .then(banners=> {
                 const r = [];
                 if (banners && banners instanceof Array && banners.length > 0) {

@@ -7,15 +7,23 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , bannerService = require('../../../service/banner');
 
 // 首页
-router.get('/', (req, res)=>
-    res.render('./web/home/view.ejs', {
+router.get('/', (req, res)=> {
+    let json = {
         title: '首页'
         , menu: require('../../../config/menu')
         , active: 'home'
-    })
-);
+        , banners: []
+    };
+    bannerService.list()
+        .then(list=> {
+            json.banners = list;
+            return res.render('./web/home/view.ejs', json);
+        })
+        .catch(e=>res.render('./web/home/view.ejs', json));
+});
 
 module.exports = router;

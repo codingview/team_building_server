@@ -9,4 +9,7 @@
 const express = require('express')
     , router = new express.Router();
 
+// 首页 - 接口
+router.use('/home', require('./home'));
+
 module.exports = router;

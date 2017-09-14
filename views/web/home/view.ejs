@@ -1,12 +1,27 @@
 <% const title = '新易途_拓展训练公司_拓展训练知名品牌_体验式管理培训专家'; %>
 <% include ../_base/head.ejs %>
 <% include ../_base/css.ejs %>
+<% include ../../_base/swiper.css.ejs %>
 <link href="/stylesheets/web/pages/home.min.css" rel="stylesheet">
 <% include ../_base/container.ejs %>
 <% include ../_base/header.ejs %>
 <div class="app-container">
-
+    <div class="container-banner">
+        <div class="swiper-container" id="swiper_container">
+            <div class="swiper-wrapper">
+                <% banners.forEach(function (banner) { %>
+                <div class="swiper-slide">
+                    <a href="<%= banner.href %>" target="_blank">
+                        <img src="/uploads/<%= banner.img %>" alt="<%= banner.dcp %>" width="100%">
+                    </a>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
 </div>
 <% include ../_base/footer.ejs %>
 <% include ../_base/javascript.ejs %>
+<% include ../../_base/swiper.js.ejs %>
+<script src="/src/home.min.js"></script>
 <% include ../_base/foot.ejs %>

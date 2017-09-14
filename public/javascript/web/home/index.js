@@ -5,3 +5,24 @@
  */
 
 'use strict';
+
+let swiper;
+
+const Data = {};
+
+const Dom = {
+    initSwiper: ()=>
+        swiper = new Swiper('.swiper-container', {
+            direction: 'vertical'
+            , loop: true
+        })
+    , init: function () {
+        this.initSwiper();
+    }
+};
+
+const Listener = {};
+
+$(function () {
+    Dom.init();
+});
