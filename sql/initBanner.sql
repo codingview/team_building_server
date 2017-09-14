@@ -1,1 +1,0 @@
-insert into `team_building`.`banner` ( `link`, `description`, `id`, `sequence`, `created_at`, `updated_at`, `image`) values ( '/active/4', '55555', '0', '5', '2017-09-11 17:47:04', '2017-09-11 17:47:06', '/banner/5.jpge')
