@@ -18,15 +18,19 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: false
             , unique: true
+            , comment: '登录账号'
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
+            , comment: '显示名称'
         }, password: {
             type: DataTypes.STRING
             , allowNull: false
+            , comment: '密码'
         }, salt: { // 加盐
             type: DataTypes.STRING
             , allowNull: false
+            , comment: '盐'
         }
     }, tableName: 'admin'
 });
