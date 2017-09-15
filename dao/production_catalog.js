@@ -26,7 +26,8 @@ class ProductionCatalog {
      * @return {ProductionCatalog}
      */
     db2Api(pc) {
-        this.text = pc.name;
+        this.name = pc.name;
+        this.open = true;
         this.grade = pc.grade;
         this.father_id = pc.father_id || 0;
         this.sequence = pc.sequence;

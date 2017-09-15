@@ -18,6 +18,7 @@ module.exports = {
         'home': BASE_URI.web + '/home'
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
+        , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
     }, output: {
         path: path.join(__dirname, 'public/src')
         , filename: '[name].min.js'

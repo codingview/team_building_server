@@ -1,5 +1,6 @@
 <% include ../../_base/head.ejs %>
 <% include ../../_base/css.ejs %>
+<% include ../../../_base/ztree.css.ejs %>
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
 <div class="app-container container">
@@ -8,11 +9,15 @@
         <div id="" class="col-sm-12">
             <div class="col-sm-6">
                 <h2>分类列表</h2>
+                <div id="production_catalog" class="ztree"></div>
             </div>
-            <div class="col-sm-6"></div>
+            <div class="col-sm-6">
+            </div>
         </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
+<% include ../../../_base/ztree.js.ejs %>
+<script src="/src/catalog.production.admin.min.js"></script>
 <% include ../../_base/foot.ejs %>

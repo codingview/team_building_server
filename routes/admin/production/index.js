@@ -7,7 +7,8 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , productionService = require('../../../service/production');
 
 /* 产品体系 */
 
@@ -18,10 +19,12 @@ router.get('/catalog', (req, res)=>
     })
 );
 
-// todo 产品分类 - 接口
-router.post('/catalog', (req, res)=> {
-
-});
+// 产品分类 - 接口
+router.post('/catalog', (req, res)=>
+    productionService.catalog.catalogList()
+        .then(catalogs=>res.json(GLO.success(catalogs)))
+        .catch(e=>res.json(GLO.error(e, -99, '获取产品分类列表出错')))
+);
 
 // todo 新增产品分类 - 接口
 router.put('/catalog', (req, res)=> {
