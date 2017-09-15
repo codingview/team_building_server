@@ -27,8 +27,10 @@ class ProductionCatalog {
      */
     db2Api(pc) {
         this.name = pc.name;
-        this.open = true;
         this.grade = pc.grade;
+        if (this.grade === 1) {
+            this.open = true;
+        } 
         this.father_id = pc.father_id || 0;
         this.sequence = pc.sequence;
         this.icon = pc.icon;
