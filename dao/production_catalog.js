@@ -19,7 +19,20 @@ class ProductionCatalog {
             this.id = cid;
         }
     }
-    
+
+    /**
+     * db结构转出api
+     * @param {object} pc
+     * @return {ProductionCatalog}
+     */
+    db2Api(pc) {
+        this.text = pc.name;
+        this.grade = pc.grade;
+        this.father_id = pc.father_id || 0;
+        this.sequence = pc.sequence;
+        this.icon = pc.icon;
+        return this;
+    }
 }
 
 module.exports = ProductionCatalog;
