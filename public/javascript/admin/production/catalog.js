@@ -10,6 +10,9 @@ class Node {
     constructor(node) {
         this.id = node.id;
         this.name = node.name;
+        this.father_id = node.father_id;
+        this.grade = node.grade;
+        this.sequence = node.sequence;
     }
 }
 
@@ -21,49 +24,93 @@ const Data = {
     // 获取分类列表
     catalogs: ()=>new Promise((resolve, reject)=>
             $.ajax({
-                url: '/admin/production/catalog'
-                , method: 'post'
+                url: '/admin/production/catalog/list'
+                , type: 'get'
                 , dataType: 'json'
                 , success: json=> {
                     if (json && 'status' in json && json.status > 0) {
                         resolve(json.data);
                     } else {
-                        reject('message' in json ? json.message : '获取数据出错');
+                        reject('message' in json ? json.message : '获取分类列表出错');
                     }
                 }, error: e=> {
                     console.error(e);
-                    reject('请求超时');
+                    reject('获取分类列表超时');
                 }
             })
     )
 
-    // zTree - 简化树结构
+    // 修改 - 分类名称
+    , rename: catalog=>new Promise((resolve, reject)=>
+            $.ajax({
+                url: '/admin/production/catalog'
+                , type: 'post'
+                , data: catalog
+                , dataType: 'json'
+                , success: json=> {
+                    if (json && 'status' in json && json.status > 0) {
+                        resolve();
+                    } else {
+                        reject('message' in json ? json.message : '修改分类名称出错');
+                    }
+                }, error: e=> {
+                    console.error(e);
+                    reject('修改分类名称超时');
+                }
+            })
+    )
 
-    // zTree - 提取节点中数据
-    , getNode: node=> {
+    // 新增 - 分类
+    , add: catalog=>new Promise((resolve, reject)=> {
+        $.ajax({
+            url: '/admin/production/catalog'
+            , type: 'put'
+            , data: catalog
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve();
+                } else {
+                    reject('message' in json ? json.message : '新增分类出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('新增分类名称超时');
+            }
+        })
+    })
 
-    }
+    // 删除 - 分类
+    , remove: catalog=>new Promise((resolve, reject)=> {
+
+    })
+
 };
 
 const Dom = {
     // zTree - 增加按钮
     addHoverDom: (treeId, treeNode)=> {
-        let newCount = 1;
         const sObj = $('#' + treeNode.tId + '_span')
-            , addBtn = $('#addBtn_' + treeNode.tId);
+            , ads = '#addBtn_' + treeNode.tId
+            , addBtn = $(ads);
         if (treeNode.editNameFlag || addBtn.length > 0 || treeNode.grade === 2) {// 2级分类不能新增3级
             return false;
         } else {
             const addStr = '<span class="button add" id="addBtn_' + treeNode.tId
                 + '" title="增加" onfocus="this.blur();"></span>';
             sObj.after(addStr);
-            const btn = $('#addBtn_' + treeNode.tId);
+            const btn = $(ads);
             if (btn) {
                 btn.bind('click', function () {
+                    const parentNode = treeNode.getParentNode() // 父节点
+                        , childNode = treeNode.children // 子节点
+                        , id = (( parentNode ? parentNode.getIndex() : 1) + 1) * 100 + (childNode ? childNode.length + 1 : 0);
+                    // todo 根据level生成不同的id
                     zTree.addNodes(treeNode, {
-                        id: (100 + newCount)
+                        id: id
                         , pId: treeNode.id
-                        , name: '新的分类' + (newCount++)
+                        , name: '新的分类' + id
+                        // todo 新增的3级分类不能有新增按钮
                     });
                     return false;
                 });
@@ -73,34 +120,6 @@ const Dom = {
 
     // zTree - 隐藏增加按钮
     , removeHoverDom: (treeId, treeNode)=>$('#addBtn_' + treeNode.tId).unbind().remove()
-
-    // zTree - 遍历树结构
-    , getNode: node=> {
-        const _node = new Node(node);
-        if ('children' in node && node.children instanceof Array && node.children.length > 0) {
-            _node.children = [];
-            node.children.forEach(child=> {
-                _node.children.push(Dom.getNode(child));
-            });
-        } else {
-            return _node;
-        }
-    }
-
-    // zTree - 提取树结构
-    , getTree: tree=> {
-        let catalogs = [];
-        tree = tree[0].children; // 根节点无需使用，直接下一层
-        //console.info(tree);
-        tree.forEach(t=> {
-            console.info(1, t);
-            const node = Dom.getNode(t);
-            console.info(2, node);
-            //catalogs.push(node);
-        });
-        //console.info(catalogs);
-        return catalogs;
-    }
 
     // 生成分类树
     , catalogs: ()=> {
@@ -122,6 +141,28 @@ const Dom = {
                                 , showRenameBtn: (treeId, treeNode)=>!treeNode.noEditBtn
                                 , showRemoveBtn: (treeId, treeNode)=>!treeNode.noEditBtn
                                 // todo 拖拽
+                            }, callback: {
+                                onNodeCreated: (event, treeId, treeNode)=> {
+                                    if (!('sequence' in treeNode) && treeNode.level !== 0) {// todo 区分初始化创建而不是新增
+                                        const parentNode = treeNode.getParentNode()
+                                            , newNode = {
+                                                name: treeNode.name
+                                                , grade: treeNode.level
+                                                , father_id: (parentNode ? parentNode.id : 0)
+                                                , sequence: treeNode.getIndex() || 0
+                                                , icon: '' // todo 默认无图标
+                                            };
+                                        Data.add(newNode);
+                                    }
+                                }, onRemove: (event, treeId, treeNode)=> {
+                                    console.info(event, treeId, treeNode)
+                                }, onRename: (event, treeId, treeNode, isCancel)=> {
+                                    if (treeNode.name) {
+                                        Data.rename(new Node(treeNode));
+                                    } else {
+                                        alert('请填写分类名称')
+                                    }
+                                }
                             }
                         }, [{
                             name: '产品分类'
@@ -141,17 +182,8 @@ const Dom = {
 
 const Listener = {
 
-    // 监听保存按钮
-    setOneSubmit: ()=> {
-        $('#production_catalog_submit').one('click', ()=> {
-            Dom.getTree(zTree.getNodes());
-            Listener.setOneSubmit();
-        });
-    }
-
     // 初始化监听
-    , init: function () {
-        this.setOneSubmit();
+    init: function () {
     }
 };
 
