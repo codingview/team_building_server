@@ -6,7 +6,7 @@
     <div class="container-header"><h2><%= title %></h2></div>
     <div class="container-content">
         <div id="" class="col-sm-12">
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="p_form">
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">产品名称</label>
 
@@ -73,6 +73,12 @@
 
                     <div class="col-sm-10">
                         <div id="p_editor"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <button id="p_reset" type="button" class="btn btn-primary wi-10e">重置</button>
+                        <button id="p_submit" type="button" class="btn btn-primary wi-10e ml-2e">提交</button>
                     </div>
                 </div>
             </form>

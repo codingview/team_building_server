@@ -15,6 +15,9 @@ const Dom = {
     // 创建富文本
     editor: ()=> {
         editor = new Editor('#p_editor');
+        editor.customConfig.menus = require('../../general/Option.editor'); // 自定义菜单配置
+        editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
+        editor.customConfig.uploadImgMaxLength = 5; // 限制一次最多上传 5 张图片
         editor.create();
     }
 
@@ -24,8 +27,25 @@ const Dom = {
     }
 };
 
-const Listener = {};
+const Listener = {
+    // 表单 - 提交 - 监听
+    setOneSubmit: ()=> {
+        $('#p_submit').one('click', ()=> {
+            const html = editor.txt.html()
+                , text = editor.txt.text();
+            console.info(html)
+            console.info(text)
+            Listener.setOneSubmit();
+        });
+    }
+
+    // 初始化
+    , init: function () {
+        this.setOneSubmit();
+    }
+};
 
 $(function () {
     Dom.init();
+    Listener.init();
 });
