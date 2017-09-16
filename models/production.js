@@ -17,8 +17,11 @@ module.exports = DataTypes=>({
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
-            , unique: true
             , comment: '产品名称'
+        }, title: {
+            type: DataTypes.STRING
+            , allowNull: true
+            , comment: '产品标题'
         }, catalog_id: {
             type: DataTypes.INTEGER
             , allowNull: false
@@ -51,11 +54,11 @@ module.exports = DataTypes=>({
             type: DataTypes.INTEGER
             , allowNull: true
             , comment: '浏览次数'
-        },rich_text:{
+        }, rich_text: {
             type: DataTypes.STRING
             , allowNull: true
             , comment: '富文本'
-        },text:{
+        }, text: {
             type: DataTypes.STRING
             , allowNull: true
             , comment: '纯文本'
