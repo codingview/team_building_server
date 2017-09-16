@@ -5,3 +5,27 @@
  */
 
 'use strict';
+
+const Editor = window.wangEditor;
+let editor; // 全局变量存储富文本对象
+
+const Data = {};
+
+const Dom = {
+    // 创建富文本
+    editor: ()=> {
+        editor = new Editor('#p_editor');
+        editor.create();
+    }
+
+    // 初始化
+    , init: function () {
+        this.editor();
+    }
+};
+
+const Listener = {};
+
+$(function () {
+    Dom.init();
+});
