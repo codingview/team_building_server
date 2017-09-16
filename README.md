@@ -34,8 +34,19 @@ team building server
   ```
   npm install 
   ```
+- 启动`redis`
 
-### 安装&启动项目
+### DB表结构创建及数据初始化  
+
+- 查看 `config/config_development` 中 mysql 配置信息
+- 新增 username 和 password 对应的用户
+- 给予数据库操作权限
+- 在localhost的mysql中创建 `team_building` 数据库，字符集 `utf8 -- UTF-8 Unicode`，排序规则 `utf8_general_ci`
+- 建表1:执行`sql`文件夹下所有sql文件
+- 建表2:执行(node) `service/init/index.js`
+
+
+### 开发环境配置
 
 - 安装`eslint`
   ```
@@ -54,12 +65,3 @@ team building server
   ```
   webpack --watch
   ```
-- 启动`redis`
-
-### DB表结构创建及数据初始化  
-
-- 查看 `config/config_development` 中 mysql 配置信息
-- 新增 username 和 password 对应的用户
-- 给予数据库操作权限
-- 在localhost的mysql中创建 `team_building` 数据库，字符集 `utf8 -- UTF-8 Unicode`，排序规则 `utf8_general_ci`
-- 建表:执行(node) `service/init/index.js`
