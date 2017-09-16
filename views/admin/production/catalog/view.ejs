@@ -5,14 +5,12 @@
 <% include ../../_base/header.ejs %>
 <div class="app-container container">
     <div class="container-header"><h2><%= title %></h2></div>
-    <div class="container-content">
-        <div id="" class="col-sm-12">
-            <div class="col-sm-6">
-                <h2>分类列表</h2>
-                <div id="production_catalog" class="ztree"></div>
-            </div>
-            <div class="col-sm-6">
-            </div>
+    <div class="container-content container-border">
+        <div class="row">
+            <div id="production_catalog" class="ztree"></div>
+        </div>
+        <div class="row">
+            <button id="production_catalog_submit" type="button" class="btn btn-primary">保存</button>
         </div>
     </div>
 </div>
