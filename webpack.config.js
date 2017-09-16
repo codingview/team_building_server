@@ -9,9 +9,9 @@
 const path = require('path')
     , webpack = require('webpack')
     , BASE_URI = {
-    web: './public/javascript/web'
-    , admin: './public/javascript/admin'
-};
+        web: './public/javascript/web'
+        , admin: './public/javascript/admin'
+    };
 
 module.exports = {
     entry: {
@@ -19,6 +19,7 @@ module.exports = {
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
+        , 'production.admin': BASE_URI.admin + '/production'
     }, output: {
         path: path.join(__dirname, 'public/src')
         , filename: '[name].min.js'

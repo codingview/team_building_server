@@ -1,4 +1,5 @@
 @import "../general/frame";
+
 // 通用css
 .app-container {
   .container-header {
@@ -10,4 +11,8 @@
       width: 120px;
     }
   }
+}
+
+.input-remark {
+  color: #FF0000;
 }
