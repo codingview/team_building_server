@@ -81,8 +81,24 @@ const Data = {
     })
 
     // 删除 - 分类
-    , remove: catalog=>new Promise((resolve, reject)=> {
-
+    , remove: cid=>new Promise((resolve, reject)=> {
+        $.ajax({
+            url: '/admin/production/catalog'
+            , type: 'delete'
+            , data: {
+                cid: cid
+            }, dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve();
+                } else {
+                    reject('message' in json ? json.message : '新增分类出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('新增分类名称超时');
+            }
+        })
     })
 
 };
@@ -154,13 +170,22 @@ const Dom = {
                                             };
                                         Data.add(newNode);
                                     }
-                                }, onRemove: (event, treeId, treeNode)=> {
-                                    console.info(event, treeId, treeNode)
+                                }, beforeRemove: (treeId, treeNode)=> {
+                                    if (treeNode.level === 2) {
+                                        Data.remove(treeNode.id);
+                                    } else if (treeNode.children && treeNode.children.length > 0) {
+                                        // 删除时，2级分类要同时删除3级分类
+                                        alert('该分类下有子分类');
+                                        return false;
+                                    } else {
+                                        Data.remove(treeNode.id);
+                                    }
                                 }, onRename: (event, treeId, treeNode, isCancel)=> {
                                     if (treeNode.name) {
                                         Data.rename(new Node(treeNode));
                                     } else {
-                                        alert('请填写分类名称')
+                                        alert('请填写分类名称');
+                                        return false;
                                     }
                                 }
                             }

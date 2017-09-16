@@ -46,6 +46,15 @@ module.exports = {
                 .then(r=>resolve(r))
                 .catch(e=>reject(e))
     )
+
+    // 删除 - 分类
+    , remove: cid=>new Promise((resolve, reject)=>
+            Production_Catalog
+                .destroy({where: {id: cid}})
+                .then(r=>resolve(r))
+                .catch(e=>reject(e))
+    )
+
     // 一级分类列表
     , firstCatalogList: ()=>_.list(1)
 
