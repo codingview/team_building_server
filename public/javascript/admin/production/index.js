@@ -9,7 +9,10 @@
 const Editor = window.wangEditor;
 let editor; // 全局变量存储富文本对象
 
-const Data = {};
+const Data = {
+    // 获取分类列表
+    catalogs: require('./general').catalogs
+};
 
 const Dom = {
     // 创建富文本
@@ -21,9 +24,36 @@ const Dom = {
         editor.create();
     }
 
+    // 分类列表
+    , catalogs: ()=> {
+        Data.catalogs()
+            .then(catalogs=>$('#p_catalog_id').html(Dom.setCatalog(catalogs)))
+            .catch(e=> {
+                console.error(e);
+                alert('获取分类列表出错');
+            })
+
+    }
+
+    // 生产分类列表
+    , setCatalog: catalogs=> {
+        let str = '';
+        catalogs.forEach(catalog=> {
+            str += `<optgroup label="${catalog.name}">`;
+            if ('children' in catalog && catalog.children instanceof Array && catalog.children.length > 0) {
+                catalog.children.forEach(child=> {
+                    str += `<option value="${child.id}">${child.name}</option>`;
+                });
+            }
+            str += '</optgroup>';
+        });
+        return str;
+    }
+
     // 初始化
     , init: function () {
         this.editor();
+        this.catalogs();
     }
 };
 

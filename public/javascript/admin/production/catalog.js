@@ -22,23 +22,7 @@ let zTree; // ztree的实例
 
 const Data = {
     // 获取分类列表
-    catalogs: ()=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/admin/production/catalog/list'
-                , type: 'get'
-                , dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve(json.data);
-                    } else {
-                        reject('message' in json ? json.message : '获取分类列表出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('获取分类列表超时');
-                }
-            })
-    )
+    catalogs: require('./general').catalogs
 
     // 修改 - 分类名称
     , rename: catalog=>new Promise((resolve, reject)=>
