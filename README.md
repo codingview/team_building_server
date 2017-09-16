@@ -54,7 +54,8 @@ team building server
   ```
   webpack --watch
   ```
-  
+- 启动`redis`
+
 ### DB表结构创建及数据初始化  
 
 - 查看 `config/config_development` 中 mysql 配置信息
