@@ -1,4 +1,31 @@
 .app-footer {
-  margin: 40px auto;
+  background: url('/images/footer_bg.png') center top no-repeat;;
+  margin: 20px auto;
+  padding-top: 20px;
+  color: #f0f0f0;
   width: 100%;
+  .footer-feedback {
+
+  }
+  .footer-connection {
+    font-size: 16px;
+    dt {
+      width: 8em;
+    }
+    dd {
+      margin-left: 8em;
+    }
+  }
+  .footer-qrcode {
+    .qrcode-weibo {
+      margin-right: 5%;
+    }
+    .qrcode-item {
+      width: 45%;
+      h3.ta-c {
+        font-size: 16px;
+        margin-top: 8px;
+      }
+    }
+  }
 }
