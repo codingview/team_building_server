@@ -50,7 +50,7 @@ const Dom = {
             str += '<div class="col-sm-3 production-item">' +
                 '<div class="production-icon">' +
                 '<img src="' + p.icon + '">' +
-                '<a class="production-layout dp-n">' +
+                '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
                 '<div class="production-title">' + p.title + '</div>' +
                 '<div class="production-abstract">' + p.abstract + '</div>' +
                 '</a>' +
