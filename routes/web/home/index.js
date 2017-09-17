@@ -8,7 +8,8 @@
 
 const express = require('express')
     , router = new express.Router()
-    , bannerService = require('../../../service/banner');
+    , bannerService = require('../../../service/banner')
+    , catalogService = require('../../../service/production').catalog;
 
 // 首页
 router.get('/', (req, res)=> {
@@ -17,10 +18,15 @@ router.get('/', (req, res)=> {
         , menu: require('../../../config/menu')
         , active: 'home'
         , banners: []
+        , catalogs: []
     };
     bannerService.list()
         .then(list=> {
             json.banners = list;
+            return catalogService.homeCatalogsList();
+        })
+        .then(catalogs=> {
+            json.catalogs = catalogs;
             return res.render('./web/home/view.ejs', json);
         })
         .catch(e=>res.render('./web/home/view.ejs', json));

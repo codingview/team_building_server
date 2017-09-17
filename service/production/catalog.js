@@ -61,6 +61,21 @@ module.exports = {
     // 二级分类列表
     , secondCatalogList: ()=>_.list(2)
 
+    // 三级分类列表
+    , thirdCatalogsList: ()=>_.list(3)
+
+    // 首页分类列表
+    , homeCatalogsList: ()=>new Promise((resolve, reject)=>
+            Production_Catalog
+                .findAll({where: {grade: 2, father_id: 1}})
+                .then(catalogs=> {
+                    let _ = [];
+                    catalogs.forEach(catalog=>_.push(new ProductionCatalog(catalog.id).db2Api(catalog)));
+                    resolve(_);
+                })
+                .catch(e=>reject(e))
+    )
+
     // 分类列表结构
     , catalogList: ()=>new Promise((resolve, reject)=> {
         let results = [], _catalogs = {};
