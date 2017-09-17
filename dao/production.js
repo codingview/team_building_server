@@ -6,9 +6,14 @@
 
 'use strict';
 
-/* 产品 */
-
+/**
+ * 产品
+ */
 class Production {
+    /**
+     * 构造函数
+     * @param {number} pid
+     */
     constructor(pid) {
         if (pid) {
             this.id = pid;
@@ -18,7 +23,7 @@ class Production {
     /**
      * 从表单转成表结构
      * @param {object} p
-     * @returns {Production}
+     * @return {Production}
      */
     form2Db(p) {
         this.name = p.name;
@@ -37,7 +42,7 @@ class Production {
     /**
      * 表结构转table
      * @param {object} p
-     * @returns {Production}
+     * @return {Production}
      */
     db2Api(p) {
         this.name = p.name;
@@ -47,6 +52,8 @@ class Production {
         this.views = p.views;
         this.sequence = p.sequence;
         this.catalog_id = p.catalog_id;
+        this.created_at = p.created_at;
+        this.updated_at = p.updated_at;
         return this;
     }
 }

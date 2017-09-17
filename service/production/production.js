@@ -19,7 +19,7 @@ module.exports = {
                     const rows = result.rows;
                     let results = [];
                     if (rows && rows instanceof Array && rows.length > 0) {
-                        rows.forEach(row=> results.push(new _Production().db2Api(row.dataValues)));
+                        rows.forEach(row=> results.push(new _Production(row.id).db2Api(row.dataValues)));
                         return resolve({results: results, count: result.count});
                     } else {
                         return resolve({results: [], count: 0});
