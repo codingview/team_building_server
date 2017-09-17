@@ -12,8 +12,15 @@ const Production = require('../../models').production
     , _Production = require('../../dao').production;
 
 module.exports = {
+    // 新增产品
+    create: production=> new Promise((resolve, reject)=>
+            Production
+                .create(new _Production().form2Db(production))
+                .then(r=>resolve(r))
+                .catch(e=>reject(e))
+    )
     // 产品列表
-    list: ({offset, limit})=>new Promise((resolve, reject)=>
+    , list: ({offset, limit})=>new Promise((resolve, reject)=>
             Production.findAndCountAll({offset, limit})
                 .then(result=> {
                     const rows = result.rows;
@@ -45,11 +52,12 @@ module.exports = {
                 .catch(e=>reject(e))
     )
 
-    // 新增产品
-    , create: production=> new Promise((resolve, reject)=>
+
+    // 产品详情
+    , detail: production_id=>new Promise((resolve, reject)=>
             Production
-                .create(new _Production().form2Db(production))
-                .then(r=>resolve(r))
+                .find({where: {id: production_id}})
+                .then(p=>resolve(new _Production(p.id).db2Detail(p.dataValues)))
                 .catch(e=>reject(e))
     )
 };
