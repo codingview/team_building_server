@@ -66,8 +66,11 @@ router.get('/add', (req, res)=>
         })
 );
 
-// todo 新增产品 - 接口
-router.put('/add', (req, res)=> {
+// 新增产品 - 接口
+router.put('/add', (req, res)=>
+        productionService.production.create(req.body)
+            .then(r=>res.json(GLO.success(r)))
+            .catch(e=>res.json(GLO.error(e, -99, '新增产品出错')))
+);
 
-});
 module.exports = router;

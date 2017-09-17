@@ -12,6 +12,25 @@ let editor; // 全局变量存储富文本对象
 const Data = {
     // 获取分类列表
     catalogs: require('./general').catalogs
+
+    // 新增产品
+    , add: production=>
+        $.ajax({
+            url: '/admin/production/add'
+            , type: 'put'
+            , data: production
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve();
+                } else {
+                    reject('message' in json ? json.message : '新增产品出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('新增产品超时');
+            }
+        })
 };
 
 const Dom = {
@@ -50,6 +69,22 @@ const Dom = {
         return str;
     }
 
+    // 获取表单内容
+    , getForm: ()=> {
+        let _ = {};
+        const form = $('#p_form')
+            , inputs = form.find('input,select');
+        for (let i = 0, len = inputs.length; i < len; i++) {
+            const input = inputs.eq(i)
+                , _id = input.attr('id').replace(/p_/g, '')
+                ;
+            if (_id !== 'text') {
+                _[_id] = input.val();
+            }
+        }
+        return _;
+    }
+
     // 初始化
     , init: function () {
         this.editor();
@@ -61,11 +96,14 @@ const Listener = {
     // 表单 - 提交 - 监听
     setOneSubmit: ()=> {
         $('#p_submit').one('click', ()=> {
-            const html = editor.txt.html()
-                , text = editor.txt.text();
-            console.info(html)
-            console.info(text)
-            Listener.setOneSubmit();
+            let form = Dom.getForm();
+            form.rich_text = editor.txt.html();
+            form.text = editor.txt.text();
+            form.sequence = form.top === 'on' ? 0 : 99;
+            delete form.top;
+            Data.add(form)
+                .then(r=>location.href = '/admin/production/list')
+                .catch(e=>Listener.setOneSubmit());
         });
     }
 

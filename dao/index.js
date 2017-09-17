@@ -15,4 +15,7 @@ module.exports = {
 
     // 产品分类
     , production_catalog: require('./production_catalog')
+
+    // 产品
+    , production: require('./production')
 };

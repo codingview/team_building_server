@@ -9,4 +9,7 @@
 module.exports = {
     // 产品分类
     catalog: require('./catalog')
+
+    // 产品
+    , production: require('./production')
 };
