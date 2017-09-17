@@ -18,6 +18,10 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: false
             , comment: '产品名称'
+        }, state: {
+            type: DataTypes.INTEGER
+            , allowNull: false
+            , comment: '产品状态'
         }, title: {
             type: DataTypes.STRING
             , allowNull: true
