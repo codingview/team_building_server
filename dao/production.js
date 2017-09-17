@@ -56,6 +56,30 @@ class Production {
         this.updated_at = p.updated_at;
         return this;
     }
+
+    /**
+     * 表结构转缩略图数据
+     * @param {object} p
+     * @return {Production}
+     */
+    db2Icon(p) {
+        this.db2Api(p);
+        this.icon = p.icon ? '/uploads' + p.icon : '/images/production.icon.jpg';
+        this.abstract = p.abstract;
+        return this;
+    }
+
+    /**
+     * 表结构转详情数据
+     * @param {object} p
+     * @return {Production}
+     */
+    db2Detail(p) {
+        this.db2Icon(p);
+        this.rich_text = p.rich_text;
+        this.text = p.text;
+        return this;
+    }
 }
 
 module.exports = Production;

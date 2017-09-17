@@ -12,9 +12,9 @@ const express = require('express')
 
 // 首页 - banner
 router.post('/banner', (req, res)=>
-    bannerService.list()
-        .then(list=>res.json(GLO.success(list)))
-        .catch(e=>res.json(GLO.error(e, -99, '获取广告栏数据出错')))
+        bannerService.list()
+            .then(list=>res.json(GLO.success(list)))
+            .catch(e=>res.json(GLO.error(e, -99, '获取广告栏数据出错')))
 );
 
 module.exports = router;

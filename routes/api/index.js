@@ -12,4 +12,7 @@ const express = require('express')
 // 首页 - 接口
 router.use('/home', require('./home'));
 
+// 产品 - 接口
+router.use('/production', require('./production'));
+
 module.exports = router;

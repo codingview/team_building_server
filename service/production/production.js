@@ -28,6 +28,23 @@ module.exports = {
                 .catch(e=>reject(e))
     )
 
+    // 根据分类编号获取商品列表
+    , listByCid: params=>new Promise((resolve, reject)=>
+            Production
+                .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
+                .then(result=> {
+                    const rows = result.rows;
+                    let results = [];
+                    if (rows && rows instanceof Array && rows.length > 0) {
+                        rows.forEach(row=> results.push(new _Production(row.id).db2Icon(row.dataValues)));
+                        return resolve({results: results, count: result.count});
+                    } else {
+                        return resolve({results: [], count: 0});
+                    }
+                })
+                .catch(e=>reject(e))
+    )
+
     // 新增产品
     , create: production=> new Promise((resolve, reject)=>
             Production
