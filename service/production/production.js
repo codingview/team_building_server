@@ -13,9 +13,20 @@ const Production = require('../../models').production
 
 module.exports = {
     // 产品列表
-    list: ()=> {
-
-    }
+    list: ({offset, limit})=>new Promise((resolve, reject)=>
+            Production.findAndCountAll({offset, limit})
+                .then(result=> {
+                    const rows = result.rows;
+                    let results = [];
+                    if (rows && rows instanceof Array && rows.length > 0) {
+                        rows.forEach(row=> results.push(new _Production().db2Api(row.dataValues)));
+                        return resolve({results: results, count: result.count});
+                    } else {
+                        return resolve({results: [], count: 0});
+                    }
+                })
+                .catch(e=>reject(e))
+    )
 
     // 新增产品
     , create: production=> new Promise((resolve, reject)=>

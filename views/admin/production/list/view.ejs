@@ -1,13 +1,18 @@
 <% include ../../_base/head.ejs %>
 <% include ../../_base/css.ejs %>
+<% include ../../../_base/dataTables.css.ejs %>
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
 <div class="app-container container">
     <div class="container-header"><h2><%= title %></h2></div>
     <div class="container-content">
-        <div id="" class="col-sm-12"></div>
+        <div class="col-sm-12">
+            <table id="production_list" class="table-striped table-bordered table-condensed"></table>
+        </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
+<% include ../../../_base/dataTables.js.ejs %>
+<script src="/src/production.admin.min.js"></script>
 <% include ../../_base/foot.ejs %>

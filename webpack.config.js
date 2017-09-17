@@ -19,6 +19,7 @@ module.exports = {
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
+        , 'add.production.admin': BASE_URI.admin + '/production/add'
         , 'production.admin': BASE_URI.admin + '/production'
     }, output: {
         path: path.join(__dirname, 'public/src')
