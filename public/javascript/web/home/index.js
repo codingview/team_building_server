@@ -7,6 +7,7 @@
 'use strict';
 
 let swiper;
+const LENGTH = 4;
 
 const Data = {
     // 根据分类获取商品
@@ -87,7 +88,7 @@ const Listener = {
                 , cid = parseInt($p.data('cid'))
                 ;
             if (isShow === 0) { // 未显示过
-                Data.production({limit: 3, cid: cid})
+                Data.production({limit: LENGTH, cid: cid})
                     .then(list=>Dom.setCatalog(cid, list))
                     .catch(e=>alert(e));
                 $p.data('show', 1);
