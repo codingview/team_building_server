@@ -23,14 +23,15 @@ class Production {
     form2Db(p) {
         this.name = p.name;
         this.title = p.title;
+        this.md5 = require('../utils/global/method').md5(p.name + '_' + p.title + '_' + new Date().getTime());// 生成md5
+        this.views = 0; // 浏览次数为0
         this.catalog_id = parseInt(p.catalog_id);
         this.tags = p.tags;
         this.rich_text = p.rich_text;
         this.text = p.text;
-        this.sequence = parseInt(p.sequence);
+        this.sequence = parseInt(p.sequence) || 99;
         return this;
     }
-
 }
 
 module.exports = Production;

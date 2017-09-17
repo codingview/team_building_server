@@ -27,7 +27,7 @@ module.exports = DataTypes=>({
             , allowNull: false
             , comment: '分类编号'
         }, md5: {
-            type: DataTypes.INTEGER
+            type: DataTypes.STRING
             , allowNull: false
             , comment: 'MD5值'
         }, abstract: {
@@ -55,11 +55,11 @@ module.exports = DataTypes=>({
             , allowNull: true
             , comment: '浏览次数'
         }, rich_text: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
             , allowNull: true
             , comment: '富文本'
         }, text: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
             , allowNull: true
             , comment: '纯文本'
         }

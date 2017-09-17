@@ -152,7 +152,9 @@ const Dom = {
                                                 , sequence: treeNode.getIndex() || 0
                                                 , icon: '' // todo 默认无图标
                                             };
-                                        Data.add(newNode);
+                                        Data.add(newNode)
+                                            .then()
+                                            .catch(e=>alert(e));
                                     }
                                 }, beforeRemove: (treeId, treeNode)=> {
                                     if (treeNode.level === 2) {
@@ -162,11 +164,15 @@ const Dom = {
                                         alert('该分类下有子分类');
                                         return false;
                                     } else {
-                                        Data.remove(treeNode.id);
+                                        Data.remove(treeNode.id)
+                                            .then()
+                                            .catch(e=>alert(e));
                                     }
                                 }, onRename: (event, treeId, treeNode, isCancel)=> {
                                     if (treeNode.name) {
-                                        Data.rename(new Node(treeNode));
+                                        Data.rename(new Node(treeNode))
+                                            .then()
+                                            .catch(e=>alert(e));
                                     } else {
                                         alert('请填写分类名称');
                                         return false;

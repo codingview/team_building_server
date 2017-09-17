@@ -14,23 +14,24 @@ const Data = {
     catalogs: require('./general').catalogs
 
     // 新增产品
-    , add: production=>
-        $.ajax({
-            url: '/admin/production/add'
-            , type: 'put'
-            , data: production
-            , dataType: 'json'
-            , success: json=> {
-                if (json && 'status' in json && json.status > 0) {
-                    resolve();
-                } else {
-                    reject('message' in json ? json.message : '新增产品出错');
+    , add: production=>new Promise((resolve, reject)=>
+            $.ajax({
+                url: '/admin/production/add'
+                , type: 'put'
+                , data: production
+                , dataType: 'json'
+                , success: json=> {
+                    if (json && 'status' in json && json.status > 0) {
+                        resolve();
+                    } else {
+                        reject('message' in json ? json.message : '新增产品出错');
+                    }
+                }, error: e=> {
+                    console.error(e);
+                    reject('新增产品超时');
                 }
-            }, error: e=> {
-                console.error(e);
-                reject('新增产品超时');
-            }
-        })
+            })
+    )
 };
 
 const Dom = {
@@ -40,6 +41,7 @@ const Dom = {
         editor.customConfig.menus = require('../../general/Option.editor'); // 自定义菜单配置
         editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
         editor.customConfig.uploadImgMaxLength = 5; // 限制一次最多上传 5 张图片
+        editor.customConfig.pasteFilterStyle = false; // 关闭粘贴样式的过滤
         editor.create();
     }
 
@@ -78,7 +80,10 @@ const Dom = {
             const input = inputs.eq(i)
                 , _id = input.attr('id').replace(/p_/g, '')
                 ;
-            if (_id !== 'text') {
+            if (_id === 'text') {
+            } else if (_id === 'top') {
+                _.top = input.is(':checked');
+            } else {
                 _[_id] = input.val();
             }
         }
@@ -99,17 +104,34 @@ const Listener = {
             let form = Dom.getForm();
             form.rich_text = editor.txt.html();
             form.text = editor.txt.text();
-            form.sequence = form.top === 'on' ? 0 : 99;
+            form.sequence = form.top ? 0 : 99;
             delete form.top;
-            Data.add(form)
-                .then(r=>location.href = '/admin/production/list')
-                .catch(e=>Listener.setOneSubmit());
+            if (form.name) {
+                Data.add(form)
+                    .then(r=> {
+                        //location.href = '/admin/production/list'
+                    })
+                    .catch(e=> {
+                        alert(e);
+                    });
+            } else {
+                alert('请输入产品名称');
+            }
+            Listener.setOneSubmit();
+        });
+    }
+
+    // 重置表单时清空富文本
+    , reset: ()=> {
+        $('#p_reset').on('click', ()=> {
+            editor.txt.clear();
         });
     }
 
     // 初始化
     , init: function () {
         this.setOneSubmit();
+        this.reset();
     }
 };
 

@@ -9,7 +9,7 @@
 /* 产品管理 */
 
 const Production = require('../../models').production
-    ,_Production=require('../../dao').production;
+    , _Production = require('../../dao').production;
 
 module.exports = {
     // 产品列表
@@ -18,8 +18,10 @@ module.exports = {
     }
 
     // 新增产品
-    , create: production=> new Promise((resolve, reject)=> {
-        console.info(production)
-        resolve(true);
-    })
+    , create: production=> new Promise((resolve, reject)=>
+            Production
+                .create(new _Production().form2Db(production))
+                .then(r=>resolve(r))
+                .catch(e=>reject(e))
+    )
 };
