@@ -17,7 +17,7 @@ module.exports = DataTypes=>({
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
-            , unique: true
+            , unique: false
             , comment: '分类名称'
         }, grade: {
             type: DataTypes.INTEGER

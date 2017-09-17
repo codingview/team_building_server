@@ -6,7 +6,14 @@
 
 'use strict';
 
+/**
+ * 节点
+ */
 class Node {
+    /**
+     * 构造函数
+     * @param {object} node
+     */
     constructor(node) {
         this.id = node.id;
         this.name = node.name;
@@ -45,46 +52,45 @@ const Data = {
     )
 
     // 新增 - 分类
-    , add: catalog=>new Promise((resolve, reject)=> {
-        $.ajax({
-            url: '/admin/production/catalog'
-            , type: 'put'
-            , data: catalog
-            , dataType: 'json'
-            , success: json=> {
-                if (json && 'status' in json && json.status > 0) {
-                    resolve();
-                } else {
-                    reject('message' in json ? json.message : '新增分类出错');
+    , add: catalog=>new Promise((resolve, reject)=>
+            $.ajax({
+                url: '/admin/production/catalog'
+                , type: 'put'
+                , data: catalog
+                , dataType: 'json'
+                , success: json=> {
+                    if (json && 'status' in json && json.status > 0) {
+                        resolve(json.data);
+                    } else {
+                        reject('message' in json ? json.message : '新增分类出错');
+                    }
+                }, error: e=> {
+                    console.error(e);
+                    reject('新增分类名称超时');
                 }
-            }, error: e=> {
-                console.error(e);
-                reject('新增分类名称超时');
-            }
-        })
-    })
+            })
+    )
 
     // 删除 - 分类
-    , remove: cid=>new Promise((resolve, reject)=> {
-        $.ajax({
-            url: '/admin/production/catalog'
-            , type: 'delete'
-            , data: {
-                cid: cid
-            }, dataType: 'json'
-            , success: json=> {
-                if (json && 'status' in json && json.status > 0) {
-                    resolve();
-                } else {
-                    reject('message' in json ? json.message : '新增分类出错');
+    , remove: cid=>new Promise((resolve, reject)=>
+            $.ajax({
+                url: '/admin/production/catalog'
+                , type: 'delete'
+                , data: {
+                    cid: cid
+                }, dataType: 'json'
+                , success: json=> {
+                    if (json && 'status' in json && json.status > 0) {
+                        resolve();
+                    } else {
+                        reject('message' in json ? json.message : '新增分类出错');
+                    }
+                }, error: e=> {
+                    console.error(e);
+                    reject('新增分类名称超时');
                 }
-            }, error: e=> {
-                console.error(e);
-                reject('新增分类名称超时');
-            }
-        })
-    })
-
+            })
+    )
 };
 
 const Dom = {
@@ -93,7 +99,7 @@ const Dom = {
         const sObj = $('#' + treeNode.tId + '_span')
             , ads = '#addBtn_' + treeNode.tId
             , addBtn = $(ads);
-        if (treeNode.editNameFlag || addBtn.length > 0 || treeNode.grade === 2) {// 2级分类不能新增3级
+        if (treeNode.editNameFlag || addBtn.length > 0 || treeNode.grade === 3) {// 3级分类不能新增4级
             return false;
         } else {
             const addStr = '<span class="button add" id="addBtn_' + treeNode.tId
@@ -102,16 +108,24 @@ const Dom = {
             const btn = $(ads);
             if (btn) {
                 btn.bind('click', function () {
-                    const parentNode = treeNode.getParentNode() // 父节点
-                        , childNode = treeNode.children // 子节点
-                        , id = (( parentNode ? parentNode.getIndex() : 1) + 1) * 100 + (childNode ? childNode.length + 1 : 0);
-                    // todo 根据level生成不同的id
-                    zTree.addNodes(treeNode, {
-                        id: id
-                        , pId: treeNode.id
-                        , name: '新的分类' + id
-                        // todo 新增的3级分类不能有新增按钮
-                    });
+                    console.info(treeNode)
+                    const newNode = {
+                        name: '新的分类'
+                        , grade: treeNode.level + 1
+                        , father_id: treeNode.id
+                        , sequence: treeNode.children ? treeNode.children.length : 0
+                        , icon: '' // todo 默认无图标
+                    };
+                    Data.add(newNode)
+                        .then(node=>zTree.addNodes(treeNode, {
+                            id: node.id
+                            , pId: treeNode.id
+                            , name: '新的分类'
+                            // todo 新增的3级分类不能有新增按钮
+                        }))
+                        .catch(e=> {
+                            alert(e);
+                        });
                     return false;
                 });
             }
@@ -143,24 +157,10 @@ const Dom = {
                                 // todo 拖拽
                             }, callback: {
                                 onNodeCreated: (event, treeId, treeNode)=> {
-                                    if (!('sequence' in treeNode) && treeNode.level !== 0) {// todo 区分初始化创建而不是新增
-                                        const parentNode = treeNode.getParentNode()
-                                            , newNode = {
-                                                name: treeNode.name
-                                                , grade: treeNode.level
-                                                , father_id: (parentNode ? parentNode.id : 0)
-                                                , sequence: treeNode.getIndex() || 0
-                                                , icon: '' // todo 默认无图标
-                                            };
-                                        Data.add(newNode)
-                                            .then()
-                                            .catch(e=>alert(e));
-                                    }
+
                                 }, beforeRemove: (treeId, treeNode)=> {
-                                    if (treeNode.level === 2) {
-                                        Data.remove(treeNode.id);
-                                    } else if (treeNode.children && treeNode.children.length > 0) {
-                                        // 删除时，2级分类要同时删除3级分类
+                                    // 删除时，要先删除下级分类
+                                    if (treeNode.children && treeNode.children.length > 0) {
                                         alert('该分类下有子分类');
                                         return false;
                                     } else {
@@ -168,7 +168,7 @@ const Dom = {
                                             .then()
                                             .catch(e=>alert(e));
                                     }
-                                }, onRename: (event, treeId, treeNode, isCancel)=> {
+                                }, onRename: (event, treeId, treeNode, isCancel)=> { // todo 修改名称自动选中文本
                                     if (treeNode.name) {
                                         Data.rename(new Node(treeNode))
                                             .then()
@@ -181,6 +181,7 @@ const Dom = {
                             }
                         }, [{
                             name: '产品分类'
+                            , id: 0
                             , open: true
                             , children: catalogs
                             , noEditBtn: true
