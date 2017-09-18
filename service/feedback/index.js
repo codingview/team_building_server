@@ -1,0 +1,27 @@
+/**
+ * Created by zhangrz on 2017/9/18.
+ * Copyright© 2015-2020 codingview (https://github.com/codingview)
+ * @version 0.0.1 created
+ */
+
+'use strict';
+
+/* 在线反馈 */
+
+const Feedback = require('../../models').feedback;
+
+module.export = {
+    // 新增 - 反馈
+    create: fb=>new Promise((resolve, reject)=>
+        Feedback.create(fb)
+            .then(r=>resolve(r))
+            .catch(e=>reject(e))
+    )
+
+    // 已查看 - 反馈
+    , view: fid=>new Promise((resolve, reject)=>
+        Feedback.update({state: 0}, {where: {id: fid}})
+    )
+
+    // 查询 - 反馈 - 列表
+};
