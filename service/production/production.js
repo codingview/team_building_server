@@ -14,50 +14,50 @@ const Production = require('../../models').production
 module.exports = {
     // 新增产品
     create: production=> new Promise((resolve, reject)=>
-            Production
-                .create(new _Production().form2Db(production))
-                .then(r=>resolve(r))
-                .catch(e=>reject(e))
+        Production
+            .create(new _Production().form2Db(production))
+            .then(r=>resolve(r))
+            .catch(e=>reject(e))
     )
     // 产品列表
     , list: ({offset, limit})=>new Promise((resolve, reject)=>
-            Production.findAndCountAll({offset, limit})
-                .then(result=> {
-                    const rows = result.rows;
-                    let results = [];
-                    if (rows && rows instanceof Array && rows.length > 0) {
-                        rows.forEach(row=> results.push(new _Production(row.id).db2Api(row.dataValues)));
-                        return resolve({results: results, count: result.count});
-                    } else {
-                        return resolve({results: [], count: 0});
-                    }
-                })
-                .catch(e=>reject(e))
+        Production.findAndCountAll({offset, limit})
+            .then(result=> {
+                const rows = result.rows;
+                let results = [];
+                if (rows && rows instanceof Array && rows.length > 0) {
+                    rows.forEach(row=> results.push(new _Production(row.id).db2Api(row.dataValues)));
+                    return resolve({results: results, count: result.count});
+                } else {
+                    return resolve({results: [], count: 0});
+                }
+            })
+            .catch(e=>reject(e))
     )
 
     // 根据分类编号获取商品列表
     , listByCid: params=>new Promise((resolve, reject)=>
-            Production
-                .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
-                .then(result=> {
-                    const rows = result.rows;
-                    let results = [];
-                    if (rows && rows instanceof Array && rows.length > 0) {
-                        rows.forEach(row=> results.push(new _Production(row.id).db2Icon(row.dataValues)));
-                        return resolve({results: results, count: result.count});
-                    } else {
-                        return resolve({results: [], count: 0});
-                    }
-                })
-                .catch(e=>reject(e))
+        Production
+            .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
+            .then(result=> {
+                const rows = result.rows;
+                let results = [];
+                if (rows && rows instanceof Array && rows.length > 0) {
+                    rows.forEach(row=> results.push(new _Production(row.id).db2Icon(row.dataValues)));
+                    return resolve({results: results, count: result.count});
+                } else {
+                    return resolve({results: [], count: 0});
+                }
+            })
+            .catch(e=>reject(e))
     )
 
 
     // 产品详情
     , detail: production_id=>new Promise((resolve, reject)=>
-            Production
-                .find({where: {id: production_id}})
-                .then(p=>resolve(new _Production(p.id).db2Detail(p.dataValues)))
-                .catch(e=>reject(e))
+        Production
+            .find({where: {id: production_id}})
+            .then(p=>resolve(new _Production(p.id).db2Detail(p.dataValues)))
+            .catch(e=>reject(e))
     )
 };
