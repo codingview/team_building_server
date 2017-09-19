@@ -9,15 +9,16 @@
 const path = require('path')
     , webpack = require('webpack')
     , BASE_URI = {
-        web: './public/javascript/web'
-        , admin: './public/javascript/admin'
-    };
+    web: './public/javascript/web'
+    , admin: './public/javascript/admin'
+};
 
 module.exports = {
     entry: {
         'home': BASE_URI.web + '/home'
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
+        , 'feedback.option.admin': BASE_URI.admin + '/option/feedback'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
         , 'add.production.admin': BASE_URI.admin + '/production/add'
         , 'production.admin': BASE_URI.admin + '/production'
