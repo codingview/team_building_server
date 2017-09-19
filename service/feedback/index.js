@@ -21,7 +21,9 @@ module.exports = {
 
     // 已查看 - 反馈
     , view: fid=>new Promise((resolve, reject)=>
-        Feedback.update({state: 0}, {where: {id: fid}})
+        Feedback.update({state: 1}, {where: {id: fid}})
+            .then(()=>resolve())
+            .catch(e=>reject(e))
     )
 
     // 查询 - 反馈 - 列表

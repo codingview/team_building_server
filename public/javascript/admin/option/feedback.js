@@ -10,8 +10,9 @@ require('../../general/Date.format');
 
 let tableApi;
 
-const Table = {
-    init: ()=> tableApi = $('#feedback_list').DataTable({
+const _ = {
+    // dt初始化
+    tableInit: ()=> tableApi = $('#feedback_list').DataTable({
         language: require('../../general/DT.language')
         , paginType: 'full_numbers'
         , lengthMenu: [ // 显示记录条数
@@ -42,12 +43,48 @@ const Table = {
             , {title: '修改时间', width: '10em', data: 'updated_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {
                 title: '操作', width: '3em', data: null, render: d=>
-                    d.state === 0 ? '<button class="btn btn-primary btn-xs" data-fid="' + d.fid + '">已阅</button>' : ''
+                    d.state === 0 ? '<button class="btn btn-primary btn-xs feedback-read" data-fid="' + d.fid + '">已阅</button>' : ''
             }
         ]
     })
+
+    // 已读提交
+    , read: fid=>new Promise((resolve, reject)=>
+        $.ajax({
+            url: '/admin/option/feedback/read'
+            , type: 'post'
+            , data: {fid}
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve();
+                } else {
+                    reject('message' in json ? json.message : '提交已阅出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('提交已阅超时');
+            }
+        })
+    )
+
+    // 监听初始化
+    , listenerInit: ()=> {
+        // 监听已阅按钮
+        $('#feedback_list').on('click', '.feedback-read', function () {
+            const fid = parseInt($(this).data('fid'));
+            _.read(fid)
+                .then(()=> {
+                    tableApi.ajax.reload();
+                    alert('已阅完成');
+                })
+                .catch(e=>alert(e));
+        });
+    }
+
 };
 
 $(function () {
-    Table.init();
+    _.tableInit();
+    _.listenerInit();
 });

@@ -45,5 +45,10 @@ router.post('/list', (req, res)=> {
 });
 
 // 反馈 - 已读
+router.post('/read', (req, res)=>
+    feedbackService.view(req.body.fid)
+        .then(()=>res.json(GLO.success(true)))
+        .catch(e=>res.json(GLO.error(e, -99, '已读反馈出错')))
+);
 
 module.exports = router;
