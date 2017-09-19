@@ -16,6 +16,8 @@ const path = require('path')
 module.exports = {
     entry: {
         'home': BASE_URI.web + '/home'
+        , 'about': BASE_URI.web + '/about'
+
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
         , 'feedback.option.admin': BASE_URI.admin + '/option/feedback'

@@ -6,9 +6,6 @@
 
 'use strict';
 
-/* 框架 */
-
-module.exports = {
-    // 底部的在线反馈
-    feedback: require('./feedback')
-};
+$(function () {
+    require('./frame').feedback();
+});

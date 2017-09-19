@@ -8,7 +8,7 @@
 
 let swiper;
 const LENGTH = 4
-    , feedback = require('../frame').footer_feedback;
+    , feedback = require('../frame').feedback;
 
 const Data = {
     // 根据分类获取商品
