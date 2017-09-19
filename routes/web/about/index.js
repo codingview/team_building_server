@@ -10,10 +10,15 @@ const express = require('express')
     , router = new express.Router();
 
 // 关于我们 - home页
-router.get('/', (req, res)=>
+router.get('/', (req, res)=>res.redirect('/about/home'));
+
+// 关于我们 - 其他页面
+router.get('/:title', (req, res)=>
     res.render('./web/about/view', {
         active: 'about'
         , title: '关于我们'
+        , menu: require('../../../config/about_menu')
+        , active_menu: req.params.title
     })
 );
 

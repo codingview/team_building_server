@@ -6,7 +6,12 @@
 <div class="app-container container">
     <div class="col-lg-12">
         <div class="col-lg-2">
-            <% include menu.ejs %>
+            <div class="list-group">
+                <% menu.forEach(function (m) { %>
+                <a href="/about/<%= m.active %>"
+                   class="list-group-item<%= active_menu === m.active ? ' active' : '' %>"><%= m.title %></a>
+                <% }) %>
+            </div>
         </div>
         <div class="col-lg-10"></div>
     </div>
