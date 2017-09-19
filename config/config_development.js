@@ -26,7 +26,7 @@ module.exports = {
             , dialect: 'mysql'
         }
     }, redis: {
-        host: 'localhost'
+        host: '192.168.1.101'
         , port: 6379
         , db: 6
         , ttl: 86000
