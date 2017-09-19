@@ -70,14 +70,10 @@ const _ = {
             const params = _.getParams();
             if (params) {
                 _.sendForm(params)
-                    .then(()=>_.setOneSubmit())
-                    .catch(e=> {
-                        _.setOneSubmit();
-                        alert(e);
-                    });
-            } else {
-                _.setOneSubmit();
+                    .then(()=>alert('您的信息已经提交成功，我们会尽快与您联系！'))
+                    .catch(e=> alert(e));
             }
+            _.setOneSubmit();
         })
 
     // 输入框检查

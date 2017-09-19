@@ -17,14 +17,14 @@ module.exports = DataTypes=>({
             , allowNull: false
             , comment: '反馈者姓名'
         }, phone: {
-            type: DataTypes.INTEGER
+            type: DataTypes.STRING(20)
             , allowNull: false
             , comment: '反馈者手机号码'
         }, state: {
             type: DataTypes.INTEGER
             , allowNull: false
             , comment: '处理状态'
-        }, icon: {
+        }, content: {
             type: DataTypes.STRING
             , allowNull: true
             , comment: '留言内容'
