@@ -19,7 +19,7 @@ module.exports = DataTypes=>({
         }, phone: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '反馈者电话'
+            , comment: '反馈者手机号码'
         }, state: {
             type: DataTypes.INTEGER
             , allowNull: false
@@ -28,6 +28,10 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: true
             , comment: '留言内容'
+        }, ip: {
+            type: DataTypes.STRING
+            , allowNull: true
+            , comment: '提交反馈的IP'
         }
     }, tableName: 'feedback'
 });

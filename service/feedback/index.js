@@ -10,7 +10,7 @@
 
 const Feedback = require('../../models').feedback;
 
-module.export = {
+module.exports = {
     // 新增 - 反馈
     create: fb=>new Promise((resolve, reject)=>
         Feedback.create(fb)

@@ -43,6 +43,7 @@ module.exports = {
                 + '  ' + JSON.stringify(req.params || {})
             ;
         logger('http').info(_);
+        req.__ip = ip; // 真实ip
         return _;
     }
 

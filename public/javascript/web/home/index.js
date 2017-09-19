@@ -7,27 +7,28 @@
 'use strict';
 
 let swiper;
-const LENGTH = 4;
+const LENGTH = 4
+    , feedback = require('../frame').footer_feedback;
 
 const Data = {
     // 根据分类获取商品
     production: data=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/api/production/list'
-                , type: 'post'
-                , data: data
-                , dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve(json.data);
-                    } else {
-                        reject('message' in json ? json.message : '获取产品列表出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('获取产品列表超时');
+        $.ajax({
+            url: '/api/production/list'
+            , type: 'post'
+            , data: data
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve(json.data);
+                } else {
+                    reject('message' in json ? json.message : '获取产品列表出错');
                 }
-            })
+            }, error: e=> {
+                console.error(e);
+                reject('获取产品列表超时');
+            }
+        })
     )
 };
 
@@ -105,4 +106,5 @@ const Listener = {
 $(function () {
     Dom.init();
     Listener.init();
+    feedback();
 });
