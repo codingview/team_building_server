@@ -3,7 +3,13 @@
 <link href="/stylesheets/web/pages/about.min.css" rel="stylesheet">
 <% include ../_base/container.ejs %>
 <% include ../_base/header.ejs %>
-<div class="app-container">
+<div class="app-container container">
+    <div class="col-lg-12">
+        <div class="col-lg-2">
+            <% include menu.ejs %>
+        </div>
+        <div class="col-lg-10"></div>
+    </div>
 </div>
 <% include ../_base/footer.ejs %>
 <% include ../_base/javascript.ejs %>
