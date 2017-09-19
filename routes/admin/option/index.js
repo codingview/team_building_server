@@ -19,4 +19,7 @@ router.get('/', (req, res)=>
 // 管理员 - 管理
 router.use('/user', require('./user'));
 
+// 首页 - 反馈列表
+router.use('/feedback', require('./feedback'));
+
 module.exports = router;

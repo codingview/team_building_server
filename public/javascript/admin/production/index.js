@@ -6,6 +6,8 @@
 
 'use strict';
 
+require('../../general/Date.format');
+
 let tableApi;
 
 const Table = {
@@ -32,13 +34,14 @@ const Table = {
             , {
                 title: '产品状态'
                 , data: 'state'
-                , render: s=>`<label class="label label-${s === 1 ? 'info' : 'danger'}">
-                ${s === 1 ? '正常' : '下架'}</label>`
+                , render: s=>'<label class="label label-'
+                + (s === 1 ? 'info' : 'danger') + '">'
+                + (s === 1 ? '正常' : '下架') + '</label>'
             }
             , {title: '浏览次数', data: 'views'}
             , {title: '是否置顶', data: 'sequence'}
-            , {title: '创建时间', data: 'created_at'}
-            , {title: '修改时间', data: 'updated_at'}
+            , {title: '创建时间', data: 'created_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
+            , {title: '修改时间', data: 'updated_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {
                 title: '操作', width: '136px', data: null, render: d=>
                 '<button class="btn btn-info btn-xs ml-1e" data-bc="' + d.bc + '">修改信息</button>' +

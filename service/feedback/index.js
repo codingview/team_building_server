@@ -8,7 +8,8 @@
 
 /* 在线反馈 */
 
-const Feedback = require('../../models').feedback;
+const Feedback = require('../../models').feedback
+    , _Feedback = require('../../dao').feedback;
 
 module.exports = {
     // 新增 - 反馈
@@ -24,4 +25,19 @@ module.exports = {
     )
 
     // 查询 - 反馈 - 列表
+    , list: ({offset, limit})=>new Promise((resolve, reject)=>
+        Feedback.findAndCountAll({offset, limit})
+            .then(result=> {
+                const rows = result.rows;
+                let results = [];
+                if (rows && rows instanceof Array && rows.length > 0) {
+                    rows.forEach(row=> results.push(new _Feedback().db2Api(row.dataValues)));
+                    return resolve({results: results, count: result.count});
+                } else {
+                    return resolve({results: [], count: 0});
+                }
+            })
+            .catch(e=>reject(e))
+    )
 };
+

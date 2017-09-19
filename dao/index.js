@@ -18,4 +18,7 @@ module.exports = {
 
     // 产品
     , production: require('./production')
+
+    // 反馈
+    , feedback: require('./feedback')
 };
