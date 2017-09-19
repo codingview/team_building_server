@@ -6,6 +6,8 @@
 
 'use strict';
 
+require('../../general/Date.format');
+
 let tableApi;
 
 const Table = {
@@ -29,8 +31,8 @@ const Table = {
             {title: '序号', width: '24px', data: 'uid'}
             , {title: '管理员', class: '', data: 'title'}
             , {title: '登录账号', class: '', data: 'user_name'}
-            , {title: '创建时间', class: '', data: 'created_at'}
-            , {title: '修改时间', class: '', data: 'updated_at'}
+            , {title: '创建时间', class: '', data: 'created_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
+            , {title: '修改时间', class: '', data: 'updated_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {
                 title: '操作', width: '136px', data: null, render: d=>
                 '<button class="btn btn-info btn-xs ml-1e" data-bc="' + d.bc + '">修改信息</button>' +
