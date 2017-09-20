@@ -1,0 +1,25 @@
+<% include ../_base/head.ejs %>
+<% include ../_base/css.ejs %>
+<% include ../_base/container.ejs %>
+<% include ../_base/header.ejs %>
+<div class="app-container container">
+    <div class="container-header"><h2><%= title %></h2></div>
+    <div class="container-title mt-2e">
+        <div class="form-inline">
+            <div class="form-group">
+                <label for="about_module">选择模块</label>
+                <select id="about_module" class="form-control ml-2e">
+                    <% menu.forEach(function (m){ %>
+                    <option value="<%= m.active %>"><%= m.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="container-content bo1" id="about_content"></div>
+</div>
+<% include ../_base/footer.ejs %>
+<% include ../_base/javascript.ejs %>
+<% include ../../_base/wangEditor.js.ejs %>
+<script src="/src/about.admin.min.js"></script>
+<% include ../_base/foot.ejs %>

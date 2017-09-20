@@ -15,22 +15,22 @@ const Data = {
 
     // 新增产品
     , add: production=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/admin/production/add'
-                , type: 'put'
-                , data: production
-                , dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve();
-                    } else {
-                        reject('message' in json ? json.message : '新增产品出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('新增产品超时');
+        $.ajax({
+            url: '/admin/production/add'
+            , type: 'put'
+            , data: production
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve();
+                } else {
+                    reject('message' in json ? json.message : '新增产品出错');
                 }
-            })
+            }, error: e=> {
+                console.error(e);
+                reject('新增产品超时');
+            }
+        })
     )
 };
 
@@ -46,15 +46,13 @@ const Dom = {
     }
 
     // 分类列表
-    , catalogs: ()=> {
+    , catalogs: ()=>
         Data.catalogs()
             .then(catalogs=>$('#p_catalog_id').html(Dom.setCatalog(catalogs)))
             .catch(e=> {
                 console.error(e);
                 alert('获取分类列表出错');
             })
-
-    }
 
     // 生产分类列表
     , setCatalog: catalogs=> {

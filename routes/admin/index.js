@@ -43,6 +43,12 @@ router.use('/production', require('./production'));
 
 // todo 师资实力
 
-// todo 精彩案例
+// 关于我们
+router.get('/about', (req, res)=>
+    res.render('./admin/about/view', {
+        title: '设置关于我们'
+        , menu: require('../../config/about_menu')
+    })
+);
 
 module.exports = router;

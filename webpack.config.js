@@ -21,9 +21,10 @@ module.exports = {
         , 'login.admin': BASE_URI.admin + '/login'
         , 'user.option.admin': BASE_URI.admin + '/option/user'
         , 'feedback.option.admin': BASE_URI.admin + '/option/feedback'
-        , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
-        , 'add.production.admin': BASE_URI.admin + '/production/add'
         , 'production.admin': BASE_URI.admin + '/production'
+        , 'add.production.admin': BASE_URI.admin + '/production/add'
+        , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
+        , 'about.admin': BASE_URI.admin + '/about'
     }, output: {
         path: path.join(__dirname, 'public/src')
         , filename: '[name].min.js'
