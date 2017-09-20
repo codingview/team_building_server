@@ -28,7 +28,7 @@ class Production {
     form2Db(p) {
         this.name = p.name;
         this.title = p.title;
-        this.md5 = require('../utils/global/method').md5(p.name + '_' + p.title + '_' + new Date().getTime());// 生成md5
+        this.md5 = require('../utils/global/method').filename(p.name + '_' + p.title + '_');// 生成md5
         this.state = 1; // 默认为1
         this.views = 0; // 浏览次数为0
         this.catalog_id = parseInt(p.catalog_id);

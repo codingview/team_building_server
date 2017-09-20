@@ -6,6 +6,10 @@
 
 'use strict';
 
+const _ = {
+    md5: str=>require('crypto').createHash('md5').update(str).digest('hex')
+};
+
 // 标准方法
 module.exports = {
     /**
@@ -23,6 +27,10 @@ module.exports = {
         const ipArr = ip.match(/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g);
         return ipArr && ipArr.length > 0 ? ipArr[0] : '127.0.0.1';
     }
+
     // MD5
-    , md5: str=>require('crypto').createHash('md5').update(str).digest('hex')
+    , md5: _.md5
+
+    // filename生成
+    , filename: str => _.md5(str + new Date().getTime())
 };
