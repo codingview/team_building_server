@@ -26,3 +26,6 @@ config/config_production.js
 # general css
 public/stylesheets/general/*.css
 public/stylesheets/general/*.css.map
+
+# statis data html file
+public/static/about/*
