@@ -16,7 +16,21 @@ const Data = {
         , text: '读取广告位'
     })
 
-    // 删除广告位
+    // 更新 - 广告位
+    , update: banner=>$ajax({
+        url: '/admin/home/banner'
+        , type: 'post'
+        , text: '更新广告位'
+    })
+
+    // 新增 - 广告位
+    , add: banner=>$ajax({
+        url: '/admin/home/banner'
+        , type: 'put'
+        , text: '新增广告位'
+    })
+
+    // 删除 - 广告位
     , remove: bid=>$ajax({
         url: '/admin/home/banner/' + bid
         , type: 'delete'
@@ -25,16 +39,33 @@ const Data = {
 };
 
 const Dom = {
-    // 拼装banner
-    setBanner: banner=> `
+    // 拼装 image
+    setImg: banner=> {
+        if ('img' in banner && banner.img) {
+            return '<img src="/uploads' + banner.img + '" width="100%">';
+        } else {
+            return '<div class="alert alert-danger alert-dismissible fade in" role="alert">' +
+                '<strong>请上传图片</strong>' +
+                '</div>';
+        }
+    }
+
+    // 拼装 banner
+    , setBanner: banner=> `
             <div class="row banner-content" data-bid="${banner.bid}">
-                <div class="col-lg-8"><img src="/uploads${banner.img}" width="100%"></div>
+                <div class="col-lg-8">${Dom.setImg(banner)}</div>
                 <div class="col-lg-4">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">链接</div>
                             <input type="text" class="form-control banner-link" value="${banner.href}"
                              placeholder="广告位链接">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">图片</div>
+                            <input type="file" class="form-control banner-image" placeholder="广告位图片">
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,6 +78,8 @@ const Dom = {
                     <div class="form-group">
                         <button type="button" class="btn btn-danger wi-6e banner-remove"
                          data-bid="${banner.bid}">删除</button>
+                        <button type="button" class="btn btn-danger wi-6e banner-save"
+                         data-bid="${banner.bid}">保存</button>
                     </div>
                 </div>
             </div>`
@@ -69,7 +102,7 @@ const Dom = {
 };
 
 const Listener = {
-    // 删除按钮的监听
+    // 删除 - 按钮
     remove: ()=> {
         $('#banner_list').on('click', '.banner-remove', function () {
             const bid = $(this).data('bid');
@@ -81,9 +114,35 @@ const Listener = {
         });
     }
 
+    // 新增 - 按钮
+    , add: ()=> {
+        $('#banner_add').one('click', ()=> {
+            const banner = {
+                bid: -1
+                , dcp: ''
+                , href: ''
+            };
+            $('#banner_list').append(Dom.setBanner(banner));
+        });
+    }
+
+    // 保存 - 按钮
+    , save: ()=> {
+        $('#banner_list').on('click', '.banner-save', function () {
+            const bid = $(this).data('bid')
+                , $c = $('.banner-content[data-bid="' + bid + '"]');
+            let form = {
+                seq: $c.index()
+            };
+            console.info(form)
+        });
+    }
+
     // 初始化
     , init: function () {
         this.remove();
+        this.save();
+        this.add();
     }
 
 };

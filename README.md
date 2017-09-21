@@ -87,7 +87,6 @@ team building server
   - 建表1:执行 `sql` 文件夹下所有sql文件
   - 建表2:执行(`node`) `service/init/index.js`
 
-
 ### 开发环境配置
 
 - 安装`eslint`

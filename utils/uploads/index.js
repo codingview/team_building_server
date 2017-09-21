@@ -9,16 +9,17 @@
 // 文件上传
 const multer = require('multer')
     , config = require('../../config')
-    , storage = multer.diskStorage({ // 存储 - 配置
-    // 设置上传后文件路径
-    destination: (req, file, callback)=>callback(null, config.uploads_images)
-    // 给上传文件重命名，获取添加后缀名
-    , filename: (req, file, callback)=>callback(null, req.timestamp + '.jpg')
-}), filter = (req, file, callback)=> { // 文件 - 过滤
+    , storage =
+    multer
+        .diskStorage({ // 存储 - 配置
+            destination: (req, file, callback)=>callback(null, config.uploads_images)// 设置上传后文件路径
+            , filename: (req, file, callback)=>callback(null, req.filename + '.jpg')// 给上传文件重命名，获取添加后缀名
+        })
+    , filter = (req, file, callback)=> { // 文件 - 过滤
     const fileFormat = (file.originalname).split('.')
         , ext = fileFormat[fileFormat.length - 1] // 转小写扩展名
         ;
-    if (ext === 'jpg' || ext === 'jpeg' || ext === 'png') {
+    if (ext === 'jpg' || ext === 'jpeg' ) {
         callback(null, true);
     } else {
         callback('仅支持jpg和jpeg两种格式', false);
