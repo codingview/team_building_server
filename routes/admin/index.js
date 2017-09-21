@@ -44,11 +44,6 @@ router.use('/production', require('./production'));
 // todo 师资实力
 
 // 关于我们
-router.get('/about', (req, res)=>
-    res.render('./admin/about/view', {
-        title: '设置关于我们'
-        , menu: require('../../config/about_menu')
-    })
-);
+router.use('/about', require('./about'));
 
 module.exports = router;

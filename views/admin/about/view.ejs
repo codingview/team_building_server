@@ -3,7 +3,9 @@
 <% include ../_base/container.ejs %>
 <% include ../_base/header.ejs %>
 <div class="app-container container">
-    <div class="container-header"><h2><%= title %></h2></div>
+    <div class="container-header">
+        <h2><%= title %></h2>
+    </div>
     <div class="container-title mt-2e">
         <div class="form-inline">
             <div class="form-group">
@@ -14,9 +16,10 @@
                     <% }); %>
                 </select>
             </div>
+            <button class="btn btn-primary wi-6e ml-2e" id="about_submit">保存</button>
         </div>
     </div>
-    <div class="container-content bo1" id="about_content"></div>
+    <div class="container-content" id="about_content"></div>
 </div>
 <% include ../_base/footer.ejs %>
 <% include ../_base/javascript.ejs %>
