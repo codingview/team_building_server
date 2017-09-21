@@ -6,19 +6,20 @@
 
 'use strict';
 
-const Editor = window.wangEditor;
+const Editor = window.wangEditor
+    , $ajax = require('../general/Ajax.general');
 let editor; // 全局变量存储富文本对象
 
 const Data = {
     // 保存
-    save: form=>require('../general/Ajax.general')({
+    save: form=>$ajax({
         url: '/admin/about/s/' + form.active
         , text: '设置关于我们'
         , data: form
     })
 
     // 读取
-    , read: active=>require('../general/Ajax.general')({
+    , read: active=>$ajax({
         url: '/admin/about/s/' + active
         , text: '读取关于我们'
         , type: 'get'

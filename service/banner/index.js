@@ -18,20 +18,18 @@ module.exports = {
     })
 
     // 删除 - 广告
+    , remove: bid=>Banner.destroy({where: {id: bid}})
 
     // 查询 - 广告 - 列表
     , list: ()=>new Promise((resolve, reject)=>
-        Banner
-            .findAll({
-                order: [['sequence', 'ASC']]
-            })
+        Banner.findAll({order: [['sequence', 'ASC']]})
             .then(banners=> {
                 const r = [];
                 if (banners && banners instanceof Array && banners.length > 0) {
                     banners.forEach(banner=>r.push(new _Banner().db2Api(banner)));
                     return resolve(r);
                 } else {
-                    return reject('查询广告位失败');
+                    return resolve([]);
                 }
             })
             .catch(e=>reject(e))

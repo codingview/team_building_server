@@ -5,7 +5,7 @@
             <% banners.forEach(function (banner) { %>
             <div class="swiper-slide">
                 <a href="<%= banner.href %>" target="_blank">
-                    <img src="/uploads/<%= banner.img %>" alt="<%= banner.dcp %>" width="100%">
+                    <img src="/uploads<%= banner.img %>" alt="<%= banner.dcp %>" width="100%">
                 </a>
             </div>
             <% }); %>

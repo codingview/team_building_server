@@ -19,11 +19,15 @@ module.exports = {
         , 'about': BASE_URI.web + '/about'
 
         , 'login.admin': BASE_URI.admin + '/login'
+        , 'banner.home.admin': BASE_URI.admin + '/home/banner'
+
         , 'user.option.admin': BASE_URI.admin + '/option/user'
         , 'feedback.option.admin': BASE_URI.admin + '/option/feedback'
+
         , 'production.admin': BASE_URI.admin + '/production'
         , 'add.production.admin': BASE_URI.admin + '/production/add'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
+
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {
         path: path.join(__dirname, 'public/src')
