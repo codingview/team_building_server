@@ -17,18 +17,48 @@ const Data = {
     })
 
     // 更新 - 广告位
-    , update: banner=>$ajax({
-        url: '/admin/home/banner'
-        , type: 'post'
-        , text: '更新广告位'
-    })
+    , update: (bid, banner)=>new Promise((resolve, reject)=>
+        $.ajax({
+            url: '/admin/home/banner/' + bid
+            , type: 'post'
+            , data: banner
+            , dataType: 'json'
+            , processData: false // 告诉JSLite不要去处理发送的数据
+            , contentType: false // 告诉JSLite不要去设置Content-Type请求头
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve(json.data);
+                } else {
+                    reject('message' in json ? json.message : '更新广告位出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('更新广告位超时');
+            }
+        })
+    )
 
     // 新增 - 广告位
-    , add: banner=>$ajax({
-        url: '/admin/home/banner'
-        , type: 'put'
-        , text: '新增广告位'
-    })
+    , add: banner=>new Promise((resolve, reject)=>
+        $.ajax({
+            url: '/admin/home/banner'
+            , type: 'put'
+            , data: banner
+            , dataType: 'json'
+            , processData: false // 告诉JSLite不要去处理发送的数据
+            , contentType: false // 告诉JSLite不要去设置Content-Type请求头
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve(json.data);
+                } else {
+                    reject('message' in json ? json.message : '新增广告位出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('新增广告位超时');
+            }
+        })
+    )
 
     // 删除 - 广告位
     , remove: bid=>$ajax({
@@ -52,7 +82,7 @@ const Dom = {
 
     // 拼装 banner
     , setBanner: banner=> `
-            <div class="row banner-content" data-bid="${banner.bid}">
+            <div class="row banner-content" data-bid="${banner.bid}" data-new="${'img' in banner ? 0 : 1}">
                 <div class="col-lg-8">${Dom.setImg(banner)}</div>
                 <div class="col-lg-4">
                     <div class="form-group">
@@ -83,6 +113,21 @@ const Dom = {
                     </div>
                 </div>
             </div>`
+
+    // 获取表单数据
+    , getForm: $f=> {
+        let formData = new FormData();
+        const img = $f.find('.banner-image').get(0).files;
+        formData.append('href', $f.find('.banner-link').val());
+        formData.append('dcp', $f.find('.banner-description').val());
+        if (img && img.length > 0) {
+            formData.append('img', img[0]); // 图片信息
+        } else if (parseInt($f.data('bid')) === -1) { // 新增banner必须上传图片
+            alert('新增广告位必须上传图片!');
+            return false;
+        }
+        return formData;
+    }
 
     // 填充banner
     , banner: list=> {
@@ -131,10 +176,15 @@ const Listener = {
         $('#banner_list').on('click', '.banner-save', function () {
             const bid = $(this).data('bid')
                 , $c = $('.banner-content[data-bid="' + bid + '"]');
-            let form = {
-                seq: $c.index()
-            };
-            console.info(form)
+            let formData = Dom.getForm($c);
+            if (formData) {
+                formData.append('seq', $c.index());
+                if (bid >= 0) {// 更新
+                    Data.update(bid, formData);
+                } else {// 新增
+                    Data.add(formData);
+                }
+            }
         });
     }
 

@@ -19,8 +19,16 @@ router.get('/', (req, res)=>
     })
 );
 
-// 增加广告位 - 上传图片
-// router.post()
+// 增加 - 广告位 - 上传图片
+router.put('/', (req, res)=> {
+});
+
+// 更新 - 广告位
+router.post('/:bid', (req, res)=>
+    bannerService.update(req, res)
+        .then(banner=>res.json(GLO.success(banner)))
+        .catch(e=>res.json(GLO.error(e, -99, '更新广告位出错')))
+);
 
 // 删除 - 广告位
 router.delete('/:bid', (req, res)=>

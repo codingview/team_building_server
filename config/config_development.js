@@ -32,5 +32,6 @@ module.exports = {
         , ttl: 86000
         , secret: 'team_building'
         , key: 'team_building'
-    }, uploads_image: path.join(__dirname + '../public/uploads') // 上传图片的路径
+    }, uploads_image: path.join(__dirname + './../public/uploads') // 上传图片的路径
+    , static_html: path.join(__dirname + './../public/static') // 静态html的路径
 };

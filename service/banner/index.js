@@ -9,7 +9,10 @@
 // 广告位
 
 const Banner = require('../../models').banner
-    , _Banner = require('../../dao').banner;
+    , _Banner = require('../../dao').banner
+// 对图片的处理
+    , imageUtil = require('./image')
+    ;
 
 module.exports = {
     // 新增 - 广告
@@ -36,4 +39,6 @@ module.exports = {
     )
 
     // 修改 - 广告
+    , update: (req, res)=>imageUtil(req, res)
+
 };
