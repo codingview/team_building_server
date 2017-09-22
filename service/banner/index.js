@@ -39,13 +39,6 @@ module.exports = {
     )
 
     // 修改 - 广告
-    , update: (req, res)=>new Promise((resolve, reject)=>
-        imageUtil(req, res)
-            .then(body=> {
-                const b = new _Banner().api2Db(body);
-                return Banner.update(b, {where: {id: body.bid}});
-            })
-            .then(()=>resolve())
-            .catch(e=>reject(e))
-    )
+    , update: (req, res)=>imageUtil(req, res)
+
 };

@@ -32,28 +32,31 @@ const _ = {
         });
     })
 
-    // 图片转换尺寸,同步方法
-    , transform: body=> {
-        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpg`)
-            , bannerFilePath = path.join(filePath, `./${body.bid}.jpeg`);
+    // 图片转换尺寸
+    , transform: body=>new Promise((resolve, reject)=> {
+        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpg`);
         images(tempFilePath)
             .size(1280, 300)
-            .save(bannerFilePath) // 调用fs的writeFileSync方法
-        ;
-        body.img = `/banner/${body.bid}.jpeg`;
-        return body;
-    }
+            .save(path.join(filePath, `./${body.bid}.jpeg`), function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(body);
+                }
+            })
+            .gc();
+    })
 
     // 删除临时图片
-    , removeTempImage: body=>fs.unlinkSync(path.join(filePath, `./${tempFileName(body.bid)}.jpg`))
+
 };
 
 module.exports = (req, res)=>new Promise((resolve, reject)=> {
     _.save(req, res)
+        .then(body=> _.transform(body))
         .then(body=> {
-            _.transform(body);
-            _.removeTempImage(body);
-            resolve(body);
+            console.info(body)
+            resolve(true)
         })
         .catch(e=>reject(e));
 });
