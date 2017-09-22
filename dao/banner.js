@@ -29,7 +29,7 @@ class Banner {
         this.image = banner.img;
         this.description = banner.dcp;
         this.link = banner.href;
-        this.sequence = banner.seq;
+        this.sequence = parseInt(banner.seq);
         return this;
     }
 
