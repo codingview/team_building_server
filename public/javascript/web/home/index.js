@@ -46,21 +46,7 @@ const Dom = {
         })
 
     // 生成 - 产品列表
-    , setProductionList: list=> {
-        let str = '';
-        list.forEach(p=> {
-            str += '<div class="col-lg-3 production-item">' +
-                '<div class="production-icon">' +
-                '<img src="' + p.icon + '">' +
-                '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
-                '<div class="production-title">' + p.title + '</div>' +
-                '<div class="production-abstract">' + p.abstract + '</div>' +
-                '</a>' +
-                '</div>' +
-                '</div>';
-        });
-        return str;
-    }
+    , setProductionList: require('../production/dom')
 
     // 注入 - 分类下产品列表
     , setCatalog: (cid, list)=>$('#catalog_' + cid).html(Dom.setProductionList(list))

@@ -76,7 +76,7 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-    // 分类列表结构
+    // 两级分类列表结构
     , catalogList: ()=>new Promise((resolve, reject)=> {
         let results = [], _catalogs = {};
         _.objList(1)

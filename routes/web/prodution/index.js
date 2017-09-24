@@ -15,9 +15,14 @@ router.get('/', (req, res)=>res.redirect('/production/list'));
 
 // 产品 - 列表 - 页面
 router.get('/list', (req, res)=>
-        res.render('./web/production/list/view', {
+    productionService.catalog.catalogList()
+        .then(catalogs=>res.render('./web/production/list/view', {
             title: '产品列表'
             , active: 'production'
+            , catalogs: catalogs
+        }))
+        .catch(e=> {
+            // todo 错误页面
         })
 );
 
@@ -32,7 +37,7 @@ router.get('/detail/:pid', (req, res)=> {
                 , active: 'production'
             }))
         .catch(e=> {
-            //todo 错误页面
+            // todo 错误页面
         });
 });
 
