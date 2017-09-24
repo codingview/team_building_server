@@ -15,9 +15,12 @@ const path = require('path')
 
 module.exports = {
     entry: {
+        // web端
         'home': BASE_URI.web + '/home'
         , 'about': BASE_URI.web + '/about'
+        , 'production': BASE_URI.web + '/production'
 
+        // 管理端
         , 'login.admin': BASE_URI.admin + '/login'
         , 'banner.home.admin': BASE_URI.admin + '/home/banner'
 
