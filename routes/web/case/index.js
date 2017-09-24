@@ -14,7 +14,7 @@ router.get('/', (req, res)=>res.redirect('/case/list'));
 
 // 服务案例 - 列表 - 页面
 router.get('/list', (req, res)=>
-    res.render('./case/list/view', {
+    res.render('./web/case/list/view', {
         title: '服务案例'
         , active: 'case'
     })
@@ -22,7 +22,7 @@ router.get('/list', (req, res)=>
 
 // 服务案例 - 详情 - 页面
 router.get('/detail/:rid', (req, res)=>
-    res.render('./case/detail/view', {
+    res.render('./web/case/detail/view', {
         title: '服务案例详情'
         , active: 'case'
     })

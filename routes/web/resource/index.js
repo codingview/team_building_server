@@ -14,7 +14,7 @@ router.get('/', (req, res)=>res.redirect('/resource/list'));
 
 // 基地资源 - 列表 - 页面
 router.get('/list', (req, res)=>
-    res.render('./resource/list/view', {
+    res.render('./web/resource/list/view', {
         title: '基地资源'
         , active: 'resource'
     })
@@ -22,7 +22,7 @@ router.get('/list', (req, res)=>
 
 // 基地资源 - 详情 - 页面
 router.get('/detail/:rid', (req, res)=>
-    res.render('./resource/detail/view', {
+    res.render('./web/resource/detail/view', {
         title: '基地资源详情'
         , active: 'resource'
     })
