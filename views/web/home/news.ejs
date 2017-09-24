@@ -1,3 +1,45 @@
 <div class="container-news">
-    <div class="production-icon ta-c"><img src="/images/news.png"></div>
+    <div class="news-title">
+        <div class="production-icon ta-c"><img src="/images/news.png"></div>
+    </div>
+    <div class="new-content container">
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <div class="swiper-container" style="width: 80%;">
+                    <div class="swiper-pagination" style="top: 68%;"></div>
+                    <div class="swiper-wrapper">
+                        <% for(let i = 1;i <= 6;i++){ %>
+                        <div class="swiper-slide">
+                            <a href="/news/detail/1">
+                                <div class="">
+                                    <img src="/_static/resource.icon<%= parseInt(Math.random() * 4) + 1 %>.jpg"
+                                         width="100%">
+                                </div>
+                                <div class="mt-1e">
+                                    <h3>新闻标题<%= i %></h3>
+                                </div>
+                                <div class="mt-1e" style="font-size:16px;">
+                                    <h4>新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1</h4>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="list-group">
+                    <% for(let i = 1;i <= 6;i++){ %>
+                    <a href="/news/detail/1"
+                       class="list-group-item list-group-item-<%= ['success', 'info', 'warning', 'danger'][parseInt(Math.random() * 4) + 1] %>">
+                        <h4 class="list-group-item-heading">新闻标题</h4>
+                        <p class="list-group-item-text">新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1新闻内容1</p>
+                    </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -24,6 +24,9 @@ router.use('/resource', require('./resource'));
 // 精彩案例
 router.use('/case', require('./case'));
 
+// 新闻
+router.use('/news', require('./news'));
+
 // 关于我们
 router.use('/about', require('./about'));
 

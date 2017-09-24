@@ -1,0 +1,28 @@
+<div class="col-lg-12">
+    <% for (let i = 0, l = 12; i < l; i++) {
+        const jj = parseInt(Math.random() * 4) + 1;
+    %>
+    <div class="col-lg-4">
+        <div class="base-item">
+            <a href="/case/detail/1">
+                <div class="base-icon mt-1e">
+                    <img width="330px" height="220px" src="/_static/resource.icon<%= jj %>.jpg">
+                </div>
+                <div class="base-title mt-1e">
+                    <h3>
+                        <% if(jj == 1){ %>
+                        颐和园
+                        <% }else if(jj == 2){ %>
+                        承德避暑山庄
+                        <% }else if(jj == 3){ %>
+                        喜马拉雅山脉
+                        <% }else if(jj == 4){ %>
+                        张家界
+                        <% } %>
+                    </h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    <% } %>
+</div>

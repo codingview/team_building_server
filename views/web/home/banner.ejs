@@ -4,7 +4,7 @@
         <div class="swiper-wrapper">
             <% banners.forEach(function (banner) { %>
             <div class="swiper-slide">
-                <% if('link' in banner && banner.link){ %>
+                <% if('href' in banner && banner.href){ %>
                 <a href="<%= banner.href %>" target="_blank">
                     <img src="/uploads<%= banner.img %>" alt="<%= banner.dcp %>" width="100%">
                 </a>
