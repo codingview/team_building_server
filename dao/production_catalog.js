@@ -30,7 +30,7 @@ class ProductionCatalog {
         this.grade = pc.grade;
         if (this.grade === 1) {
             this.open = true;
-        } 
+        }
         this.father_id = pc.father_id || 0;
         this.sequence = pc.sequence;
         this.icon = pc.icon;
