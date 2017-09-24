@@ -1,7 +1,7 @@
 /**
- * Created by zhangrz on 9月16.
- * Copyright© 2015-2020 occultskyrong (https://github.com/occultskyrong)
- * @version 0.0.1 created 产品
+ * Created by zhangrz on 2017/9/24.
+ * Copyright© 2015-2020 codingview (https://github.com/codingview)
+ * @version 0.0.1 created 服务案例
  */
 
 'use strict';
@@ -15,15 +15,15 @@ module.exports = DataTypes=>({
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
-            , comment: '产品名称'
+            , comment: '案例名称'
         }, state: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '产品状态'
+            , comment: '案例状态'
         }, title: {
             type: DataTypes.STRING
             , allowNull: true
-            , comment: '产品标题'
+            , comment: '案例标题'
         }, catalog_id: {
             type: DataTypes.INTEGER
             , allowNull: false
@@ -65,5 +65,5 @@ module.exports = DataTypes=>({
             , allowNull: true
             , comment: '纯文本'
         }
-    }, tableName: 'production'
+    }, tableName: 'case'
 });

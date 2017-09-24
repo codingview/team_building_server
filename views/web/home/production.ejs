@@ -1,9 +1,11 @@
 <div class="container-production">
-    <div class="production-icon ta-c"><img src="/images/production.png"></div>
+    <div class="production-title">
+        <div class="title-icon ta-c"><img src="/images/production.png"></div>
+    </div>
     <div class="production-catalogs">
         <div class="container">
             <ul class="nav nav-pills nav-tabs" role="tablist" id="production_catalogs">
-                <% catalogs.forEach(catalog=>{ %>
+                <% catalogs.forEach(function(catalog){ %>
                 <li role="presentation" class="<%= catalogs.indexOf(catalog) === 0 ? 'active' : '' %>">
                     <a href="#catalog_<%= catalog.id %>" data-cid="<%= catalog.id %>"
                        role="tab" data-toggle="tab" data-show="0"><%= catalog.name %></a>
@@ -11,7 +13,7 @@
                 <% }) %>
             </ul>
             <div class="tab-content mt-40">
-                <% catalogs.forEach(catalog=>{ %>
+                <% catalogs.forEach(function(catalog){ %>
                 <div role="tabpanel" class="tab-pane <%= catalogs.indexOf(catalog) === 0 ? 'active' : '' %>"
                      id="catalog_<%= catalog.id %>" data-cid="<%= catalog.id %>"></div>
                 <% }); %>
