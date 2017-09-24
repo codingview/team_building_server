@@ -31,9 +31,17 @@
         </div>
     </div>
     <div class="container-production">
-        <div class="production-list" id="production_list"></div>
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="production-list" id="production_list"></div>
+            </div>
+        </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
+<script>
+    var DEFAULT_CATALOG_ID = <%= default_catalog_id %>; // 默认加载的分类编号
+</script>
+<script src="/src/production.min.js"></script>
 <% include ../../_base/foot.ejs %>

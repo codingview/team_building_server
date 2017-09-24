@@ -6,7 +6,34 @@
 
 'use strict';
 
-const Dom = {
-    
+const $ajax = require('../../general/Ajax.general')
+    , Url = require('../../general/Url.frame');
+
+const Data = {
+    // 分页 - 获取 - 分类商品
+    production: page=>$ajax({
+        url: '/api/production/list'
+        , type: 'post'
+        , data: page
+        , text: '获取产品列表'
+    })
 };
 
+const Dom = {
+    // 加载分类
+    setProductionList: require('./dom')
+
+    // 默认加载分类
+    , initCatalog: ()=> {
+        const cid = Url.get('cid') || DEFAULT_CATALOG_ID;
+        Data.production({
+                cid: cid
+            })
+            .then(list=>$('#production_list').html(Dom.setProductionList(list)))
+            .catch(e=>alert(e));
+    }
+};
+
+$(function () {
+    Dom.initCatalog();
+});
