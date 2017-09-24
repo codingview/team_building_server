@@ -6,20 +6,72 @@
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <a href="#bjjqjd" aria-controls="bjjqjd" role="tab" data-toggle="tab">北京郊区基地</a>
+                </li>
                 <li role="presentation">
-                    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+                    <a href="#bjcqjd" aria-controls="bjcqjd" role="tab" data-toggle="tab">北京城区基地</a>
                 </li>
-                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+                <li role="presentation">
+                    <a href="#hbjd" aria-controls="hbjd" role="tab" data-toggle="tab">海边基地</a>
                 </li>
-                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+                <li role="presentation">
+                    <a href="#cyjd" aria-controls="cyjd" role="tab" data-toggle="tab">草原基地</a>
+                </li>
+                <li role="presentation">
+                    <a href="#smjd" aria-controls="smjd" role="tab" data-toggle="tab">沙漠基地</a>
+                </li>
+                <li role="presentation">
+                    <a href="#qgjd" aria-controls="qgjd" role="tab" data-toggle="tab">全国基地</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="resource-list">
         <div class="container">
-            <div class="bases-list" id="bases_list"></div>
+            <div class=" tab-content">
+                <div role="tabpanel" class="tab-pane bases-list active" id="bjjqjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base1.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane bases-list" id="bjcqjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base2.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane bases-list" id="hbjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base3.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane bases-list" id="cyjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base4.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane bases-list" id="smjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base1.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane bases-list" id="qgjd">
+                    <div class="col-lg-12">
+                        <% for(let i = 0, l = 4;i < l;i++){ %>
+                        <% include ../../_static/base2.ejs %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
