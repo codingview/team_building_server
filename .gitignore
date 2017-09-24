@@ -30,3 +30,4 @@ public/stylesheets/general/*.css.map
 
 # statis data html file
 public/static/about/*
+public/uploads/banner/*
