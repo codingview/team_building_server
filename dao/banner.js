@@ -26,7 +26,9 @@ class Banner {
      * @return {Banner}
      */
     api2Db(banner) {
-        this.image = banner.img;
+        if ('img' in banner) {
+            this.image = banner.img;
+        }
         this.description = banner.dcp;
         this.link = banner.href;
         this.sequence = parseInt(banner.seq);

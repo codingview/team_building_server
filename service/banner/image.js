@@ -26,6 +26,7 @@ const _ = {
                 reject(error);
             } else {
                 const body = req.body;
+                body.imgBoo = !!req.file; // 是否有图片
                 body.bid = bid;
                 resolve(body);
             }
@@ -34,13 +35,15 @@ const _ = {
 
     // 图片转换尺寸,同步方法
     , transform: body=> {
-        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpg`)
-            , bannerFilePath = path.join(filePath, `./${body.bid}.jpeg`);
+        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpg`) // 临时文件路径
+            , _bid = '_bid' in body ? body._bid : body.bid
+            , bannerFilePath = path.join(filePath, `./${_bid}.jpeg`) // 替换文件路径
+            ;
         images(tempFilePath)
             .size(1280, 300)
             .save(bannerFilePath) // 调用fs的writeFileSync方法
         ;
-        body.img = `/banner/${body.bid}.jpeg`;
+        body.img = `/banner/${body._bid}.jpeg`; // 替换后的文件路径
         return body;
     }
 
@@ -48,12 +51,4 @@ const _ = {
     , removeTempImage: body=>fs.unlinkSync(path.join(filePath, `./${tempFileName(body.bid)}.jpg`))
 };
 
-module.exports = (req, res)=>new Promise((resolve, reject)=> {
-    _.save(req, res)
-        .then(body=> {
-            _.transform(body);
-            _.removeTempImage(body);
-            resolve(body);
-        })
-        .catch(e=>reject(e));
-});
+module.exports = _;

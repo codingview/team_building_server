@@ -16,9 +16,23 @@ const Banner = require('../../models').banner
 
 module.exports = {
     // 新增 - 广告
-    add: banner=>new Promise((resolve, reject)=> {
-
-    })
+    add: (req, res)=>new Promise((resolve, reject)=> {
+            req.params.bid = -1;
+            imageUtil.save(req, res) // 保存临时图片
+                .then(body=> {
+                    const b = new _Banner().api2Db(body);
+                    b.image = ''; // 使用空的图片
+                    return Banner.create(b); // 创建banner记录
+                })
+                .then(result=> {
+                    const _bid = result.id
+                        , body = imageUtil.transform({bid: -1, _bid: _bid, img: ''}); // 转换并生成对应的图片
+                    imageUtil.removeTempImage({bid: -1}); // 删除临时文件
+                    return Banner.update({image: body.img}, {where: {id: _bid}}); // 更新db中记录
+                })
+                .catch(e=>reject(e));
+        }
+    )
 
     // 删除 - 广告
     , remove: bid=>Banner.destroy({where: {id: bid}})
@@ -40,12 +54,15 @@ module.exports = {
 
     // 修改 - 广告
     , update: (req, res)=>new Promise((resolve, reject)=>
-        imageUtil(req, res)
+        imageUtil.save(req, res)
             .then(body=> {
+                if (body.imgBoo) { // 判断是否更新了图片，有图片才进行转换和删除临时图片
+                    imageUtil.transform(body);
+                    imageUtil.removeTempImage(body);
+                }
                 const b = new _Banner().api2Db(body);
                 return Banner.update(b, {where: {id: body.bid}});
             })
-            .then(()=>resolve())
             .catch(e=>reject(e))
     )
 };
