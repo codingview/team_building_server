@@ -43,7 +43,7 @@ const _ = {
             .size(1280, 300)
             .save(bannerFilePath) // 调用fs的writeFileSync方法
         ;
-        body.img = `/banner/${body._bid}.jpeg`; // 替换后的文件路径
+        body.img = `/banner/${_bid}.jpeg`; // 替换后的文件路径
         return body;
     }
 
