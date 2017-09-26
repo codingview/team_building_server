@@ -9,7 +9,8 @@
 /* 产品管理 */
 
 const Production = require('../../models').production
-    , _Production = require('../../dao').production;
+    , _Production = require('../../dao').production
+    , _image = require('./image');
 
 module.exports = {
     // 新增产品
@@ -52,12 +53,21 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-
     // 产品详情
     , detail: production_id=>new Promise((resolve, reject)=>
         Production
             .find({where: {id: production_id}})
             .then(p=>resolve(new _Production(p.id).db2Detail(p.dataValues)))
+            .catch(e=>reject(e))
+    )
+
+    // 上传 - 产品 - 图片
+    , image: (req, res)=>new Promise((resolve, reject)=>
+        _image.save(req, res)
+            .then(body=> {
+                _image.transform(body);
+                resolve(body);
+            })
             .catch(e=>reject(e))
     )
 };

@@ -54,7 +54,7 @@ const Dom = {
                 alert('获取分类列表出错');
             })
 
-    // 生产分类列表
+    // 生成分类列表
     , setCatalog: catalogs=> {
         let str = '';
         catalogs.forEach(catalog=> {
@@ -103,11 +103,12 @@ const Listener = {
             form.rich_text = editor.txt.html();
             form.text = editor.txt.text();
             form.sequence = form.top ? 0 : 99;
+            form.img = parseInt($('#p_icon_val').val());
             delete form.top;
             if (form.name) {
                 Data.add(form)
                     .then(r=> {
-                        //location.href = '/admin/production/list'
+                        // location.href = '/admin/production/list'
                     })
                     .catch(e=> {
                         alert(e);
@@ -136,4 +137,5 @@ const Listener = {
 $(function () {
     Dom.init();
     Listener.init();
+    require('./image')();
 });
