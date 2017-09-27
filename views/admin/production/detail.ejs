@@ -7,8 +7,8 @@
                     <label for="p_name" class="col-lg-2 control-label">产品名称</label>
 
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="p_name"
-                               value="<%= detail ? detail.title : '' %>" placeholder="请您输入产品名称">
+                        <input type="text" class="form-control" id="p_name" placeholder="请您输入产品名称"
+                               value="<%= detail ? detail.name : '' %>">
                     </div>
                     <div class="col-lg-4">
                         <span class="input-remark">* 产品名称</span>
@@ -18,7 +18,8 @@
                     <label for="p_title" class="col-lg-2 control-label">产品标题</label>
 
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="p_title" placeholder="请您输入产品标题">
+                        <input type="text" class="form-control" id="p_title" placeholder="请您输入产品标题"
+                               value="<%= detail ? detail.title : '' %>">
                     </div>
                     <div class="col-lg-4">
                         <span class="input-remark">* </span>
@@ -28,6 +29,7 @@
                     <label for="p_catalog_id" class="col-lg-2 control-label">产品分类</label>
 
                     <div class="col-lg-2">
+                        <input type="hidden" id="p_catalog_id_val" value="<%= detail ? detail.catalog_Id : '' %>">
                         <select class="form-control" id="p_catalog_id"></select>
                     </div>
                     <div class="col-lg-4">
@@ -49,7 +51,8 @@
                     <label for="p_abstract" class="col-lg-2 control-label">产品摘要</label>
 
                     <div class="col-lg-6">
-                        <textarea class="form-control" id="p_abstract" placeholder="请输入产品摘要"></textarea>
+                        <textarea class="form-control" id="p_abstract"
+                                  placeholder="请输入产品摘要"><%= detail ? detail.abstract : '' %></textarea>
                     </div>
                     <div class="col-lg-4">
                         <span class="input-remark">* 用于显示在产品列表中的简略说明</span>
@@ -59,7 +62,8 @@
                     <label for="p_tags" class="col-lg-2 control-label">产品标签</label>
 
                     <div class="col-lg-6">
-                        <input type="text" class="form-control" id="p_tags" placeholder="请输入产品标签">
+                        <input type="text" class="form-control" id="p_tags" placeholder="请输入产品标签"
+                                <%= detail ? detail.tags : '' %>>
                     </div>
                     <div class="col-lg-4">
                         <span class="input-remark">* </span>
@@ -69,7 +73,7 @@
                     <label for="p_top" class="col-lg-2 control-label">是否置顶</label>
 
                     <div class="col-lg-6">
-                        <input type="checkbox" id="p_top">
+                        <input type="checkbox" id="p_top" <%= detail && detail.sequence === 0 ? 'checked' : '' %>>
                     </div>
                     <div class="col-lg-4">
                         <span class="input-remark">* </span>
@@ -79,7 +83,7 @@
                     <label for="p_editor" class="col-lg-2 control-label">产品详情</label>
 
                     <div class="col-lg-10">
-                        <div id="p_editor"></div>
+                        <div id="p_editor"><%= detail?detail.rich_text:'' %></div>
                     </div>
                 </div>
                 <div class="form-group">
