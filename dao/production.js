@@ -79,6 +79,7 @@ class Production {
         this.db2Icon(p);
         this.rich_text = p.rich_text;
         this.text = p.text;
+        this.tags = p.tags;
         return this;
     }
 }

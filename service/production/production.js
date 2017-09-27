@@ -22,8 +22,8 @@ module.exports = {
             .catch(e=>reject(e));
     })
     // 产品列表
-    , list: ({offset, limit})=>new Promise((resolve, reject)=>
-        Production.findAndCountAll({offset, limit})
+    , list: ({offset, limit, state})=>new Promise((resolve, reject)=>
+        Production.findAndCountAll({where: {state}, offset, limit})
             .then(result=> {
                 const rows = result.rows;
                 let results = [];

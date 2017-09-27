@@ -27,6 +27,9 @@ const Table = {
         , ajax: {
             url: '/admin/production/list'
             , method: 'post'
+            , data: json=> {
+                json.state = $('#p_list_state').val()
+            }
         }, columns: [
             {title: '编号', width: '26px', data: 'id'}
             , {title: '产品名称', data: 'name'}

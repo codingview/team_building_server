@@ -6,7 +6,21 @@
 <div class="app-container container">
     <div class="container-header"><h2><%= title %></h2></div>
     <div class="container-content">
-        <div class="col-lg-12 mt-40">
+        <div class="row">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">选择产品</div>
+                        <select id="p_list_state" class="form-control">
+                            <option value="-1">显示全部</option>
+                            <option value="0">仅显示已下架产品</option>
+                            <option value="1" selected>仅显示在架产品</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt-1e">
             <table id="production_list" class="table-striped table-bordered table-condensed" width="100%"></table>
         </div>
     </div>

@@ -60,6 +60,7 @@ router.post('/list', (req, res)=> {
     let _ = {
         offset: 'start' in body ? parseInt(body.start) : 0
         , limit: 'length' in body ? parseInt(body.length) : 10
+        , state: 'state' in body ? parseInt(body.state) : 1
     };
     productionService.production.list(_)
         .then(r=>res.json({
@@ -113,5 +114,8 @@ router.put('/image', (req, res)=>
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
 );
+
+// todo 下架
+// todo 上架
 
 module.exports = router;
