@@ -29,6 +29,7 @@ module.exports = {
 
         , 'production.admin': BASE_URI.admin + '/production'
         , 'add.production.admin': BASE_URI.admin + '/production/add'
+        , 'update.production.admin': BASE_URI.admin + '/production/update'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
 
         , 'about.admin': BASE_URI.admin + '/about'
