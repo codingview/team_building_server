@@ -36,6 +36,19 @@ const _ = {
 
     // 删除临时图片
     , removeTempImage: body=>fs.unlinkSync(body.image)
+
+    // 移动临时文件
+    , moveTempImage: fileName=>
+        new Promise((resolve, reject)=>
+            fs.rename(path.join(filePath, 'temp.jpg'), path.join(filePath, fileName), err=> {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
+        )
+
 };
 
 module.exports = _;

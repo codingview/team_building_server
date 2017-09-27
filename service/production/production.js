@@ -14,12 +14,13 @@ const Production = require('../../models').production
 
 module.exports = {
     // 新增产品
-    create: production=> new Promise((resolve, reject)=>
-        Production
-            .create(new _Production().form2Db(production))
+    create: production=> new Promise((resolve, reject)=> {
+        const pp = new _Production().form2Db(production);
+        _image.moveTempImage(pp.md5 + '.jpeg')
+            .then(()=> Production.create(pp))
             .then(r=>resolve(r))
-            .catch(e=>reject(e))
-    )
+            .catch(e=>reject(e));
+    })
     // 产品列表
     , list: ({offset, limit})=>new Promise((resolve, reject)=>
         Production.findAndCountAll({offset, limit})

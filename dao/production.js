@@ -36,6 +36,7 @@ class Production {
         this.rich_text = p.rich_text;
         this.text = p.text;
         this.sequence = parseInt(p.sequence) || 99;
+        this.icon = '/production/' + this.md5 + '.jpeg';
         return this;
     }
 

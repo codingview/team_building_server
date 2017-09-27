@@ -44,8 +44,8 @@ const Table = {
             , {title: '修改时间', data: 'updated_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {
                 title: '操作', width: '136px', data: null, render: d=>
-                '<button class="btn btn-info btn-xs ml-1e" data-bc="' + d.bc + '">修改信息</button>' +
-                '<button class="btn btn-danger btn-xs ml-1e barcode-delete" data-bc="' + d.bc + '">产品下架</button>'
+                '<a class="btn btn-info btn-xs ml-1e" href="/admin/production/update/' + d.id + '">修改信息</a>' +
+                '<button class="btn btn-danger btn-xs ml-1e production-off" data-pid="' + d.id + '">产品下架</button>'
             }
         ]
     })

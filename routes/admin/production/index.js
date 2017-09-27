@@ -82,6 +82,7 @@ router.post('/list', (req, res)=> {
 router.get('/add', (req, res)=>
     res.render('./admin/production/add/view', {
         title: '产品体系-新增产品'
+        , detail: false
     })
 );
 
@@ -92,7 +93,17 @@ router.put('/add', (req, res)=>
         .catch(e=>res.json(GLO.error(e, -99, '新增产品出错')))
 );
 
-// todo 更新产品 - 页面
+// 更新产品 - 页面
+router.get('/update/:pid', (req, res)=>
+    productionService.production.detail(req.params.pid)
+        .then(p=>res.render('./admin/production/update/view', {
+            title: '产品体系-更新产品'
+            , detail: p
+        }))
+        .catch(e=> {
+            // todo 错误页面
+        })
+);
 
 // todo 更新产品 - 接口
 
