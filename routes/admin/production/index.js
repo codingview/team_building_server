@@ -61,6 +61,7 @@ router.post('/list', (req, res)=> {
         offset: 'start' in body ? parseInt(body.start) : 0
         , limit: 'length' in body ? parseInt(body.length) : 10
         , state: 'state' in body ? parseInt(body.state) : 1
+        , catalog_id: 'catalog_id' in body ? parseInt(body.catalog_id) : -1
     };
     productionService.production.list(_)
         .then(r=>res.json({
@@ -115,7 +116,18 @@ router.put('/image', (req, res)=>
         .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
 );
 
-// todo 下架
-// todo 上架
+// 上/下架
+router.post('/state/:pid/:state', (req, res)=> {
+        const state = parseInt(req.params.state)
+            , production_id = parseInt(req.params.pid);
+        if (state === 1 || state === 0) {
+            productionService.production.state(production_id, state)
+                .then(()=>res.json(GLO.success(true)))
+                .catch(e=>res.json(GLO.error(e, -99, '上下架产品出错')));
+        } else {
+            return res.json(GLO.error('上下架标记错误:state', -11));
+        }
+    }
+);
 
 module.exports = router;

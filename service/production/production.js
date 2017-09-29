@@ -13,7 +13,7 @@ const Production = require('../../models').production
     , _image = require('./image');
 
 module.exports = {
-    // 新增产品
+    // 增：新增产品
     create: production=> new Promise((resolve, reject)=> {
         const pp = new _Production().form2Db(production);
         _image.moveTempImage(pp.md5 + '.jpeg')
@@ -21,9 +21,17 @@ module.exports = {
             .then(r=>resolve(r))
             .catch(e=>reject(e));
     })
-    // 产品列表
-    , list: ({offset, limit, state})=>new Promise((resolve, reject)=>
-        Production.findAndCountAll({where: {state}, offset, limit})
+
+    // 查：产品列表
+    , list: ({offset, limit, state, catalog_id})=>new Promise((resolve, reject)=> {
+        let _where = {state, catalog_id};
+        if (catalog_id === -1) {
+            delete _where.catalog_id;
+        }
+        if (state === -1) {
+            delete _where.state;
+        }
+        Production.findAndCountAll({where: _where, offset, limit})
             .then(result=> {
                 const rows = result.rows;
                 let results = [];
@@ -34,10 +42,10 @@ module.exports = {
                     return resolve({results: [], count: 0});
                 }
             })
-            .catch(e=>reject(e))
-    )
+            .catch(e=>reject(e));
+    })
 
-    // 根据分类编号获取商品列表
+    // 查：根据分类编号获取商品列表
     , listByCid: params=>new Promise((resolve, reject)=>
         Production
             .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
@@ -54,13 +62,16 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-    // 产品详情
+    // 查：产品详情
     , detail: production_id=>new Promise((resolve, reject)=>
         Production
             .find({where: {id: production_id}})
             .then(p=>resolve(new _Production(p.id).db2Detail(p.dataValues)))
             .catch(e=>reject(e))
     )
+
+    // 改：产品上/下架
+    , state: (production_id, state)=>Production.update({state: state}, {where: {id: production_id}})
 
     // 上传 - 产品 - 图片
     , image: (req, res)=>new Promise((resolve, reject)=>

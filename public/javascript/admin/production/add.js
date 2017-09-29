@@ -6,12 +6,14 @@
 
 'use strict';
 
-const Editor = window.wangEditor;
+const Editor = window.wangEditor
+    , general = require('./general');
+
 let editor; // 全局变量存储富文本对象
 
 const Data = {
     // 获取分类列表
-    catalogs: require('./general').catalogs
+    catalogs: general.catalogs
 
     // 新增产品
     , add: production=>new Promise((resolve, reject)=>
@@ -55,20 +57,7 @@ const Dom = {
             })
 
     // 生成分类列表
-    , setCatalog: catalogs=> {
-        let str = '';
-        const cid = parseInt($('#p_catalog_id_val').val());
-        catalogs.forEach(catalog=> {
-            str += `<optgroup label="${catalog.name}">`;
-            if ('children' in catalog && catalog.children instanceof Array && catalog.children.length > 0) {
-                catalog.children.forEach(child=> {
-                    str += `<option value="${child.id}" ${child.id === cid ? 'selected' : ''}>${child.name}</option>`;
-                });
-            }
-            str += '</optgroup>';
-        });
-        return str;
-    }
+    , setCatalog: general.setCatalogs
 
     // 获取表单内容
     , getForm: ()=> {
