@@ -40,11 +40,10 @@ const _ = {
         $('#p_icon').on('change', function () {
             _
                 .ajax()
-                .then(r=> {
-                    console.info(r)
+                .then(()=> {
                     $('#p_icon_val').val(1); // 设置临时图片有值
                 })
-                .catch(e=>alert(e))
+                .catch(e=>alert(e));
         });
     }
 };

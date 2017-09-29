@@ -108,6 +108,9 @@ router.get('/update/:pid', (req, res)=>
 );
 
 // todo 更新产品 - 接口
+router.put('/update',(req,res)=>
+productionService.production.update(req.body)
+);
 
 // 更新图片 - 接口
 router.put('/image', (req, res)=>

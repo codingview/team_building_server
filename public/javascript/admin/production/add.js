@@ -94,11 +94,16 @@ const Listener = {
             form.text = editor.txt.text();
             form.sequence = form.top ? 0 : 99;
             form.img = parseInt($('#p_icon_val').val());
+            if (form.img === 0) {
+                Listener.setOneSubmit();
+                alert('请上传缩略图');
+                return false;
+            }
             delete form.top;
             if (form.name) {
                 Data.add(form)
-                    .then(r=> {
-                        // location.href = '/admin/production/list'
+                    .then(()=> {
+                        location.href = '/admin/production/list';
                     })
                     .catch(e=> {
                         alert(e);
@@ -129,3 +134,9 @@ $(function () {
     Listener.init();
     require('./image')();
 });
+
+module.exports = {
+    Data: Data
+    , Dom: Dom
+    , Listener: Listener
+};

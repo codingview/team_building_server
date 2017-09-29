@@ -73,6 +73,8 @@ module.exports = {
     // 改：产品上/下架
     , state: (production_id, state)=>Production.update({state: state}, {where: {id: production_id}})
 
+    // 改：更新产品信息
+    
     // 上传 - 产品 - 图片
     , image: (req, res)=>new Promise((resolve, reject)=>
         _image.save(req, res)
