@@ -18,6 +18,7 @@ const Editor = window.wangEditor
             url: '/admin/production/add'
             , type: 'put'
             , data: production
+            , message: '新增产品'
         })
 
 
@@ -27,6 +28,7 @@ const Editor = window.wangEditor
             url: '/admin/production/update'
             , type: 'put'
             , data: production
+            , message: '更新产品'
         })
 
     // 获取分类列表

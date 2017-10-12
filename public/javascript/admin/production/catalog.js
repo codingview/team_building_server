@@ -6,6 +6,8 @@
 
 'use strict';
 
+const $ajax = require('../../general/Ajax.general');
+
 /**
  * 节点
  */
@@ -29,68 +31,35 @@ let zTree; // ztree的实例
 
 const Data = {
     // 获取分类列表
-    catalogs: require('./general').catalogs
+    catalogs: require('./general').Data.catalogs
 
     // 修改 - 分类名称
-    , rename: catalog=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/admin/production/catalog'
-                , type: 'post'
-                , data: catalog
-                , dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve();
-                    } else {
-                        reject('message' in json ? json.message : '修改分类名称出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('修改分类名称超时');
-                }
-            })
-    )
+    , rename: catalog=>
+        $ajax({
+            url: '/admin/production/catalog'
+            , type: 'post'
+            , data: catalog
+            , message: '修改分类名称'
+        })
 
     // 新增 - 分类
-    , add: catalog=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/admin/production/catalog'
-                , type: 'put'
-                , data: catalog
-                , dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve(json.data);
-                    } else {
-                        reject('message' in json ? json.message : '新增分类出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('新增分类名称超时');
-                }
-            })
-    )
+    , add: catalog=>
+        $ajax({
+            url: '/admin/production/catalog'
+            , type: 'put'
+            , data: catalog
+            , message: '新增分类名称'
+        })
 
     // 删除 - 分类
-    , remove: cid=>new Promise((resolve, reject)=>
-            $.ajax({
-                url: '/admin/production/catalog'
-                , type: 'delete'
-                , data: {
-                    cid: cid
-                }, dataType: 'json'
-                , success: json=> {
-                    if (json && 'status' in json && json.status > 0) {
-                        resolve();
-                    } else {
-                        reject('message' in json ? json.message : '新增分类出错');
-                    }
-                }, error: e=> {
-                    console.error(e);
-                    reject('新增分类名称超时');
-                }
-            })
-    )
+    , remove: cid=>
+        $ajax({
+            url: '/admin/production/catalog'
+            , type: 'delete'
+            , data: {
+                cid: cid
+            }, message: '删除分类'
+        })
 };
 
 const Dom = {
@@ -186,7 +155,7 @@ const Dom = {
                             , children: catalogs
                             , noEditBtn: true
                         }])
-        )
+            )
             .catch(e=>alert(e));
     }
 
