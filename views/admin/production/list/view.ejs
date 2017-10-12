@@ -4,7 +4,12 @@
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
 <div class="app-container container">
-    <div class="container-header"><h2><%= title %></h2></div>
+    <div class="container-header">
+        <h2>
+            <%= title %>
+            <a class="btn btn-primary ml-2e" href="/admin/production/add"><i class="glyphicon glyphicon-plus"></i></a>
+        </h2>
+    </div>
     <div class="container-content">
         <div class="row">
             <div class="form-inline">

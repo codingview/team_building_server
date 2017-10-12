@@ -10,14 +10,7 @@ const express = require('express')
     , router = new express.Router()
     , adminService = require('../../../service/admin');
 
-// 管理员 - 页面 - 列表
-router.get('/', (req, res)=>
-    res.render('./admin/option/user/view', {
-        title: '管理员管理'
-    })
-);
-
-// 管理员 - api - 新增
+// 管理员 - 新增 - api
 router.post('/', (req, res)=> {
     const body = req.body;
     let _ = {};
@@ -49,6 +42,14 @@ router.post('/', (req, res)=> {
 router.delete('/:uid', (req, res)=> {
 
 });
+
+
+// 管理员 - 页面 - 列表
+router.get('/', (req, res)=>
+    res.render('./admin/option/user/view', {
+        title: '管理员管理'
+    })
+);
 
 // 管理员 - api - 列表
 router.post('/list', (req, res)=> {
