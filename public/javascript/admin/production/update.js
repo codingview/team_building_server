@@ -6,4 +6,43 @@
 
 'use strict';
 
-require('./add');
+const general = require('./general');
+
+let editor = general.editor;
+
+const Listener = {
+    // 表单 - 提交 - 监听
+    setOneSubmit: ()=> {
+        $('#p_submit').one('click', ()=> {
+            let form = general.Dom.getForm();
+            form.rich_text = editor.txt.html();
+            form.text = editor.txt.text();
+            form.sequence = form.top ? 0 : 99;
+            form.img = parseInt($('#p_icon_val').val());
+            delete form.top;
+            if (form.name) {
+                general.Data.update(form)
+                    .then(()=> {
+                        location.href = '/admin/production/list';
+                    })
+                    .catch(e=> {
+                        alert(e);
+                    });
+            } else {
+                alert('请输入产品名称');
+            }
+            Listener.setOneSubmit();
+        });
+    }
+
+    // 初始化
+    , init: function () {
+        this.setOneSubmit();
+    }
+};
+
+$(function () {
+    Listener.init();
+    editor = general.Dom.editor();
+    general.Listener.reset(editor);
+});

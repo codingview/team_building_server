@@ -73,11 +73,11 @@ const Data = {
 const Dom = {
     // 拼接分类列表
     catalogs: ()=> new Promise((resolve, reject)=> {
-        general.catalogs()
+        general.Data.catalogs()
             .then(catalogs=> {
-                _catalogs = general.setCatalogsKv(catalogs);
+                _catalogs = general.Dom.setCatalogsKv(catalogs);
                 $('#p_catalog').html('<option value="-1">--- 全部 ---</option>'
-                    + general.setCatalogs(catalogs));
+                    + general.Dom.setCatalogs(catalogs));
                 resolve();
             })
             .catch(e=>reject(e));

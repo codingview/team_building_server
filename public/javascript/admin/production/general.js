@@ -6,9 +6,31 @@
 
 'use strict';
 
-module.exports = {
+let editor;
+
+const $ajax = require('../../general/Ajax.general');
+
+const Editor = window.wangEditor
+    , Data = {
+    // 新增产品
+    add: production=>
+        $ajax({
+            url: '/admin/production/add'
+            , type: 'put'
+            , data: production
+        })
+
+
+    // 更新产品
+    , update: production=>
+        $ajax({
+            url: '/admin/production/update'
+            , type: 'put'
+            , data: production
+        })
+
     // 获取分类列表
-    catalogs: ()=>new Promise((resolve, reject)=>
+    , catalogs: ()=>new Promise((resolve, reject)=>
         $.ajax({
             url: '/admin/production/catalog/list'
             , type: 'get'
@@ -25,9 +47,10 @@ module.exports = {
             }
         })
     )
-
+}
+    , Dom = {
     // 生成分类列表
-    , setCatalogs: catalogs=> {
+    setCatalogs: catalogs=> {
         let str = '';
         const cid = parseInt($('#p_catalog_id_val').val());
         catalogs.forEach(catalog=> {
@@ -55,4 +78,70 @@ module.exports = {
         });
         return _;
     }
+    // 创建富文本
+    , editor: ()=> {
+        editor = new Editor('#p_editor');
+        editor.customConfig.menus = require('../../general/Option.editor'); // 自定义菜单配置
+        editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
+        editor.customConfig.uploadImgMaxLength = 5; // 限制一次最多上传 5 张图片
+        editor.customConfig.pasteFilterStyle = false; // 关闭粘贴样式的过滤
+        editor.create();
+        return editor;
+    }
+
+    // 分类列表
+    , catalogs: ()=>
+        Data.catalogs()
+            .then(catalogs=>$('#p_catalog_id').html(Dom.setCatalogs(catalogs)))
+            .catch(e=> {
+                console.error(e);
+                alert('获取分类列表出错');
+            })
+
+    // 获取表单内容
+    , getForm: ()=> {
+        let _ = {};
+        const form = $('#p_form')
+            , inputs = form.find('input,select');
+        for (let i = 0, len = inputs.length; i < len; i++) {
+            const input = inputs.eq(i)
+                , _id = input.attr('id').replace(/p_/g, '')
+                ;
+            if (_id === 'text') {
+            } else if (_id === 'top') {
+                _.top = input.is(':checked');
+            } else {
+                _[_id] = input.val();
+            }
+        }
+        _.abstract = $('#p_abstract').val();
+        return _;
+    }
+
+    // 初始化
+    , init: function () {
+        this.catalogs();
+    }
+}
+    , Listener = {
+    // 重置表单时清空富文本
+    reset: editor=> {
+        $('#p_reset').on('click', ()=> {
+            editor.txt.clear();
+        });
+    }
+
+};
+
+// 页面初始化
+$(function () {
+    Dom.init();
+    require('./image')();
+});
+
+module.exports = {
+    Data: Data
+    , Dom: Dom
+    , Listener: Listener
+    , editor: editor
 };
