@@ -21,21 +21,32 @@ class Production {
     }
 
     /**
-     * 从表单转成表结构
+     * 更新:从表单转成表结构
      * @param {object} p
      * @return {Production}
      */
-    form2Db(p) {
+    update(p) {
         this.name = p.name;
         this.title = p.title;
-        this.md5 = require('../utils/global/method').filename(p.name + '_' + p.title + '_');// 生成md5
-        this.state = 1; // 默认为1
-        this.views = 0; // 浏览次数为0
+        this.state = 1;
         this.catalog_id = parseInt(p.catalog_id);
+        this.abstract = p.abstract;
         this.tags = p.tags;
         this.rich_text = p.rich_text;
         this.text = p.text;
         this.sequence = parseInt(p.sequence) || 99;
+        return this;
+    }
+
+    /**
+     * 新增:从表单转成表结构
+     * @param {object} p
+     * @return {Production}
+     */
+    form2Db(p) {
+        this.update(p);
+        this.md5 = require('../utils/global/method').filename(p.name + '_' + p.title + '_');// 生成md5
+        this.views = 0; // 浏览次数为0
         this.icon = '/production/' + this.md5 + '.jpeg';
         return this;
     }

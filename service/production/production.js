@@ -74,7 +74,22 @@ module.exports = {
     , state: (production_id, state)=>Production.update({state: state}, {where: {id: production_id}})
 
     // 改：更新产品信息
-    
+    , update: production=>new Promise((resolve, reject)=> {
+        const pp = new _Production().update(production)
+            , pid = production.id;
+        if (parseInt(production.img) === 0) { // 图片无变化
+            Production.update(pp, {where: {id: pid}})
+                .then(()=>resolve(true))
+                .catch(e=>reject(e));
+        } else { // 有图片变化
+            Production.find({where: {id: pid}})
+                .then(p=>_image.moveTempImage(p.md5 + '.jpeg')) // 移动
+                .then(()=> Production.update(pp, {where: {id: pid}}))
+                .then(()=>resolve(true))
+                .catch(e=>reject(e));
+        }
+    })
+
     // 上传 - 产品 - 图片
     , image: (req, res)=>new Promise((resolve, reject)=>
         _image.save(req, res)

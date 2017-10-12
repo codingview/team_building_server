@@ -107,9 +107,11 @@ router.get('/update/:pid', (req, res)=>
         })
 );
 
-// todo 更新产品 - 接口
-router.put('/update',(req,res)=>
-productionService.production.update(req.body)
+// 更新产品 - 接口
+router.put('/update', (req, res)=>
+    productionService.production.update(req.body)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '更新产品出错')))
 );
 
 // 更新图片 - 接口
