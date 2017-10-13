@@ -8,38 +8,40 @@
                 <h4 class="modal-title" id="user_detail_title">管理员详情</h4>
             </div>
             <div class="modal-body">
-                <div class="col-lg-12">
-                    <form class="form-horizontal" id="p_form">
-                        <div class="form-group">
-                            <label for="u_name" class="col-lg-2 control-label">管理员名称</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="u_name" placeholder="管理员名称">
-                            </div>
-                            <div class="col-lg-4">
-                                <span class="input-remark">* 显示的管理员名称</span>
-                            </div>
+                <form class="form-horizontal" id="p_form">
+                    <div class="form-group">
+                        <label for="u_name" class="col-lg-2 control-label">管理员名称</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="u_name" placeholder="管理员名称">
                         </div>
-                        <div class="form-group">
-                            <label for="u_login" class="col-lg-2 control-label">登录账号</label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="u_login" placeholder="登录账号">
-                            </div>
-                            <div class="col-lg-4">
-                                <span class="input-remark">* 登录时使用的账号</span>
-                            </div>
+                        <div class="col-lg-4">
+                            <span class="input-remark">* 显示的管理员名称</span>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-offset-6 col-lg-6">
-                                <button id="u_reset" type="reset" class="btn btn-default wi-4e" >重置</button>
-                                <button id="u_submit" type="button" class="btn btn-primary wi-4e ml-2e">保存</button>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_login" class="col-lg-2 control-label">登录账号</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="u_login" placeholder="登录账号">
                         </div>
-                    </form>
-                </div>
+                        <div class="col-lg-4">
+                            <span class="input-remark">* 登录时使用的账号</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_pwd" class="col-lg-2 control-label">登录密码</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" id="u_pwd" placeholder="登录密码">
+                        </div>
+                        <div class="col-lg-4">
+                            <span class="input-remark">* 登录密码</span>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="u_reset" type="button" class="btn btn-warning">重置</button>
+                <button id="u_submit" type="button" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
