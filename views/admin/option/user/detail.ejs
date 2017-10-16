@@ -1,4 +1,5 @@
-<div id="user_detail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="user_detail_title">
+<div id="user_detail" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="user_detail_title" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="p_form">
+                    <input type="hidden" id="u_uid" value="-1">
                     <div class="form-group">
                         <label for="u_name" class="col-lg-2 control-label">管理员名称</label>
                         <div class="col-lg-6">

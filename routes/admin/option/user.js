@@ -39,9 +39,11 @@ router.post('/', (req, res)=> {
 });
 
 // 管理员 - api - 删除
-router.delete('/:uid', (req, res)=> {
-
-});
+router.delete('/:uid', (req, res)=>
+    adminService.del(req.params.uid)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '删除管理员失败')))
+);
 
 
 // 管理员 - 页面 - 列表
@@ -76,8 +78,29 @@ router.post('/list', (req, res)=> {
 });
 
 // 管理员 - api - 更新
-router.put('/uid', (req, res)=> {
-
+router.put('/:uid', (req, res)=> {
+    const body = req.body;
+    let _ = {id: parseInt(req.params.uid)};
+    if ('user_name' in body && body.user_name) {
+        _.login_name = body.user_name;
+    } else {
+        return res.json(GLO.error('未获取到登录账号:user_name', -11));
+    }
+    if ('title' in body && body.title) {
+        _.name = body.title;
+    } else {
+        return res.json(GLO.error('未获取到名称:name', -15));
+    }
+    if ('pwd' in body && body.pwd) {
+        if (body.pwd.toString().length > 6) {
+            _.password = body.pwd;
+        } else {
+            return res.json(GLO.error('密码长度不小于6位', -19));
+        }
+    }
+    adminService.update(_)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '更新管理员失败')));
 });
 
 module.exports = router;
