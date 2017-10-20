@@ -10,7 +10,8 @@
 
 const Production = require('../../models').production
     , _Production = require('../../dao').production
-    , _image = require('./image');
+    , _image = require('./image')
+    , _redis = require('../../utils/redis');
 
 module.exports = {
     // 增：新增产品
@@ -99,4 +100,9 @@ module.exports = {
             })
             .catch(e=>reject(e))
     )
+
+    // 更新 - redis中文章的浏览次数
+    , view: md5=>
+        _redis.add(md5)
+            .catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
 };
