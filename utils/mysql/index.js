@@ -21,6 +21,7 @@ const Sequelize = require('sequelize')
                 , host: config.host
                 , port: config.port
                 , timezone: '+08:00'
+		, operatorsAliases: false
                 , logging: 'logging' in config ? config.logging : console.log
                 , define: {
                     underscored: true // 字段以 true:下划线（_）来分割
