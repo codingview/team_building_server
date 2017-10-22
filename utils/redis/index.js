@@ -30,7 +30,6 @@ module.exports = {
 
     // 自增
     , add: function (key) {
-        console.info(key)
         const _self = this;
         return new Promise((resolve, reject)=>
             _self.get(key)
