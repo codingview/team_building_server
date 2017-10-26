@@ -40,9 +40,20 @@ const printF = msg=>alert(msg)
         });
     }
 
+    // 密码输入框的回车监听
+    , inputEnterListener: ()=> {
+        $('#pwd').on('keyup', function (event) {
+                if (event.keyCode === 13) {
+                    $('#login_submit').click();
+                }
+            }
+        );
+    }
+
     // 初始化监听
     , init: function () {
         this.submit();
+        this.inputEnterListener();
     }
 };
 

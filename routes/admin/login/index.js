@@ -31,7 +31,7 @@ router.post('/', (req, res)=> {
     } else {
         return res.json(GLO.error('未获取到密码:pwd', -12));
     }
-    adminService.login({_})
+    adminService.login(_)
         .then(r=> {
             if (r) {
                 req.session.admin = {
