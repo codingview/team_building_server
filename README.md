@@ -107,3 +107,12 @@ team building server
   ```
   webpack --watch
   ```
+
+## TODO list
+- 修改前端页面，admin中header的链接，隐藏不活动的链接地址
+- 修改数据库中假数据
+- 完成新闻管理页面的开发
+- 查看image2中关于图片压缩的配置，减少图片的大小和压缩比
+
+
+***
