@@ -1,6 +1,6 @@
 /**
  * Created by zrz on 2017/8/22.
- * Copyright© 2015-2020 codingview (https://github.com/codingview)
+ * Copyright© 2015-2020 DiandaInfo (https://github.com/codingview)
  * @version 0.0.1 created
  */
 
@@ -18,12 +18,14 @@ module.exports = {
             , username: 'root' // 账号
             , password: 'root' // 密码
             , dialect: 'mysql'
+            , logging: false
         }, write: {
             database: 'team_building'
             , host: '127.0.0.1'
             , username: 'root'
             , password: 'root'
             , dialect: 'mysql'
+            , logging: false
         }
     }, redis: {
         host: 'localhost'
