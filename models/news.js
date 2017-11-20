@@ -1,7 +1,7 @@
 /**
  * Created by zhangrz on 2017/9/24.
  * Copyright© 2015-2020 codingview (https://github.com/codingview)
- * @version 0.0.1 created 服务案例分类
+ * @version 0.0.1 created 服务案例
  */
 
 'use strict';
@@ -15,24 +15,15 @@ module.exports = DataTypes=>({
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
-            , unique: false
-            , comment: '分类名称'
-        }, grade: {
+            , comment: '新闻标题'
+        }, case_id: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '分类等级'
+            , comment: '案例编号'
         }, sequence: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '排序'
-        }, father_id: {
-            type: DataTypes.INTEGER
-            , allowNull: true
-            , comment: '父分类编号'
-        }, icon: {
-            type: DataTypes.STRING
-            , allowNull: true
-            , comment: '分类图标'
+            , comment: '排序序号'
         }
-    }, tableName: 'case_catalog'
+    }, tableName: 'case'
 });

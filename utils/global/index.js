@@ -38,7 +38,11 @@ const packageConfig = require('../../package.json')
                 , data: null
             };
         }
-    }
+    }, dt: (draw, data, count = data.length)=>({
+        status: 1, draw, data
+        , recordsTotal: count
+        , recordsFiltered: count
+    })
 };
 
 module.exports = Object.assign(_, require('./logger'));

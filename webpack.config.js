@@ -32,6 +32,9 @@ module.exports = {
         , 'update.production.admin': BASE_URI.admin + '/production/update'
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
 
+        , 'catalog.admin': BASE_URI.admin + '/catalog'
+        , 'list.case.admin': BASE_URI.admin + '/case'
+
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {
         path: path.join(__dirname, 'public/src')

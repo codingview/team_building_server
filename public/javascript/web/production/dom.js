@@ -13,7 +13,7 @@ module.exports = list=> {
         str += '<div class="col-lg-3 production-item">' +
             '<div class="production-icon">' +
             '<img src="' + p.icon + '">' +
-            '<a href="/production/detail/' + p.id + '?md5=' + p.md5 + '" class="production-layout" target="_blank">' +
+            '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
             '<div class="production-title">' + p.title + '</div>' +
             '<div class="production-abstract">' + (p.abstract || '') + '</div>' +
             '</a>' +

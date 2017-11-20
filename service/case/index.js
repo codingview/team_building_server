@@ -6,3 +6,7 @@
 
 'use strict';
 
+const Case = require('../../models').case
+    , caseService = {};
+
+module.exports = caseService;

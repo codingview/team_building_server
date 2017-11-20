@@ -102,7 +102,5 @@ module.exports = {
     )
 
     // 更新 - redis中文章的浏览次数
-    , view: md5=>
-        _redis.add(md5)
-            .catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
+    , view: key=>_redis.add(key).catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
 };

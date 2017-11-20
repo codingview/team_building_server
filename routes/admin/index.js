@@ -41,7 +41,14 @@ router.use('/production', require('./production'));
 
 // todo 基地资源
 
-// todo 师资实力
+// 通用分类
+router.use('/catalog', require('./catalog'));
+
+// 服务案例
+router.use('/case', require('./case'));
+
+// 新闻
+router.use('/news', require('./news'));
 
 // 关于我们
 router.use('/about', require('./about'));

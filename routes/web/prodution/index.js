@@ -31,23 +31,17 @@ router.get('/list', (req, res)=>
 // 产品 - 详情 - 页面
 router.get('/detail/:pid', (req, res)=> {
     const production_id = parseInt(req.params.pid);
-    if ('md5' in req.query) {
-        const md5 = req.query.md5;
-        productionService.production.view(md5);
-        productionService.production.detail(production_id)
-            .then(production=>
-                res.render('./web/production/detail/view', {
-                    title: '产品详情'
-                    , detail: production
-                    , active: 'production'
-                }))
-            .catch(e=> {
-                // todo 错误页面
-            });
-    } else {
-        // todo md5值缺失-错误提示页面
-        return false;
-    }
+    productionService.production.view(`p:${production_id}`); // 浏览次数加1
+    productionService.production.detail(production_id)
+        .then(production=>
+            res.render('./web/production/detail/view', {
+                title: '产品详情'
+                , detail: production
+                , active: 'production'
+            }))
+        .catch(e=> {
+            // todo 错误页面
+        });
 });
 
 module.exports = router;

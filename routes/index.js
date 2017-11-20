@@ -12,7 +12,7 @@ const express = require('express')
 
 // 请求日志
 router.use((req, res, next)=> {
-    console.info(req.sessionID, !!req.session);
+    // console.info(req.sessionID, !!req.session); // 打印session信息
     GLO.http(req);
     next();
 });
