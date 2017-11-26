@@ -26,10 +26,10 @@ module.exports = type=>
             , {title: '排序序号', data: 'sequence'}
             , {
                 title: '操作', width: '136px', data: null, render: d=>
-                '<a class="btn btn-info btn-xs ml-1e" href="/admin/production/update/' + d.id + '">修改信息</a>' +
-                '<button class="btn btn-' + (d.state === 1 ? 'danger' : 'primary') + ' btn-xs ml-1e production-state"' +
-                ' data-pid="' + d.id + '" data-state="' + d.state + '">产品'
-                + (d.state === 1 ? '下架' : '上架') + '</button>'
+                '<button type="button" class="btn btn-info btn-xs ml-1e catalog-update"' +
+                ' data-id="' + d.id + '" data-name="' + d.name + '" data-sequence="' + d.sequence + '">更新分类</button>' +
+                '<button type="button" class="btn btn-danger btn-xs ml-1e catalog-delete"' +
+                ' data-id="' + d.id + '">删除分类</button>'
             }
         ]
     });

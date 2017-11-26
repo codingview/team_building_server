@@ -19,6 +19,7 @@ npm-lock.log
 logs/
 
 # config
+config/config_production.js
 
 # general css
 public/stylesheets/general/*.css
