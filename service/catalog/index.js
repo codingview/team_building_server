@@ -14,6 +14,7 @@ const GeneralCatalogs = require('../../models').general_catalog
     add: catalog=>GeneralCatalogs.create(catalog)
 
     // 删除 - 分类
+    , del: catalog_id=>GeneralCatalogs.destroy({where: {id: catalog_id}})
 
     // 获取 - 分类 - 列表
     , list: type=>new Promise((resolve, reject)=>
@@ -27,6 +28,15 @@ const GeneralCatalogs = require('../../models').general_catalog
     )
 
     // 更新 - 分类
+    , up: body=>new Promise((resolve, reject)=> {
+        GeneralCatalogs.findOne({where: {id: body.id}})
+            .then(catalog=> {
+                Object.assign(catalog, body);
+                return catalog.save();
+            })
+            .then(()=>resolve(true))
+            .catch(e=>reject(e));
+    })
 
 };
 

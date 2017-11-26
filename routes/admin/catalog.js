@@ -34,9 +34,10 @@ router.post('/list', (req, res)=> {
 
 // 新增分类
 router.post('/', (req, res)=>
-    joi.validate(req.body, {
+    Joi.validate(req.body, {
         name: Joi.string().required()
         , type: Joi.number().integer().required()
+        , sequence: Joi.number().integer()
         , icon: Joi.string()
     })
         .then(catalogService.add)
@@ -46,24 +47,28 @@ router.post('/', (req, res)=>
 
 // 删除分类
 router.delete('/:cid', (req, res)=>
-    catalogService.del(req.params.cid)
+    Joi.validate(req.params, {
+        cid: Joi.number().integer().required()
+    })
+        .then(param=>catalogService.del(param.cid))
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e)))
 );
 
 // 更新分类
-router.post('/', (req, res)=>
-    joi.validate(req.body
+router.put('/', (req, res)=>
+    Joi.validate(req.body
         , Joi.object().keys({
             id: Joi.number().integer().required()
             , name: Joi.string()
+            , sequence: Joi.number().integer()
             , type: Joi.number().integer()
             , icon: Joi.string()
         }).with('name', 'type', 'icon')
     )
-        .then(catalogService.add)
+        .then(catalogService.up)
         .then(r=>res.json(GLO.success(r)))
-        .catch(e=>res.json(GLO.error(e, -99, '新增分类出错')))
+        .catch(e=>res.json(GLO.error(e, -99, '更新分类出错')))
 );
 
 module.exports = router;
