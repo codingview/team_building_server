@@ -19,14 +19,14 @@ router.get('/catalog', (req, res)=>
     })
 );
 
-// 服务案例 - 案例列表 - 页面
+// 案例列表 - 页面
 router.get('/list', (req, res)=>
     res.render('./admin/example/list/view', {
         title: '案例列表'
     })
 );
 
-// 服务案例 - 案例列表 - 接口
+// 案例列表 - 接口
 router.post('/list', (req, res)=> {
     const body = req.body;
     let _ = {
@@ -52,7 +52,7 @@ router.post('/list', (req, res)=> {
         );
 });
 
-// 服务案例 - 新增案例 - 页面
+// 新增案例 - 页面
 router.get('/add', (req, res)=>
     res.render('./admin/example/add/view', {
         title: '案例体系-新增案例'
@@ -60,18 +60,37 @@ router.get('/add', (req, res)=>
     })
 );
 
-// 服务案例 - 接口
+// 新增案例 - 接口
 router.put('/add', (req, res)=>
     exampleService.create(req.body)
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e, -99, '新增案例出错')))
 );
 
-// 更新图片 - 接口
+// 上传图片 - 接口
 router.put('/image', (req, res)=>
     exampleService.image(req, res)
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e, -99, '上传案例图片出错')))
+);
+
+// 更新案例 - 页面
+router.get('/update/:pid', (req, res)=>
+    exampleService.detail(req.params.pid)
+        .then(p=>res.render('./admin/example/update/view', {
+            title: '案例体系-更新案例'
+            , detail: p
+        }))
+        .catch(e=> {
+            // todo 错误页面
+        })
+);
+
+// 更新案例 - 接口
+router.put('/update', (req, res)=>
+    exampleService.update(req.body)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '更新案例出错')))
 );
 
 // 服务案例 - 上/下架案例
@@ -86,7 +105,5 @@ router.post('/state/:eid/:state', (req, res)=> {
         return res.json(GLO.error('上下架标记错误:state', -11));
     }
 });
-
-// 服务案例 - 更新案例
 
 module.exports = router;

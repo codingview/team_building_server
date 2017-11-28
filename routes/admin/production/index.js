@@ -12,7 +12,7 @@ const express = require('express')
 
 /* 产品体系 */
 
-// 产品分类 - 页面
+// 产品 - 分类列表 - 页面
 router.get('/catalog', (req, res)=>
     res.render('./admin/production/catalog/view', {
         title: '产品体系-分类管理'
@@ -95,6 +95,13 @@ router.put('/add', (req, res)=>
         .catch(e=>res.json(GLO.error(e, -99, '新增产品出错')))
 );
 
+// 上传图片 - 接口
+router.put('/image', (req, res)=>
+    productionService.production.image(req, res)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
+);
+
 // 更新产品 - 页面
 router.get('/update/:pid', (req, res)=>
     productionService.production.detail(req.params.pid)
@@ -112,13 +119,6 @@ router.put('/update', (req, res)=>
     productionService.production.update(req.body)
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e, -99, '更新产品出错')))
-);
-
-// 更新图片 - 接口
-router.put('/image', (req, res)=>
-    productionService.production.image(req, res)
-        .then(r=>res.json(GLO.success(r)))
-        .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
 );
 
 // 上/下架
