@@ -36,6 +36,7 @@ module.exports = {
 
         , 'example.admin': BASE_URI.admin + '/example'
         , 'add.example.admin': BASE_URI.admin + '/example/add'
+        , 'update.example.admin': BASE_URI.admin + '/example/update'
 
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {

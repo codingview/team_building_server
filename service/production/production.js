@@ -23,6 +23,17 @@ module.exports = {
             .catch(e=>reject(e));
     })
 
+    // 上传 - 产品 - 图片
+    , image: (req, res)=>new Promise((resolve, reject)=>
+        _image.save(req, res)
+            .then(body=> {
+                _image.transform(body);
+                resolve(body);
+            })
+            .catch(e=>reject(e))
+    )
+
+
     // 查：产品列表
     , list: ({offset, limit, state, catalog_id})=>new Promise((resolve, reject)=> {
         let _where = {state, catalog_id};
@@ -90,16 +101,6 @@ module.exports = {
                 .catch(e=>reject(e));
         }
     })
-
-    // 上传 - 产品 - 图片
-    , image: (req, res)=>new Promise((resolve, reject)=>
-        _image.save(req, res)
-            .then(body=> {
-                _image.transform(body);
-                resolve(body);
-            })
-            .catch(e=>reject(e))
-    )
 
     // 更新 - redis中文章的浏览次数
     , view: key=>_redis.add(key).catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
