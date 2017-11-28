@@ -1,0 +1,44 @@
+<% include ../../_base/head.ejs %>
+<% include ../../_base/css.ejs %>
+<% include ../../../_base/dataTables.css.ejs %>
+<% include ../../_base/container.ejs %>
+<% include ../../_base/header.ejs %>
+<div class="app-container container">
+    <div class="container-header">
+        <h2>
+            <%= title %>
+            <a class="btn btn-primary ml-2e" href="/admin/example/add"><i class="glyphicon glyphicon-plus"></i></a>
+        </h2>
+    </div>
+    <div class="container-content">
+        <div class="row">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon">选择案例</div>
+                        <select id="e_list_state" class="form-control">
+                            <option value="-1">显示全部</option>
+                            <option value="0">仅显示已下架案例</option>
+                            <option value="1" selected>仅显示在架案例</option>
+                        </select>
+                    </div>
+                    <div class="input-group ml-2e">
+                        <div class="input-group-addon">选择分类</div>
+                        <select id="e_catalog" class="form-control"></select>
+                    </div>
+                    <div class="input-group ml-2e">
+                        <button id="search_submit" class="btn btn-danger wi-6e">查询</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt-1e">
+            <table id="example_list" class="table-striped table-bordered table-condensed" width="100%"></table>
+        </div>
+    </div>
+</div>
+<% include ../../_base/footer.ejs %>
+<% include ../../_base/javascript.ejs %>
+<% include ../../../_base/dataTables.js.ejs %>
+<script charset="utf-8" src="/src/example.admin.min.js"></script>
+<% include ../../_base/foot.ejs %>

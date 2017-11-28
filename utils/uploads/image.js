@@ -12,7 +12,7 @@ module.exports = option=>
     multer({
         storage: multer.diskStorage({ // 存储 - 配置
             destination: (req, file, callback)=>callback(null, option.path)// 设置上传后文件路径
-            , filename: (req, file, callback)=>callback(null, option.fileName + '.jpg')// 给上传文件重命名，获取添加后缀名
+            , filename: (req, file, callback)=>callback(null, option.fileName + '.jpeg')// 给上传文件重命名，获取添加后缀名
         })
         , fileFilter: (req, file, callback)=> { // 文件 - 过滤
             const fileFormat = (file.originalname).split('.')

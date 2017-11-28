@@ -65,5 +65,5 @@ module.exports = DataTypes=>({
             , allowNull: true
             , comment: '纯文本'
         }
-    }, tableName: 'case'
+    }, tableName: 'example'
 });

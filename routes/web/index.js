@@ -22,7 +22,7 @@ router.use('/production', require('./prodution'));
 router.use('/resource', require('./resource'));
 
 // 精彩案例
-router.use('/case', require('./case'));
+router.use('/example', require('./example'));
 
 // 新闻
 router.use('/news', require('./news'));

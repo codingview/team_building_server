@@ -45,7 +45,7 @@ router.use('/production', require('./production'));
 router.use('/catalog', require('./catalog'));
 
 // 服务案例
-router.use('/case', require('./case'));
+router.use('/example', require('./example'));
 
 // 新闻
 router.use('/news', require('./news'));

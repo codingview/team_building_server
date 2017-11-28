@@ -27,5 +27,6 @@ public/stylesheets/general/*.css.map
 
 # statis data html file
 public/static/about/*
-public/uploads/banner/*
-public/uploads/production/*
+public/uploads/banner/*.jpeg
+public/uploads/production/*.jpeg
+public/uploads/example/*.jpeg

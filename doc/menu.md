@@ -109,7 +109,7 @@
 |routes|web|||
 |routes|web|about||
 ||||index.js
-|routes|web|case||
+|routes|web|example||
 ||||index.js
 |routes|web|home||
 ||||index.js

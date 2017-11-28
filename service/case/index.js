@@ -6,7 +6,7 @@
 
 'use strict';
 
-const Case = require('../../models').case
-    , caseService = {};
+const example = require('../../models').example
+    , exampleService = {};
 
-module.exports = caseService;
+module.exports = exampleService;

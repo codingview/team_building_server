@@ -10,10 +10,9 @@ const fs = require('fs')
     , path = require('path')
     , config = require('../../config')
     , imageUploadUtil = require('../../utils/uploads').image
-    , filePath = path.join(config.uploads_image, './production')
-    , images = require('images');
-
-const _ = {
+    , filePath = path.join(config.uploads_image, './example')
+    , images = require('images')
+    , imageService = {
     // 保存图片
     save: (req, res)=>new Promise((resolve, reject)=> {
         imageUploadUtil({
@@ -51,4 +50,4 @@ const _ = {
 
 };
 
-module.exports = _;
+module.exports = imageService;
