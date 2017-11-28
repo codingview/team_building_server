@@ -137,7 +137,9 @@ const Editor = window.wangEditor
 
 // 页面初始化
 $(function () {
-    Dom.init();
+    if ($('#p_catalog_id').length > 0) {
+        Dom.init();
+    }
     require('./image')();
 });
 

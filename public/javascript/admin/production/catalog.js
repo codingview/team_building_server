@@ -165,14 +165,6 @@ const Dom = {
     }
 };
 
-const Listener = {
-
-    // 初始化监听
-    init: function () {
-    }
-};
-
 $(function () {
     Dom.init();
-    Listener.init();
 });
