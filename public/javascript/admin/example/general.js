@@ -61,19 +61,6 @@ const Editor = window.wangEditor
         return str;
     }
 
-    // 生成分类列表名称:编号kv结构
-    , setCatalogsKv: catalogs=> {
-        let _ = {};
-        catalogs.forEach(catalog=> {
-            _[catalog.id] = catalog.name;
-            if (catalog.children) {
-                catalog.children.forEach(child=> {
-                    _[child.id] = child.name;
-                });
-            }
-        });
-        return _;
-    }
     // 创建富文本
     , editor: ()=> {
         editor = new Editor('#e_editor');
@@ -131,7 +118,9 @@ const Editor = window.wangEditor
 
 // 页面初始化
 $(function () {
-    Dom.init();
+    if ($('#e_catalog_id').length > 0) {
+        Dom.init();
+    }
     require('./image')();
 });
 

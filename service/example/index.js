@@ -33,4 +33,27 @@ module.exports = {
 
     // 更新 - redis中文章的浏览次数
     , view: key=>_redis.add(key).catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
+
+    // 查：产品列表
+    , list: ({offset, limit, state, catalog_id})=>new Promise((resolve, reject)=> {
+        let _where = {state, catalog_id};
+        if (catalog_id === -1) {
+            delete _where.catalog_id;
+        }
+        if (state === -1) {
+            delete _where.state;
+        }
+        Example.findAndCountAll({where: _where, offset, limit})
+            .then(result=> {
+                const rows = result.rows;
+                let results = [];
+                if (rows && rows instanceof Array && rows.length > 0) {
+                    rows.forEach(row=> results.push(new _Example(row.id).db2Api(row.dataValues)));
+                    return resolve({results: results, count: result.count});
+                } else {
+                    return resolve({results: [], count: 0});
+                }
+            })
+            .catch(e=>reject(e));
+    })
 };

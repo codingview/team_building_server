@@ -26,6 +26,32 @@ router.get('/list', (req, res)=>
     })
 );
 
+// 服务案例 - 案例列表 - 接口
+router.post('/list', (req, res)=> {
+    const body = req.body;
+    let _ = {
+        offset: 'start' in body ? parseInt(body.start) : 0
+        , limit: 'length' in body ? parseInt(body.length) : 10
+        , state: 'state' in body ? parseInt(body.state) : 1
+        , catalog_id: 'catalog_id' in body ? parseInt(body.catalog_id) : -1
+    };
+    exampleService.list(_)
+        .then(r=>res.json({
+            draw: 'draw' in body ? parseInt(body.draw) : 1
+            , data: r.results
+            , recordsTotal: r.count
+            , recordsFiltered: r.count
+        }))
+        .catch(e=> res.json({
+                draw: 'draw' in body ? parseInt(body.draw) : -1
+                , data: []
+                , recordsTotal: 0
+                , recordsFiltered: 0
+                , message: GLO.eLog(e, '读取案例列表出错', -99)
+            })
+        );
+});
+
 // 服务案例 - 新增案例 - 页面
 router.get('/add', (req, res)=>
     res.render('./admin/example/add/view', {
