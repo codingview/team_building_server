@@ -7,13 +7,22 @@
 'use strict';
 
 const Example = require('../../models').example
+    , _Example = require('../../dao').example
     , _image = require('./image')
     , _redis = require('../../utils/redis');
 
 module.exports = {
+    // 新增 - 服务案例
+    create: example=> new Promise((resolve, reject)=> {
+        const pp = new _Example().form2Db(example);
+        _image.moveTempImage(pp.md5 + '.jpeg')
+            .then(()=> Example.create(pp))
+            .then(r=>resolve(r))
+            .catch(e=>reject(e));
+    })
 
     // 上传 - 案例 - 图片
-    image: (req, res)=>new Promise((resolve, reject)=>
+    , image: (req, res)=>new Promise((resolve, reject)=>
         _image.save(req, res)
             .then(body=> {
                 _image.transform(body);

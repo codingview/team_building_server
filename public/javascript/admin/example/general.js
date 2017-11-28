@@ -101,7 +101,7 @@ const Editor = window.wangEditor
             , inputs = form.find('input,select');
         for (let i = 0, len = inputs.length; i < len; i++) {
             const input = inputs.eq(i)
-                , _id = input.attr('id').replace(/p_/g, '')
+                , _id = input.attr('id').replace(/e_/g, '')
                 ;
             if (_id === 'text') {
             } else if (_id === 'top') {

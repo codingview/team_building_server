@@ -11,7 +11,7 @@ const express = require('express')
     , router = new express.Router()
     , exampleService = require('../../../service/example');
 
-// 服务案例 - 分类列表
+// 服务案例 - 分类列表 - 页面
 router.get('/catalog', (req, res)=>
     res.render('./admin/catalog/view', {
         title: '案例分类'
@@ -19,19 +19,26 @@ router.get('/catalog', (req, res)=>
     })
 );
 
-// 服务案例 - 案例列表
+// 服务案例 - 案例列表 - 页面
 router.get('/list', (req, res)=>
     res.render('./admin/example/list/view', {
         title: '案例列表'
     })
 );
 
-// 服务案例 - 新增案例
+// 服务案例 - 新增案例 - 页面
 router.get('/add', (req, res)=>
     res.render('./admin/example/add/view', {
         title: '案例体系-新增案例'
         , detail: false
     })
+);
+
+// 服务案例 - 接口
+router.put('/add', (req, res)=>
+    exampleService.create(req.body)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '新增产品出错')))
 );
 
 // 更新图片 - 接口

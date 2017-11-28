@@ -21,4 +21,7 @@ module.exports = {
 
     // 反馈
     , feedback: require('./feedback')
+
+    // 案例
+    , example: require('./example')
 };
