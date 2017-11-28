@@ -76,7 +76,7 @@ class Production {
      */
     db2Icon(p) {
         this.db2Api(p);
-        this.icon = p.icon ? '/uploads' + p.icon : '/images/production.icon.jpeg';
+        this.icon = p.icon ? '/uploads' + p.icon : '/images/production.icon.jpg';
         this.abstract = p.abstract;
         return this;
     }

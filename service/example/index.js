@@ -31,10 +31,7 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-    // 更新 - redis中文章的浏览次数
-    , view: key=>_redis.add(key).catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
-
-    // 查：产品列表
+    // 查：案例列表
     , list: ({offset, limit, state, catalog_id})=>new Promise((resolve, reject)=> {
         let _where = {state, catalog_id};
         if (catalog_id === -1) {
@@ -56,4 +53,52 @@ module.exports = {
             })
             .catch(e=>reject(e));
     })
+
+    // 查：根据分类编号获取商品列表
+    , listByCid: params=>new Promise((resolve, reject)=>
+        Example
+            .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
+            .then(result=> {
+                const rows = result.rows;
+                let results = [];
+                if (rows && rows instanceof Array && rows.length > 0) {
+                    rows.forEach(row=> results.push(new _Example(row.id).db2Icon(row.dataValues)));
+                    return resolve({results: results, count: result.count});
+                } else {
+                    return resolve({results: [], count: 0});
+                }
+            })
+            .catch(e=>reject(e))
+    )
+
+    // 查：案例详情
+    , detail: example_id=>new Promise((resolve, reject)=>
+        Example
+            .find({where: {id: example_id}})
+            .then(p=>resolve(new _Example(p.id).db2Detail(p.dataValues)))
+            .catch(e=>reject(e))
+    )
+
+    // 改：案例上/下架
+    , state: (example_id, state)=>Example.update({state: state}, {where: {id: example_id}})
+
+    // 改：更新案例信息
+    , update: example=>new Promise((resolve, reject)=> {
+        const pp = new _Example().update(example)
+            , eid = example.id;
+        if (parseInt(example.img) === 0) { // 图片无变化
+            Example.update(pp, {where: {id: eid}})
+                .then(()=>resolve(true))
+                .catch(e=>reject(e));
+        } else { // 有图片变化
+            Example.find({where: {id: eid}})
+                .then(p=>_image.moveTempImage(p.md5 + '.jpeg')) // 移动
+                .then(()=> Example.update(pp, {where: {id: eid}}))
+                .then(()=>resolve(true))
+                .catch(e=>reject(e));
+        }
+    })
+
+    // 更新 - redis中文章的浏览次数
+    , view: key=>_redis.add(key).catch(e=>GLO.error(e, -99, '文章浏览次数自增失败'))
 };

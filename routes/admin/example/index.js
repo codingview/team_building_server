@@ -64,17 +64,28 @@ router.get('/add', (req, res)=>
 router.put('/add', (req, res)=>
     exampleService.create(req.body)
         .then(r=>res.json(GLO.success(r)))
-        .catch(e=>res.json(GLO.error(e, -99, '新增产品出错')))
+        .catch(e=>res.json(GLO.error(e, -99, '新增案例出错')))
 );
 
 // 更新图片 - 接口
 router.put('/image', (req, res)=>
     exampleService.image(req, res)
         .then(r=>res.json(GLO.success(r)))
-        .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
+        .catch(e=>res.json(GLO.error(e, -99, '上传案例图片出错')))
 );
 
-// 服务案例 - 删除案例
+// 服务案例 - 上/下架案例
+router.post('/state/:eid/:state', (req, res)=> {
+    const state = parseInt(req.params.state)
+        , example_id = parseInt(req.params.eid);
+    if (state === 1 || state === 0) {
+        exampleService.state(example_id, state)
+            .then(()=>res.json(GLO.success(true)))
+            .catch(e=>res.json(GLO.error(e, -99, '上下架案例出错')));
+    } else {
+        return res.json(GLO.error('上下架标记错误:state', -11));
+    }
+});
 
 // 服务案例 - 更新案例
 
