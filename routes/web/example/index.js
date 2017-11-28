@@ -10,21 +10,21 @@ const express = require('express')
     , router = new express.Router();
 
 // 服务案例 - 首页 - 中转
-router.get('/', (req, res)=>res.redirect('/case/list'));
+router.get('/', (req, res)=>res.redirect('/example/list'));
 
 // 服务案例 - 列表 - 页面
 router.get('/list', (req, res)=>
-    res.render('./web/case/list/view', {
+    res.render('./web/example/list/view', {
         title: '服务案例'
-        , active: 'case'
+        , active: 'example'
     })
 );
 
 // 服务案例 - 详情 - 页面
 router.get('/detail/:rid', (req, res)=>
-    res.render('./web/case/detail/view', {
+    res.render('./web/example/detail/view', {
         title: '服务案例详情'
-        , active: 'case'
+        , active: 'example'
     })
 );
 

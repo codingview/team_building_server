@@ -8,7 +8,8 @@
 
 // 路由 - 服务案例
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , exampleService = require('../../../service/example');
 
 // 服务案例 - 分类列表
 router.get('/catalog', (req, res)=>
@@ -20,16 +21,24 @@ router.get('/catalog', (req, res)=>
 
 // 服务案例 - 案例列表
 router.get('/list', (req, res)=>
-    res.render('./admin/case/list/view', {
+    res.render('./admin/example/list/view', {
         title: '案例列表'
     })
 );
 
 // 服务案例 - 新增案例
 router.get('/add', (req, res)=>
-    res.render('./admin/case/add/view', {
-        title: '新增案例'
+    res.render('./admin/example/add/view', {
+        title: '案例体系-新增案例'
+        , detail: false
     })
+);
+
+// 更新图片 - 接口
+router.put('/image', (req, res)=>
+    exampleService.image(req, res)
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '上传产品图片出错')))
 );
 
 // 服务案例 - 删除案例

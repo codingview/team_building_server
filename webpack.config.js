@@ -33,7 +33,8 @@ module.exports = {
         , 'catalog.production.admin': BASE_URI.admin + '/production/catalog'
 
         , 'catalog.admin': BASE_URI.admin + '/catalog'
-        , 'list.case.admin': BASE_URI.admin + '/case'
+        , 'list.example.admin': BASE_URI.admin + '/example'
+        , 'add.example.admin': BASE_URI.admin + '/example/add'
 
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {

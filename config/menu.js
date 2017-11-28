@@ -140,8 +140,8 @@ module.exports = [{
     , children: []
 }, {
     text: '服务案例'
-    , class: 'case'
-    , uri: '/case'
+    , class: 'example'
+    , uri: '/example'
     , children: []
 }, {
     text: '关于我们'

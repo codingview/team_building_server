@@ -16,7 +16,7 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: false
             , comment: '新闻标题'
-        }, case_id: {
+        }, example_id: {
             type: DataTypes.INTEGER
             , allowNull: false
             , comment: '案例编号'
@@ -25,5 +25,5 @@ module.exports = DataTypes=>({
             , allowNull: false
             , comment: '排序序号'
         }
-    }, tableName: 'case'
+    }, tableName: 'news'
 });
