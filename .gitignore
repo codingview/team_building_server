@@ -29,3 +29,4 @@ public/stylesheets/general/*.css.map
 public/static/about/*
 public/uploads/banner/*.jpeg
 public/uploads/production/*.jpeg
+public/uploads/example/*.jpeg

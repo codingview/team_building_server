@@ -35,7 +35,7 @@ const _ = {
 
     // 图片转换尺寸,同步方法
     , transform: body=> {
-        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpg`) // 临时文件路径
+        const tempFilePath = path.join(filePath, `./${tempFileName(body.bid)}.jpeg`) // 临时文件路径
             , _bid = '_bid' in body ? body._bid : body.bid
             , bannerFilePath = path.join(filePath, `./${_bid}.jpeg`) // 替换文件路径
             ;
@@ -48,7 +48,7 @@ const _ = {
     }
 
     // 删除临时图片
-    , removeTempImage: body=>fs.unlinkSync(path.join(filePath, `./${tempFileName(body.bid)}.jpg`))
+    , removeTempImage: body=>fs.unlinkSync(path.join(filePath, `./${tempFileName(body.bid)}.jpeg`))
 };
 
 module.exports = _;
