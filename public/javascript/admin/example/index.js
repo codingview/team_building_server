@@ -76,6 +76,7 @@ const Dom = {
     catalogs: ()=> new Promise((resolve, reject)=> {
         general.Data.catalogs()
             .then(catalogs=> {
+                _catalogs = general.Dom.setCatalogsKv(catalogs);
                 $('#e_catalog').html('<option value="-1">--- 全部 ---</option>'
                     + general.Dom.setCatalogs(catalogs));
                 resolve();

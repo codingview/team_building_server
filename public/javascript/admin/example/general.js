@@ -61,6 +61,15 @@ const Editor = window.wangEditor
         return str;
     }
 
+    // 生成分类列表名称:编号kv结构
+    , setCatalogsKv: catalogs=> {
+        let _ = {};
+        catalogs.forEach(catalog=> {
+            _[catalog.id] = catalog.name;
+        });
+        return _;
+    }
+
     // 创建富文本
     , editor: ()=> {
         editor = new Editor('#e_editor');
