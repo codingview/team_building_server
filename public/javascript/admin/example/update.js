@@ -13,9 +13,8 @@ let editor = general.editor;
 const Listener = {
     // 表单 - 提交 - 监听
     setOneSubmit: ()=> {
-        $('#p_submit').one('click', ()=> {
+        $('#e_submit').one('click', ()=> {
             let form = general.Dom.getForm();
-            console.info(form)
             form.rich_text = editor.txt.html();
             form.text = editor.txt.text();
             form.sequence = form.top ? 0 : 99;
@@ -43,7 +42,6 @@ const Listener = {
 };
 
 $(function () {
-    console.info(6555555555)
     Listener.init();
     editor = general.Dom.editor();
     general.Listener.reset(editor);
