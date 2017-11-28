@@ -23,7 +23,7 @@ const _ = {
             if (error) {
                 reject(error);
             } else {
-                resolve({image: path.join(filePath, 'temp.jpg')});
+                resolve({image: path.join(filePath, 'temp.jpeg')});
             }
         });
     })
@@ -40,7 +40,7 @@ const _ = {
     // 移动临时文件
     , moveTempImage: fileName=>
         new Promise((resolve, reject)=>
-            fs.rename(path.join(filePath, 'temp.jpg'), path.join(filePath, fileName), err=> {
+            fs.rename(path.join(filePath, 'temp.jpeg'), path.join(filePath, fileName), err=> {
                 if (err) {
                     reject(err);
                 } else {
