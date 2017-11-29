@@ -16,8 +16,6 @@ const express = require('express')
     , bodyParser = require('body-parser')
     , path = require('path')
     , serveFavicon = require('serve-favicon')
-    // express-session不再需要使用cookieParser中间件
-    // , cookieParser = require('cookie-parser')
     , config = require('./config')
     ;
 
@@ -29,7 +27,6 @@ app.set('view cache', !GLO.isDev()); // 设置模板缓存
 app.use(serveFavicon(path.join(__dirname, '/public/favicon.ico'))); // 设置浏览器图标
 app.use(bodyParser.json({limit: '50mb'})); // 设置body结构体最大值
 app.use(bodyParser.urlencoded({extended: true})); // 设置body结构体键值数据类型
-// app.use(cookieParser()); // 加载cookie解析中间件
 app.use(express.static(path.join(__dirname, 'public'))); // 设置静态资源解析地址
 // 配置session
 app.use(session({
@@ -54,4 +51,15 @@ app.listen(config.port, ()=> {
         + '  监听端口:' + config.port
         , 'start');
     // todo 开启定时任务
+});
+
+// 捕获未被catch的promise异常
+process.on('unhandledRejection', (err, p)=> {
+    GLO.log('捕获到未被catch的Promise异常');
+    GLO.error(err);
+    GLO.error(p);
+});
+// 捕获未被catch的异常
+process.on('uncaughtException', err=> {
+    GLO.error(err);
 });
