@@ -71,7 +71,7 @@ const Dom = {
     , setNewsList: array=> {
         let str = '';
         array.forEach(a=> {
-            str += `<a href="/news/${a.id}" class="list-group-item list-group-item-info">
+            str += `<a href="/news/detail/${a.id}" class="list-group-item list-group-item-info">
     <h4 class="list-group-item-heading">${a.name}</h4>
     <p class="list-group-item-text">${a.abstract}</p>
 </a>`;
@@ -83,7 +83,7 @@ const Dom = {
         let str = '';
         array.forEach(a=> {
             str += `<div class="swiper-slide">
-    <a href="/news/${a.id}">
+    <a href="/news/detail/${a.id}">
         <div class=""><img src="/uploads${a.icon}" width="100%"></div>
         <div class="mt-1e"><h3>${a.name}</h3></div>
         <div class="mt-1e" style="font-size:16px;"><h4>${a.abstract}</h4></div>

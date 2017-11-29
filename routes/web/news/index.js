@@ -7,14 +7,22 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , newsService = require('../../../service/news');
 
 // 新闻 - 详情 - 页面
 router.get('/detail/:nid', (req, res)=>
-    res.render('./web/news/detail/view', {
-        title: '新闻详情'
-        , active: 'news'
-    })
+    newsService.detail(req.params.nid)
+        .then(details=>
+            res.render('./web/news/detail/view', {
+                title: '新闻详情'
+                , active: 'news'
+                , detail: details
+            })
+        )
+        .catch(e=> {
+            res.redirect('/error?msg=未找到该新闻的详情信息');
+        })
 );
 
 module.exports = router;

@@ -53,6 +53,26 @@ const sequelize = require('../../utils/mysql').sequelize
             .catch(reject);
     })
 
+    // 查:详情
+    , detail: id=>new Promise((resolve, reject)=> {
+        sequelize.query(`SELECT 
+        news.id AS id,
+        news.name AS name,
+        example.rich_text AS rich_text,
+        example.icon AS icon
+        FROM news  
+        LEFT JOIN example ON news.example_id = example.id
+        WHERE news.id = ${id}`, {type: sequelize.QueryTypes.SELECT})
+            .then(details=> {
+                if (details && details instanceof Array && details.length > 0) {
+                    resolve(details[0]);
+                } else {
+                    reject(GLO.error(details, -99, '获取数据出错'));
+                }
+            })
+            .catch(reject);
+    })
+
 };
 
 module.exports = newsService;
