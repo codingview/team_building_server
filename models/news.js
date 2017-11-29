@@ -24,6 +24,9 @@ module.exports = DataTypes=>({
             type: DataTypes.INTEGER
             , allowNull: false
             , comment: '排序序号'
+        }, views: {
+            type: DataTypes.INTEGER
+            , comment: '浏览次数'
         }
     }, tableName: 'news'
 });

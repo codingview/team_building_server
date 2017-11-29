@@ -7,15 +7,16 @@
 'use strict';
 
 require('../../general/Date.format');
+require('../news/add'); // 新增新闻
 
 const general = require('./general');
 
-let tableApi // td的api实例
-    , _catalogs // 分类列表
+
+let _catalogs // 分类列表
     ;
 
 const Table = {
-    init: ()=> tableApi = $('#example_list').DataTable({
+    init: ()=> window.tableApi = $('#example_list').DataTable({
         language: require('../../general/DT.language')
         , paginType: 'full_numbers'
         , lengthMenu: [ // 显示记录条数
@@ -52,11 +53,12 @@ const Table = {
             , {title: '创建时间', data: 'created_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {title: '修改时间', data: 'updated_at', render: t=>new Date(t).format('yyyy-MM-dd hh:mm:ss')}
             , {
-                title: '操作', width: '136px', data: null, render: d=>
+                title: '操作', data: null, render: d=>
                 '<a class="btn btn-info btn-xs ml-1e" href="/admin/example/update/' + d.id + '">修改信息</a>' +
                 '<button class="btn btn-' + (d.state === 1 ? 'danger' : 'primary') + ' btn-xs ml-1e example-state"' +
-                ' data-pid="' + d.id + '" data-state="' + d.state + '">案例'
-                + (d.state === 1 ? '下架' : '上架') + '</button>'
+                ' data-pid="' + d.id + '" data-state="' + d.state + '">案例' +
+                (d.state === 1 ? '下架' : '上架') + '</button>' +
+                '<button class="btn btn-xs btn-warning ml-1e add-news" data-id="' + d.id + '">新增新闻</button>'
             }
         ]
     })
@@ -96,7 +98,7 @@ const Listener = {
     // 查询按钮的监听
     searchSubmit: ()=> {
         $('#search_submit').one('click', function () {
-            tableApi.ajax.reload();
+            window.tableApi.ajax.reload();
             Listener.searchSubmit();
         });
     }
@@ -107,7 +109,7 @@ const Listener = {
             const pid = parseInt($(this).data('pid'))
                 , state = parseInt($(this).data('state'));
             Data.state(pid, 1 - state)
-                .then(()=>tableApi.ajax.reload())
+                .then(()=>window.tableApi.ajax.reload())
                 .catch(e=>alert(e));
         });
     }

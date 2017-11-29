@@ -23,27 +23,46 @@ router.use(log4js.connectLogger(log4js.getLogger('http'), {
     , format: ':remote-addr  :method  :url  :status  :response-time' + 'ms'
 }));
 
-// todo 路由 - web端接口
+// 路由 - web端接口
 router.use('/api', require('./api'));
 
-// todo 路由 - 管理端页面
+// 路由 - 管理端页面
 router.use('/admin', require('./admin'));
 
-// todo 路由 - web端页面
+// 路由 - web端页面
 router.use('/', require('./web'));
 
-// todo 路由 - 404页面
+// 路由 - 404页面
+router.get('/error', (req, res)=> {
+    const body = req.query;
+    let message = '该页面已飞向火星~~';
+    if ('msg' in body) {
+        message = body.msg;
+    }
+    res.render('./web/error', {
+        message: message
+        , title: '未找到该页面'
+        , active: '新易途'
+    });
+});
 
 // 系统错误 - 返回
 router.use((err, req, res, next) => {
     // http状态值
     res.status(err.status || 500);
-    if (err.status !== 404) {
-        GLO.logger('router').error(err);
-        return res.json(GLO.error(err, -99, '系统错误'));
+    if (err.status === 404) {
+        return res.redirect('/error');
     } else {
-        return res.json(GLO.error(err, 404, '未找到请求地址'));
+        GLO.logger('router').error(err);
+        if (req.method === 'get') {
+            return res.redirect('/error');
+        } else {
+            return res.json(GLO.error(err, -99, '系统错误'));
+        }
     }
 });
+
+// 所有无指向页面指向404
+router.get('*', (req, res)=>res.redirect('/error'));
 
 module.exports = router;

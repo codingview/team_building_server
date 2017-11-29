@@ -8,11 +8,16 @@
         <div class="container-title">
             <ol class="breadcrumb">
                 <li><a href="/">首页</a></li>
-                <li class="active">新闻标题</li>
+                <li class="active">
+                    <%= detail.name %>
+                </li>
             </ol>
         </div>
         <div class="container-content">
-            <% include ../../../_static/base.detail.ejs %>
+            <h2 class="ta-c"><%= detail.name %></h2>
+            <div class="mt-2e">
+                <%- detail.rich_text %>
+            </div>
         </div>
     </div>
 </div>
