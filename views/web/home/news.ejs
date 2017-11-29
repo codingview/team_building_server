@@ -7,40 +7,13 @@
             <div class="col-lg-6">
                 <div class="swiper-container" style="width: 80%;">
                     <div class="swiper-pagination" style="top: 68%;"></div>
-                    <div class="swiper-wrapper">
-                        <% for(let i = 1;i <= 6;i++){ %>
-                        <div class="swiper-slide">
-                            <a href="/news/detail/1">
-                                <div class="">
-                                    <img src="/_static/resource.icon<%= parseInt(Math.random() * 4) + 1 %>.jpg"
-                                         width="100%">
-                                </div>
-                                <div class="mt-1e">
-                                    <h3>《创·见未来》2016第六届中国拓展界年度峰会圆满结束</h3>
-                                </div>
-                                <div class="mt-1e" style="font-size:16px;">
-                                    <h4>
-                                        以“创新、创见、创享”为立意，以“创·见未来”作为今年的大会主题，顺迎行业发展趋势，大胆提出产业定义升级新主张，共同梳理产业结构，打造良性发展生态圈，与全国同业链接国际能量共同构建全产业链资源共创共享生态平台。</h4>
-                                </div>
-                            </a>
-                        </div>
-                        <% } %>
-                    </div>
+                    <div class="swiper-wrapper" id="home_news_banner"></div>
                 </div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
             <div class="col-lg-6">
-                <div class="list-group">
-                    <% for(let i = 1;i <= 6;i++){ %>
-                    <a href="/news/detail/1"
-                       class="list-group-item list-group-item-<%= ['success', 'info', 'warning', 'danger'][parseInt(Math.random() * 4) + 1] %>">
-                        <h4 class="list-group-item-heading">《创·见未来》2016第六届中国拓展界年度峰会圆满结束</h4>
-                        <p class="list-group-item-text">
-                            以“创新、创见、创享”为立意，以“创·见未来”作为今年的大会主题，顺迎行业发展趋势，大胆提出产业定义升级新主张，共同梳理产业结构，打造良性发展生态圈，与全国同业链接国际能量共同构建全产业链资源共创共享生态平台。</p>
-                    </a>
-                    <% } %>
-                </div>
+                <div class="list-group" id="home_news_list"></div>
             </div>
         </div>
     </div>

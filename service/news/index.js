@@ -6,7 +6,8 @@
 
 'use strict';
 
-const News = require('../../models').news
+const sequelize = require('../../utils/mysql').sequelize
+    , News = require('../../models').news
     , newsService = {
     // 增: 新增新闻
     add: body=> new Promise((resolve, reject)=> {
@@ -35,6 +36,21 @@ const News = require('../../models').news
                 }
             })
             .catch(e=>reject(e));
+    })
+
+    // 查:列表+详情
+    , homeList: ({offset, limit})=>new Promise((resolve, reject)=> {
+        sequelize.query(`SELECT 
+        news.id AS id,
+        news.name AS name,
+        example.abstract AS abstract,
+        example.icon AS icon
+        FROM news  
+        LEFT JOIN example ON news.example_id = example.id
+        ORDER BY news.created_at DESC
+        LIMIT 0, 6`, {type: sequelize.QueryTypes.SELECT})
+            .then(resolve)
+            .catch(reject);
     })
 
 };

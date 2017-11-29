@@ -30,6 +30,25 @@ const Data = {
             }
         })
     )
+    // 获取 - 新闻
+    , news: data=>new Promise((resolve, reject)=>
+        $.ajax({
+            url: '/api/home/news/list'
+            , type: 'get'
+            , data: data
+            , dataType: 'json'
+            , success: json=> {
+                if (json && 'status' in json && json.status > 0) {
+                    resolve(json.data);
+                } else {
+                    reject('message' in json ? json.message : '获取新闻列表出错');
+                }
+            }, error: e=> {
+                console.error(e);
+                reject('获取新闻列表超时');
+            }
+        })
+    )
 };
 
 const Dom = {
@@ -48,6 +67,32 @@ const Dom = {
     // 生成 - 产品列表
     , setProductionList: require('../production/dom')
 
+    // 写入 - 新闻轮播
+    , setNewsList: array=> {
+        let str = '';
+        array.forEach(a=> {
+            str += `<a href="/news/${a.id}" class="list-group-item list-group-item-info">
+    <h4 class="list-group-item-heading">${a.name}</h4>
+    <p class="list-group-item-text">${a.abstract}</p>
+</a>`;
+        });
+        return str;
+    }
+    // 写入 - 新闻列表
+    , setNewsBanner: array=> {
+        let str = '';
+        array.forEach(a=> {
+            str += `<div class="swiper-slide">
+    <a href="/news/${a.id}">
+        <div class=""><img src="/uploads${a.icon}" width="100%"></div>
+        <div class="mt-1e"><h3>${a.name}</h3></div>
+        <div class="mt-1e" style="font-size:16px;"><h4>${a.abstract}</h4></div>
+    </a>
+</div>`;
+        });
+        return str;
+    }
+
     // 注入 - 分类下产品列表
     , setCatalog: (cid, list)=>$('#catalog_' + cid).html(Dom.setProductionList(list))
 
@@ -59,10 +104,21 @@ const Dom = {
             .catch(e=>alert(e));
     }
 
+    // 初始化 - 新闻列表
+    , initNews: ()=> {
+        Data.news({limit: 6})
+            .then(list=> {
+                $('#home_news_banner').html(Dom.setNewsBanner(list));
+                $('#home_news_list').html(Dom.setNewsList(list));
+            })
+            .catch(e=>alert(e));
+    }
+
     // 初始化
     , init: function () {
         this.initSwiper();
         this.initCatalog();
+        this.initNews();
     }
 };
 
