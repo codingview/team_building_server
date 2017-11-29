@@ -26,7 +26,7 @@ const $ajax = require('../../general/Ajax.general')
     }
     // alert
     , setAlert: message=> {
-
+        alert(message);
     }
 }
     , Data = {
@@ -85,7 +85,7 @@ const $ajax = require('../../general/Ajax.general')
                         tableApi.ajax.reload();
                         $('#catalog_detail').modal('hide');
                     })
-                    .catch(Dom.setAlert(e));
+                    .catch(Dom.setAlert);
             } else { // 新增
                 delete catalog.id;
                 Data.add(catalog)
@@ -93,7 +93,7 @@ const $ajax = require('../../general/Ajax.general')
                         tableApi.ajax.reload();
                         $('#catalog_detail').modal('hide');
                     })
-                    .catch(Dom.setAlert(e));
+                    .catch(Dom.setAlert);
             }
             Listener.formOneSubmit();
         });

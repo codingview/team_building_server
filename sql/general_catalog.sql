@@ -28,7 +28,3 @@ CREATE TABLE `general_catalog` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `general_catalog`
--- ----------------------------

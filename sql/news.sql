@@ -28,7 +28,3 @@ CREATE TABLE `news` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `news`
--- ----------------------------
