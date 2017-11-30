@@ -27,7 +27,6 @@ const packageConfig = require('../../package.json')
             return {
                 status: status
                 , message: error
-                , data: null
             };
             // 记录错误信息
         } else {
@@ -35,7 +34,7 @@ const packageConfig = require('../../package.json')
             return {
                 status: status
                 , message: msg
-                , data: null
+                , err: error.message
             };
         }
     }, dt: (draw, data, count = data.length)=>({
