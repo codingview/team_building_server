@@ -15,24 +15,24 @@ module.exports = DataTypes=>({
         }, name: {
             type: DataTypes.STRING
             , allowNull: false
-            , unique: false
             , comment: '分类名称'
-        }, grade: {
+        }, first_catalog_id: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '分类等级'
+            , comment: '一级分类编号'
         }, sequence: {
             type: DataTypes.INTEGER
             , allowNull: false
             , comment: '排序'
-        }, father_id: {
-            type: DataTypes.INTEGER
-            , allowNull: true
-            , comment: '父分类编号'
         }, icon: {
             type: DataTypes.STRING
-            , allowNull: true
             , comment: '分类图标'
+        }, home_show: {
+            type: DataTypes.BOOLEAN
+            , comment: '是否展示到首页'
         }
-    }, tableName: 'production_catalog'
+    }, tableName: 'production_catalog_second'
+    , option: {
+        comment: '二级产品分类'
+    }
 });

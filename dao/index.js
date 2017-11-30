@@ -13,9 +13,6 @@ module.exports = {
     // 广告位
     , banner: require('./banner')
 
-    // 产品分类
-    , production_catalog: require('./production_catalog')
-
     // 产品
     , production: require('./production')
 
