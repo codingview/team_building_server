@@ -43,9 +43,14 @@ router.delete('/first/:pcf_id', (req, res)=>
 );
 
 // 查询 - 一级产品分类 - 接口
-router.get('/first', (req, res)=>
+router.post('/first/list', (req, res)=>
     catalogService.first.query()
-        .then(r=>res.json(GLO.success(r)))
+        .then(r=>res.json({
+            data: r
+            , draw: req.body.draw
+            , recordsFiltered: r.length
+            , recordsTotal: r.length
+        }))
         .catch(e=>res.json(GLO.error(e, -99, '查询产品分类出错')))
 );
 
@@ -53,7 +58,7 @@ router.get('/first', (req, res)=>
 router.put('/first', (req, res)=>
     Joi.validate(req.body
         , Joi.object().keys({
-            pcf_id: Joi.number().integer().required()
+            id: Joi.number().integer().required()
             , name: Joi.string()
             , sequence: Joi.number().integer()
             , home_show: Joi.boolean()
@@ -68,20 +73,22 @@ router.put('/first', (req, res)=>
 
 // 新增 - 二级产品分类 - 接口
 router.post('/second', (req, res)=>
-    Joi.validate(req.body, Joi.object().keys({
-        pcf_id: Joi.number().integer().required()
-        , name: Joi.string().required()
-        , sequence: Joi.number().integer().default(99)
-        , home_show: Joi.boolean().default(false)
-    }))
+    Joi.validate(req.body
+        , Joi.object().keys({
+            first_catalog_id: Joi.number().integer().required()
+            , name: Joi.string().required()
+            , sequence: Joi.number().integer().default(99)
+            , home_show: Joi.boolean().default(false)
+        })
+    )
         .then(catalogService.second.add)
         .then(r=>res.json(GLO.success(r)))
         .catch(e=>res.json(GLO.error(e, -99, '新增产品分类出错')))
 );
 
 // 删除 - 二级产品分类 - 接口
-router.delete('/second/:pcf_id', (req, res)=>
-    Joi.validate(req.params.pcf_id
+router.delete('/second/:pcs_id', (req, res)=>
+    Joi.validate(req.params.pcs_id
         , Joi.number().integer().required()
     )
         .then(catalogService.second.del)
@@ -90,9 +97,14 @@ router.delete('/second/:pcf_id', (req, res)=>
 );
 
 // 查询 - 二级产品分类 - 接口
-router.get('/second', (req, res)=>
+router.post('/second/list', (req, res)=>
     catalogService.second.query()
-        .then(r=>res.json(GLO.success(r)))
+        .then(r=>res.json({
+            data: r
+            , draw: req.body.draw
+            , recordsFiltered: r.length
+            , recordsTotal: r.length
+        }))
         .catch(e=>res.json(GLO.error(e, -99, '查询产品分类出错')))
 );
 
@@ -100,11 +112,12 @@ router.get('/second', (req, res)=>
 router.put('/second', (req, res)=>
     Joi.validate(req.body
         , Joi.object().keys({
-            pcs_id: Joi.number().integer().required()
+            id: Joi.number().integer().required()
+            , first_catalog_id: Joi.number().integer()
             , name: Joi.string()
             , sequence: Joi.number().integer()
             , home_show: Joi.boolean()
-        }).or('name', 'sequence', 'home_show')
+        }).or('name', 'sequence', 'home_show', 'first_catalog_id')
     )
         .then(catalogService.second.up)
         .then(r=>res.json(GLO.success(r)))

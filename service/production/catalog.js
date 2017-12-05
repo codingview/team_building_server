@@ -31,7 +31,7 @@ const ProductionCatalogFirst = require('../../models').production_catalog_first
 
     // 修改 - 一级产品分类
     , up: body=>new Promise((resolve, reject)=> {
-        ProductionCatalogFirst.findOne({where: {id: body.pcf_id}})
+        ProductionCatalogFirst.findOne({where: {id: body.id}})
             .then(first=> {
                 if (first) {
                     Object.assign(first, body);
@@ -66,7 +66,7 @@ const ProductionCatalogFirst = require('../../models').production_catalog_first
 
     // 修改 - 二级产品分类
     , up: body=>new Promise((resolve, reject)=> {
-        ProductionCatalogSecond.findOne({where: {id: body.pcf_id}})
+        ProductionCatalogSecond.findOne({where: {id: body.id}})
             .then(second=> {
                 if (second) {
                     Object.assign(second, body);
