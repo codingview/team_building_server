@@ -18,6 +18,15 @@ router.get('/', (req, res)=>
     })
 );
 
+// —————————— 产品分类 ——————————
+
+// 获取 - 产品分类 - 列表
+router.get('/list', (req, res)=>
+    catalogService.catalog.list()
+        .then(r=>res.json(GLO.success(r)))
+        .catch(e=>res.json(GLO.error(e, -99, '获取产品分类列表出错')))
+);
+
 // —————————— 一级产品分类 ——————————————————
 
 // 新增 - 一级产品分类 - 接口

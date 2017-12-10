@@ -52,33 +52,39 @@ const Editor = window.wangEditor
 }
     , Dom = {
     // 生成分类列表
-    setCatalogs: catalogs=> {
+    setCatalogs: (catalogs, type = 'list')=> {
         let str = '';
-        const cid = parseInt($('#p_catalog_id_val').val());
-        catalogs.forEach(catalog=> {
-            str += `<optgroup label="${catalog.name}">`;
-            if ('children' in catalog && catalog.children instanceof Array && catalog.children.length > 0) {
-                catalog.children.forEach(child=> {
-                    str += `<option value="${child.id}" ${child.id === cid ? 'selected' : ''}>${child.name}</option>`;
+        const cid = parseInt($('#p_catalog_id_val').val())
+            , getSelect = second=>`${second.id === cid ? 'selected' : ''}`;
+        catalogs.forEach(first=> {
+            if (type === 'list') { // 列表可选择
+                // str += `<option value="${first.id}"> ${first.name}</option>`;
+            } else { // 其他不可选择
+                str += `<optgroup label=" ${first.name}">`;
+            }
+            if ('second' in first && Array.isArray(first.second) && first.second.length > 0) {
+                first.second.forEach(second=> {
+                    str += `<option value="${second.id}" ${getSelect(second)}> >> ${second.name}</option>`;
                 });
             }
-            str += '</optgroup>';
+            if (type !== 'list') {
+                str += '</optgroup>';
+            }
         });
         return str;
     }
 
     // 生成分类列表名称:编号kv结构
     , setCatalogsKv: catalogs=> {
-        let _ = {};
-        catalogs.forEach(catalog=> {
-            _[catalog.id] = catalog.name;
-            if (catalog.children) {
-                catalog.children.forEach(child=> {
-                    _[child.id] = child.name;
+        let secondCatalogsList = {};
+        catalogs.forEach(first=> {
+            if (first.second) {
+                first.second.forEach(second=> {
+                    secondCatalogsList[second.id] = second.name;
                 });
             }
         });
-        return _;
+        return secondCatalogsList;
     }
     // 创建富文本
     , editor: ()=> {
@@ -94,7 +100,9 @@ const Editor = window.wangEditor
     // 分类列表
     , catalogs: ()=>
         Data.catalogs()
-            .then(catalogs=>$('#p_catalog_id').html(Dom.setCatalogs(catalogs)))
+            .then(catalogs=> {
+                $('#p_catalog_id').html(Dom.setCatalogs(catalogs, 'add'));
+            })
             .catch(e=> {
                 console.error(e);
                 alert('获取分类列表出错');

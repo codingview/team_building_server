@@ -9,6 +9,7 @@
 const ProductionCatalogFirst = require('../../models').production_catalog_first
     , ProductionCatalogSecond = require('../../models').production_catalog_second
     , firstCatalogService = { // 一级产品分类
+
     // 新增 - 一级产品分类
     add: body=>ProductionCatalogFirst.create(body)
 
@@ -43,7 +44,9 @@ const ProductionCatalogFirst = require('../../models').production_catalog_first
             .then(resolve)
             .catch(reject);
     })
+
 }, secondCatalogService = { // 二级产品分类
+
     // 新增 - 二级产品分类
     add: body=>ProductionCatalogSecond.create(body)
 
@@ -80,6 +83,25 @@ const ProductionCatalogFirst = require('../../models').production_catalog_first
     })
 }, homeCatalogService = { // 首页分类
 
+}, catalogService = { // 产品分类
+
+    // 查询 - 产品分类 - 列表
+    list: ()=>new Promise((resolve, reject)=> {
+        ProductionCatalogFirst.findAll({
+            attributes: {
+                exclude: ['created_at', 'updated_at', 'icon']
+            }, order: [['sequence', 'DESC']]
+            , include: [{
+                model: ProductionCatalogSecond
+                , as: 'second'
+                , attributes: {
+                    exclude: ['created_at', 'updated_at', 'icon']
+                }
+            }]
+        })
+            .then(resolve)
+            .catch(reject);
+    })
 };
 
 // 产品分类
@@ -87,4 +109,5 @@ module.exports = {
     first: firstCatalogService
     , second: secondCatalogService
     , home: homeCatalogService
+    , catalog: catalogService
 };

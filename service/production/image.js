@@ -11,14 +11,13 @@ const fs = require('fs')
     , config = require('../../config')
     , imageUploadUtil = require('../../utils/uploads').image
     , filePath = path.join(config.uploads_image, './production')
-    , images = require('images');
-
-const _ = {
+    , images = require('images')
+    , imagesService = {
     // 保存图片
     save: (req, res)=>new Promise((resolve, reject)=> {
         imageUploadUtil({
             path: filePath
-            , fileName: 'temp'
+            , fileName: 'temp' // 为了防止出现多个临时文件
         }).single('img')(req, res, error=> {
             if (error) {
                 reject(error);
@@ -48,7 +47,6 @@ const _ = {
                 }
             })
         )
-
 };
 
-module.exports = _;
+module.exports = imagesService;

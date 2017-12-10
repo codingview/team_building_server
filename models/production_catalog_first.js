@@ -29,5 +29,21 @@ module.exports = DataTypes=>({
     }, tableName: 'production_catalog_first'
     , option: {
         comment: '一级产品分类'
+    }, associations: models=> {
+        models.production_catalog_first.hasMany(
+            models.production_catalog_second
+            , {
+                foreignKey: 'first_catalog_id'
+                , sourceKey: 'id'
+                , as: 'second'
+            }
+        );
+        models.production_catalog_second.belongsTo(
+            models.production_catalog_first
+            , {
+                foreignKey: 'first_catalog_id'
+                , targetKey: 'id'
+            }
+        );
     }
 });

@@ -10,7 +10,7 @@ require('../../general/Date.format');
 const general = require('./general');
 
 let tableApi // td的api实例
-    , _catalogs // 分类列表
+    , secondCatalogsList // 分类列表
     ;
 
 const Table = {
@@ -38,7 +38,7 @@ const Table = {
             {title: '编号', width: '26px', data: 'id'}
             , {title: '产品名称', data: 'name'}
             , {title: '产品标题', data: 'title'}
-            , {title: '产品分类', data: 'catalog_id', render: d=>_catalogs[d]}
+            , {title: '产品分类', data: 'catalog_id', render: d=>secondCatalogsList[d]}
             , {
                 title: '产品状态'
                 , data: 'state'
@@ -75,7 +75,7 @@ const Dom = {
     catalogs: ()=> new Promise((resolve, reject)=> {
         general.Data.catalogs()
             .then(catalogs=> {
-                _catalogs = general.Dom.setCatalogsKv(catalogs);
+                secondCatalogsList = general.Dom.setCatalogsKv(catalogs);
                 $('#p_catalog').html('<option value="-1">--- 全部 ---</option>'
                     + general.Dom.setCatalogs(catalogs));
                 resolve();

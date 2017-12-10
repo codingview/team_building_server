@@ -6,7 +6,15 @@
 <div class="app-container container">
     <div class="container-header"><h2><%= title %></h2></div>
     <div class="container-content container-border">
-        <div class="col-lg-12">
+        <div class="col-lg-6" style="color:red;">
+            <ol style="list-style-type: decimal;">
+                <li>二级分类中一级分类编号必须存在于一级分类中,否则无法看到该二级分类</li>
+                <li>首页基于二级分类展示,选择"首页是否展示"来决定是否在首页显示该二级分类</li>
+                <li>排序值从大到小依次排列,即 9 >> 1 </li>
+                <li>删除分类前,请自行确定此分类下已经无产品,否则产品缺失分类无法显示</li>
+            </ol>
+        </div>
+        <div class="col-lg-12 mt-2e">
             <div class="row">
                 <div class="col-lg-6">
                     <h3>一级分类列表
@@ -29,15 +37,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="first_home_show" class="col-lg-4 control-label">首页是否显示</label>
-                            <div class="col-lg-2">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="first_home_show">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
+                            <!--<label for="first_home_show" class="col-lg-4 control-label">首页是否显示</label>-->
+                            <!--<div class="col-lg-2">-->
+                            <!--<div class="checkbox">-->
+                            <!--<label>-->
+                            <!--<input type="checkbox" id="first_home_show">-->
+                            <!--</label>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="col-lg-4 col-lg-offset-4">
                                 <button type="button" class="btn btn-primary" id="first_submit" data-type="first">保存
                                 </button>
                             </div>
