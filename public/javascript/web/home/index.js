@@ -94,13 +94,13 @@ const Dom = {
     }
 
     // 注入 - 分类下产品列表
-    , setCatalog: (cid, list)=>$('#catalog_' + cid).html(Dom.setProductionList(list))
+    , setCatalog: (sci, list)=>$('#catalog_' + sci).html(Dom.setProductionList(list))
 
     // 初始化 - 第一个分类下产品列表
     , initCatalog: ()=> {
-        const cid = parseInt($('#production_catalogs').find('a[data-toggle="tab"]').eq(0).data('cid'));
-        Data.production({limit: 3, cid: cid})
-            .then(list=>Dom.setCatalog(cid, list))
+        const sci = parseInt($('#production_catalogs').find('a[data-toggle="tab"]').eq(0).data('sci'));
+        Data.production({limit: 3, sci})
+            .then(list=>Dom.setCatalog(sci, list))
             .catch(e=>alert(e));
     }
 
@@ -128,11 +128,11 @@ const Listener = {
         $('#production_catalogs').on('show.bs.tab', 'a[data-toggle="tab"]', function () {
             const $p = $(this)
                 , isShow = parseInt($p.data('show'))
-                , cid = parseInt($p.data('cid'))
+                , sci = parseInt($p.data('sci'))
                 ;
             if (isShow === 0) { // 未显示过
-                Data.production({limit: LENGTH, cid: cid})
-                    .then(list=>Dom.setCatalog(cid, list))
+                Data.production({limit: LENGTH, sci})
+                    .then(list=>Dom.setCatalog(sci, list))
                     .catch(e=>alert(e));
                 $p.data('show', 1);
             }
