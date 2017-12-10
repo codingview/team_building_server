@@ -28,6 +28,12 @@ const $ajax = require('../../general/Ajax.general')
         }
         return {name, example_id, sequence};
     }
+
+    // 初始化模块框
+    , initModal: ()=> {
+        $('#news_name').val('');
+        $('#news_sequence').val('');
+    }
 }, Listener = {
     // 初始化监听事件
     init: function () {
@@ -37,6 +43,7 @@ const $ajax = require('../../general/Ajax.general')
 
     // 新增新闻按钮监听
     , addNews: ()=>$('#example_list').on('click', '.add-news', function () {
+        Dom.initModal();
         $('#news_example_id').val($(this).data('id')); // 绑定的案例编号
         $('#news_detail').modal('show'); // 显示模态框
     })
