@@ -23,7 +23,7 @@ router.get('/', (req, res)=> {
     bannerService.list()
         .then(list=> {
             json.banners = list;
-            return catalogService.homeCatalogsList();
+            return catalogService.home.list();
         })
         .then(catalogs=> {
             json.catalogs = catalogs;

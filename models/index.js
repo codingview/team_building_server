@@ -16,11 +16,19 @@ const mysql = require('../utils/mysql')
     ()=> {
         // 获取文档名称列表
         const filesList = _.remove(fs.readdirSync(path.join(__dirname)), file=>file !== 'index.js');
-        let models = {};
+        let models = {}
+            , associations = [] // 关系绑定函数
+            ;
         filesList.forEach(fileName=> {
             const model = require(path.join(__dirname, fileName))(mysql.Sequelize);
             models[model.tableName] = mysql.sequelize.define(model.tableName, model.fields);
+            if ('associations' in model) {
+                associations.push(model.associations);
+            }
         });
+        if ('GLO' in global) {
+            associations.forEach(association=>association(models));
+        }
         return models;
     };
 

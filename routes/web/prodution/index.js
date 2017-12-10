@@ -15,13 +15,13 @@ router.get('/', (req, res)=>res.redirect('/production/list'));
 
 // 产品 - 列表 - 页面
 router.get('/list', (req, res)=>
-    productionService.catalog.catalogList()
+    productionService.catalog.catalog.list()
         .then(catalogs=>res.render('./web/production/list/view', {
             title: '产品列表'
             , active: 'production'
             , catalogs: catalogs
             // 默认加载的分类编号
-            , default_catalog_id: 'children' in catalogs[0] ? catalogs[0].children[0].id : catalogs[0].id
+            , default_catalog_id: 'second' in catalogs[0] ? catalogs[0].second[0].id : catalogs[0].id
         }))
         .catch(e=> {
             // todo 错误页面

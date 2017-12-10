@@ -6,106 +6,120 @@
 
 'use strict';
 
-const Production_Catalog = require('../../models').production_catalog
-    , ProductionCatalog = require('../../dao').production_catalog
-    , _ = {
-    // 分类列表
-    list: grade=> new Promise((resolve, reject)=>
-        Production_Catalog
-            .findAll({where: {grade: grade}, order: [['sequence', 'asc']]})
-            .then(catalogs=> {
-                let _ = [];
-                catalogs.forEach(catalog=> {
-                    _.push(new ProductionCatalog(catalog.id).db2Api(catalog));
-                });
-                resolve(_);
+const ProductionCatalogFirst = require('../../models').production_catalog_first
+    , ProductionCatalogSecond = require('../../models').production_catalog_second
+    , firstCatalogService = { // 一级产品分类
+
+    // 新增 - 一级产品分类
+    add: body=>ProductionCatalogFirst.create(body)
+
+    // 删除 - 一级产品分类
+    , del: pcf_id=>new Promise((resolve, reject)=> {
+        ProductionCatalogFirst.findOne({where: {id: pcf_id}})
+            .then(first=> {
+                if (first) {
+                    return first.destroy();
+                } else {
+                    reject('未找到对应的一级产品分类');
+                }
             })
-            .catch(e=>reject(e))
-    )
-    // 获取obj的分类列表
-    , objList: grade=>new Promise((resolve, reject)=>
-        Production_Catalog
-            .findAll({where: {grade: grade}, order: [['sequence', 'asc']]})
-            .then(catalogs=> {
-                let _ = {};
-                catalogs.forEach(catalog=> {
-                    _[catalog.id] = new ProductionCatalog(catalog.id).db2Api(catalog);
-                });
-                resolve(_);
+            .then(resolve)
+            .catch(reject);
+    })
+
+    // 查询 - 一级产品分类
+    , query: body=>ProductionCatalogFirst.findAll({order: [['sequence', 'desc']]})
+
+    // 修改 - 一级产品分类
+    , up: body=>new Promise((resolve, reject)=> {
+        ProductionCatalogFirst.findOne({where: {id: body.id}})
+            .then(first=> {
+                if (first) {
+                    Object.assign(first, body);
+                    return first.save();
+                } else {
+                    reject('未找到对应的一级产品分类');
+                }
             })
-            .catch(e=>reject(e))
-    )
+            .then(resolve)
+            .catch(reject);
+    })
+
+}, secondCatalogService = { // 二级产品分类
+
+    // 新增 - 二级产品分类
+    add: body=>ProductionCatalogSecond.create(body)
+
+    // 删除 - 二级产品分类
+    , del: pcf_id=>new Promise((resolve, reject)=> {
+        ProductionCatalogSecond.findOne({where: {id: pcf_id}})
+            .then(second=> {
+                if (second) {
+                    return second.destroy();
+                } else {
+                    reject('未找到对应的二级产品分类');
+                }
+            })
+            .then(resolve)
+            .catch(reject);
+    })
+
+    // 查询 - 二级产品分类
+    , query: body=>ProductionCatalogSecond.findAll({order: [['sequence', 'desc']]})
+
+    // 修改 - 二级产品分类
+    , up: body=>new Promise((resolve, reject)=> {
+        ProductionCatalogSecond.findOne({where: {id: body.id}})
+            .then(second=> {
+                if (second) {
+                    Object.assign(second, body);
+                    return second.save();
+                } else {
+                    reject('未找到对应的二级产品分类');
+                }
+            })
+            .then(resolve)
+            .catch(reject);
+    })
+}, homeCatalogService = { // 首页分类
+
+    // 首页 - 分类 - 列表
+    list: ()=>new Promise((resolve, reject)=> {
+        ProductionCatalogSecond.findAll({
+            where: {home_show: true}
+            , attributes: {
+                exclude: ['created_at', 'updated_at', 'icon']
+            }
+        })
+            .then(resolve)
+            .catch(reject);
+    })
+
+}, catalogService = { // 产品分类
+
+    // 查询 - 产品分类 - 列表
+    list: ()=>new Promise((resolve, reject)=> {
+        ProductionCatalogFirst.findAll({
+            attributes: {
+                exclude: ['created_at', 'updated_at', 'icon']
+            }, order: [['sequence', 'DESC']]
+            , include: [{
+                model: ProductionCatalogSecond
+                , as: 'second'
+                , attributes: {
+                    exclude: ['created_at', 'updated_at', 'icon']
+                }
+            }]
+        })
+            .then(resolve)
+            .catch(reject);
+    })
 };
 
 // 产品分类
 module.exports = {
-    // 新增 - 分类
-    create: catalog=>new Promise((resolve, reject)=>
-        Production_Catalog
-            .create(catalog)
-            .then(r=>resolve(r))
-            .catch(e=>reject(e))
-    )
-
-    // 删除 - 分类
-    , remove: cid=>new Promise((resolve, reject)=>
-        Production_Catalog
-            .destroy({where: {id: cid}})
-            .then(r=>resolve(r))
-            .catch(e=>reject(e))
-    )
-
-    // 一级分类列表
-    , firstCatalogList: ()=>_.list(1)
-
-    // 二级分类列表
-    , secondCatalogList: ()=>_.list(2)
-
-    // 三级分类列表
-    , thirdCatalogsList: ()=>_.list(3)
-
-    // 首页分类列表
-    , homeCatalogsList: ()=>new Promise((resolve, reject)=>
-        Production_Catalog
-            .findAll({where: {grade: 2, father_id: 1}})
-            .then(catalogs=> {
-                let _ = [];
-                catalogs.forEach(catalog=>_.push(new ProductionCatalog(catalog.id).db2Api(catalog)));
-                resolve(_);
-            })
-            .catch(e=>reject(e))
-    )
-
-    // 两级分类列表结构
-    , catalogList: ()=>new Promise((resolve, reject)=> {
-        let results = [], _catalogs = {};
-        _.objList(1)
-            .then(catalogs=> {
-                _catalogs = catalogs;
-                return _.list(2);
-            })
-            .then(secondCatalogs=> {
-                secondCatalogs.forEach(sc=> {
-                    const catalog = _catalogs[sc.father_id];
-                    if ('children' in catalog) {
-                        catalog.children.push(sc);
-                    } else {
-                        catalog.children = [sc];
-                    }
-                });
-                Object.keys(_catalogs).forEach(key=> {
-                    results.push(_catalogs[key]);
-                });
-                resolve(results);
-            })
-            .catch(e=>reject(e));
-    })
-
-    // 更新 - 分类
-    , update: catalog=>new Promise((resolve, reject)=>
-        Production_Catalog
-            .update({name: catalog.name}, {where: {id: catalog.id}})
-            .then(()=>resolve())
-            .catch(e=>reject(e))
-    )
+    first: firstCatalogService
+    , second: secondCatalogService
+    , home: homeCatalogService
+    , catalog: catalogService
 };

@@ -53,4 +53,7 @@ router.use('/news', require('./news'));
 // 关于我们
 router.use('/about', require('./about'));
 
+// 系统更新日志
+router.use('/version', require('./version'));
+
 module.exports = router;

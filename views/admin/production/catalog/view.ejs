@@ -1,18 +1,116 @@
 <% include ../../_base/head.ejs %>
 <% include ../../_base/css.ejs %>
-<% include ../../../_base/ztree.css.ejs %>
+<% include ../../../_base/dataTables.css.ejs %>
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
 <div class="app-container container">
     <div class="container-header"><h2><%= title %></h2></div>
     <div class="container-content container-border">
-        <div class="row">
-            <div id="production_catalog" class="ztree"></div>
+        <div class="col-lg-6" style="color:red;">
+            <ol style="list-style-type: decimal;">
+                <li>二级分类中一级分类编号必须存在于一级分类中,否则无法看到该二级分类</li>
+                <li>首页基于二级分类展示,选择"首页是否展示"来决定是否在首页显示该二级分类</li>
+                <li>排序值从大到小依次排列,即 9 >> 1 </li>
+                <li>删除分类前,请自行确定此分类下已经无产品,否则产品缺失分类无法显示</li>
+            </ol>
+        </div>
+        <div class="col-lg-12 mt-2e">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>一级分类列表
+                        <button class="btn btn-primary add-first">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                    </h3>
+                    <form class="form-horizontal mt-2e" id="first_form">
+                        <input type="hidden" id="first_id" value="-1">
+                        <div class="form-group">
+                            <label for="first_name" class="col-lg-4 control-label">分类名称</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="first_name" placeholder="分类名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_sequence" class="col-lg-4 control-label">排序值</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" id="first_sequence" placeholder="排序值">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--<label for="first_home_show" class="col-lg-4 control-label">首页是否显示</label>-->
+                            <!--<div class="col-lg-2">-->
+                            <!--<div class="checkbox">-->
+                            <!--<label>-->
+                            <!--<input type="checkbox" id="first_home_show">-->
+                            <!--</label>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="col-lg-4 col-lg-offset-4">
+                                <button type="button" class="btn btn-primary" id="first_submit" data-type="first">保存
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <table class="table table-striped table-bordered table-hover table-condensed"
+                           id="first_catalog_list"></table>
+                </div>
+            </div>
+            <div class="row mt-2e">
+                <div class="col-lg-6">
+                    <h3>二级分类列表
+                        <button class="btn btn-primary add-second">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </button>
+                    </h3>
+                    <form class="form-horizontal mt-2e" id="second_form">
+                        <input type="hidden" id="second_id" value="-1">
+                        <div class="form-group">
+                            <label for="second_name" class="col-lg-4 control-label">分类名称</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="second_name" placeholder="分类名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="second_first_catalog_id" class="col-lg-4 control-label">一级分类编号</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" id="second_first_catalog_id"
+                                       placeholder="一级分类编号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="second_sequence" class="col-lg-4 control-label">排序值</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" id="second_sequence" placeholder="排序值">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="second_home_show" class="col-lg-4 control-label">首页是否显示</label>
+                            <div class="col-lg-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="second_home_show">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <button type="button" class="btn btn-primary" id="second_submit" data-type="second">保存
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <table class="table table-striped table-bordered table-hover table-condensed"
+                           id="second_catalog_list"></table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
-<% include ../../../_base/ztree.js.ejs %>
+<% include ../../../_base/dataTables.js.ejs %>
 <script charset="utf-8" src="/src/catalog.production.admin.min.js"></script>
 <% include ../../_base/foot.ejs %>

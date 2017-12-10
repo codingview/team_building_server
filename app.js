@@ -7,6 +7,7 @@
 'use strict';
 
 global.GLO = require('./utils/global');
+global.option = require('./service/option').start(); // 项目启动加载配置信息
 
 // 加载modules
 const express = require('express')

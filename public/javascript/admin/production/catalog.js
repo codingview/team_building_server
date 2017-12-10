@@ -6,165 +6,203 @@
 
 'use strict';
 
-const $ajax = require('../../general/Ajax.general');
+const $ajax = require('../../general/Ajax.general')
+    , Data = {
+    // 删除分类的接口
+    deleteCatalog: (cid, type)=>$ajax({
+        url: '/admin/production/catalog/' + type + '/' + cid
+        , type: 'delete'
+        , message: '删除产品分类'
+    })
 
-/**
- * 节点
- */
-class Node {
-    /**
-     * 构造函数
-     * @param {object} node
-     */
-    constructor(node) {
-        this.id = node.id;
-        this.name = node.name;
-        this.father_id = node.father_id;
-        this.grade = node.grade;
-        this.sequence = node.sequence;
-    }
-}
-
-/* 产品分类 */
-
-let zTree; // ztree的实例
-
-const Data = {
-    // 获取分类列表
-    catalogs: require('./general').Data.catalogs
-
-    // 修改 - 分类名称
-    , rename: catalog=>
-        $ajax({
-            url: '/admin/production/catalog'
-            , type: 'post'
-            , data: catalog
-            , message: '修改分类名称'
-        })
-
-    // 新增 - 分类
-    , add: catalog=>
-        $ajax({
-            url: '/admin/production/catalog'
-            , type: 'put'
-            , data: catalog
-            , message: '新增分类名称'
-        })
-
-    // 删除 - 分类
-    , remove: cid=>
-        $ajax({
-            url: '/admin/production/catalog'
-            , type: 'delete'
-            , data: {
-                cid: cid
-            }, message: '删除分类'
-        })
-};
-
-const Dom = {
-    // zTree - 增加按钮
-    addHoverDom: (treeId, treeNode)=> {
-        const sObj = $('#' + treeNode.tId + '_span')
-            , ads = '#addBtn_' + treeNode.tId
-            , addBtn = $(ads);
-        if (treeNode.editNameFlag || addBtn.length > 0 || treeNode.grade === 3) {// 3级分类不能新增4级
-            return false;
+    // 保存分类的接口
+    , saveCatalog: (type, data)=> {
+        if (data.id === -1) {
+            delete data.id;
+            return $ajax({
+                url: '/admin/production/catalog/' + type
+                , type: 'post'
+                , data: data
+                , message: '新增产品分类'
+            });
         } else {
-            const addStr = '<span class="button add" id="addBtn_' + treeNode.tId
-                + '" title="增加" onfocus="this.blur();"></span>';
-            sObj.after(addStr);
-            const btn = $(ads);
-            if (btn) {
-                btn.bind('click', function () {
-                    console.info(treeNode)
-                    const newNode = {
-                        name: '新的分类'
-                        , grade: treeNode.level + 1
-                        , father_id: treeNode.id
-                        , sequence: treeNode.children ? treeNode.children.length : 0
-                        , icon: '' // todo 默认无图标
-                    };
-                    Data.add(newNode)
-                        .then(node=>zTree.addNodes(treeNode, {
-                            id: node.id
-                            , pId: treeNode.id
-                            , name: '新的分类'
-                            // todo 新增的3级分类不能有新增按钮
-                        }))
-                        .catch(e=> {
-                            alert(e);
-                        });
-                    return false;
-                });
+            return $ajax({
+                url: '/admin/production/catalog/' + type
+                , type: 'put'
+                , data: data
+                , message: '新增产品分类'
+            });
+        }
+    }
+}, Dom = {
+    // 获取分类表单数据
+    getForm: type=> {
+        let formData = {};
+        const id = parseInt($(`#${type}_id`).val())
+            , name = $(`#${type}_name`).val()
+            , sequence = parseInt($(`#${type}_sequence`).val())
+            , home_show = $(`#${type}_home_show`).is(':checked') || false;
+        if (!name) {
+            alert('请输入分类名称');
+            return false;
+        }
+        if (!(sequence >= 0)) {
+            alert('请输入排序值');
+            return false;
+        }
+        formData = {id, name, sequence, home_show};
+        if (type === 'second') {
+            const first_catalog_id = parseInt($('#second_first_catalog_id').val());
+            if (!(first_catalog_id >= 0)) {
+                alert('请输入一级分类编号');
+                return false;
+            } else {
+                formData.first_catalog_id = first_catalog_id;
             }
+        }
+        return formData;
+    }
+
+    // 填充form
+    , setForm: (type, id = -1, name = '', sequence = '', home_show = false, fid = '')=> {
+        $(`#${type}_id`).val(id);
+        $(`#${type}_name`).val(name);
+        $(`#${type}_sequence`).val(sequence);
+        $(`#${type}_home_show`).prop('checked', home_show);
+        if (type === 'second') {
+            $('#second_first_catalog_id').val(fid);
         }
     }
 
-    // zTree - 隐藏增加按钮
-    , removeHoverDom: (treeId, treeNode)=>$('#addBtn_' + treeNode.tId).unbind().remove()
-
-    // 生成分类树
-    , catalogs: ()=> {
-        Data.catalogs()
-            .then(catalogs=>
-                zTree =
-                    $.fn.zTree.init(
-                        $('#production_catalog')
-                        , {
-                            view: {
-                                addHoverDom: Dom.addHoverDom
-                                , removeHoverDom: Dom.removeHoverDom
-                                , selectedMulti: false
-                            }, edit: {
-                                enable: true
-                                , removeTitle: '删除'
-                                , renameTitle: '重命名'
-                                // 禁止0级的重命名、删除
-                                , showRenameBtn: (treeId, treeNode)=>!treeNode.noEditBtn
-                                , showRemoveBtn: (treeId, treeNode)=>!treeNode.noEditBtn
-                                // todo 拖拽
-                            }, callback: {
-                                onNodeCreated: (event, treeId, treeNode)=> {
-
-                                }, beforeRemove: (treeId, treeNode)=> {
-                                    // 删除时，要先删除下级分类
-                                    if (treeNode.children && treeNode.children.length > 0) {
-                                        alert('该分类下有子分类');
-                                        return false;
-                                    } else {
-                                        Data.remove(treeNode.id)
-                                            .then()
-                                            .catch(e=>alert(e));
-                                    }
-                                }, onRename: (event, treeId, treeNode, isCancel)=> { // todo 修改名称自动选中文本
-                                    if (treeNode.name) {
-                                        Data.rename(new Node(treeNode))
-                                            .then()
-                                            .catch(e=>alert(e));
-                                    } else {
-                                        alert('请填写分类名称');
-                                        return false;
-                                    }
-                                }
-                            }
-                        }, [{
-                            name: '产品分类'
-                            , id: 0
-                            , open: true
-                            , children: catalogs
-                            , noEditBtn: true
-                        }])
-            )
-            .catch(e=>alert(e));
+}, Listener = {
+    // 删除分类的监听
+    deleteCatalog: ()=> {
+        const delCatalog = (cid, type)=> {
+            Data.deleteCatalog(cid, type)
+                .then(()=>Table.reload(type))
+                .catch(alert);
+        };
+        $('#first_catalog_list').on('click', '.del-first', event=> {
+            const cid = parseInt($(event.target).data('id'));
+            delCatalog(cid, 'first');
+        });
+        $('#second_catalog_list').on('click', '.del-second', event=> {
+            const cid = parseInt($(event.target).data('id'));
+            delCatalog(cid, 'second');
+        });
     }
 
-    // 初始化
+    // 保存分类的监听
+    , saveCatalog: type=> {
+        $(`#${type}_submit`).one('click', event=> {
+            const data = Dom.getForm(type);
+            if (data) {
+                Data.saveCatalog(type, data)
+                    .then(()=> {
+                        Dom.setForm(type);
+                        Table.reload(type);
+                        Listener.saveCatalog(type);
+                    })
+                    .catch(e=> {
+                        Listener.saveCatalog(type);
+                        alert(e);
+                    });
+            } else {
+                Listener.saveCatalog(type);
+            }
+        });
+    }
+
+    // 修改的监听
+    , updateCatalog: ()=> {
+        const upCatalog = ($t, type)=> {
+            const id = $t.data('id')
+                , name = $t.data('name')
+                , sequence = $t.data('sequence')
+                , home_show = $t.data('home');
+            let fid = '';
+            if (type === 'second') {
+                fid = $t.data('first');
+            }
+            Dom.setForm(type, id, name, sequence, home_show, fid);
+        };
+        $('#first_catalog_list').on('click', '.up-first', event=> {
+            upCatalog($(event.target), 'first');
+        });
+        $('#second_catalog_list').on('click', '.up-second', event=> {
+            upCatalog($(event.target), 'second');
+        });
+    }
+
+    // 监听初始化
     , init: function () {
-        this.catalogs();
+        this.deleteCatalog();
+        this.saveCatalog('first');
+        this.saveCatalog('second');
+        this.updateCatalog();
     }
+}
+    , Table = {
+    reload: type=>Table[type + 'TableApi'].ajax.reload()
+    , firstTableApi: null
+    , secondTableApi: null
+    , firstCatalogTable: ()=>Table.firstTableApi = $('#first_catalog_list').DataTable({
+        language: require('../../general/DT.language')
+        , paging: false
+        , searching: false
+        , ordering: false
+        , processing: true
+        , serverSide: true
+        , autoWidth: true
+        , stateSave: false
+        , ajax: {
+            url: '/admin/production/catalog/first/list'
+            , method: 'post'
+        }, columns: [
+            {title: '编号', width: '26px', data: 'id'}
+            , {title: '分类名称', data: 'name'}
+            , {title: '排序值', data: 'sequence'}
+            , {title: '首页是否显示', data: 'home_show', render: d=>d ? '是' : '否'}
+            , {
+                title: '操作', data: null, render: d=>
+                '<button class="btn btn-info btn-xs ml-1e up-first"' +
+                ' data-id="' + d.id + '" data-name="' + d.name + '" data-sequence="' + d.sequence + '"' +
+                ' data-home="' + d.home_show + '">修改</button>' +
+                '<button class="btn btn-danger btn-xs ml-1e del-first" data-id="' + d.id + '">删除</button>'
+            }
+        ]
+    })
+    , secondCatalogTable: ()=>Table.secondTableApi = $('#second_catalog_list').DataTable({
+        language: require('../../general/DT.language')
+        , paging: false
+        , searching: false
+        , ordering: false
+        , processing: true
+        , serverSide: true
+        , autoWidth: true
+        , stateSave: false
+        , ajax: {
+            url: '/admin/production/catalog/second/list'
+            , method: 'post'
+        }, columns: [
+            {title: '编号', width: '26px', data: 'id'}
+            , {title: '分类名称', data: 'name'}
+            , {title: '一级分类编号', data: 'first_catalog_id'}
+            , {title: '排序值', data: 'sequence'}
+            , {title: '首页是否显示', data: 'home_show', render: d=>d ? '是' : '否'}
+            , {
+                title: '操作', data: null, render: d=>
+                '<button class="btn btn-info btn-xs ml-1e up-second"' +
+                ' data-id="' + d.id + '" data-name="' + d.name + '" data-sequence="' + d.sequence + '"' +
+                ' data-home="' + d.home_show + '" data-first="' + d.first_catalog_id + '">修改</button>' +
+                '<button class="btn btn-danger btn-xs ml-1e del-second" data-id="' + d.id + '">删除</button>'
+            }
+        ]
+    })
 };
 
 $(function () {
-    Dom.init();
+    Table.firstCatalogTable();
+    Table.secondCatalogTable();
+    Listener.init();
 });
