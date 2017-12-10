@@ -25,10 +25,8 @@ const Dom = {
 
     // 默认加载分类
     , initCatalog: ()=> {
-        const cid = Url.get('cid') || DEFAULT_CATALOG_ID;
-        Data.production({
-                cid: cid
-            })
+        const sci = Url.get('sci') || DEFAULT_CATALOG_ID;
+        Data.production({sci})
             .then(list=>$('#production_list').html(Dom.setProductionList(list)))
             .catch(e=>alert(e));
     }

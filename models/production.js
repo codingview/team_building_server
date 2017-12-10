@@ -24,10 +24,14 @@ module.exports = DataTypes=>({
             type: DataTypes.STRING
             , allowNull: true
             , comment: '产品标题'
-        }, catalog_id: {
+        }, first_catalog_id: {
             type: DataTypes.INTEGER
             , allowNull: false
-            , comment: '分类编号'
+            , comment: '一级分类编号'
+        }, second_catalog_id: {
+            type: DataTypes.INTEGER
+            , allowNull: false
+            , comment: '二级分类编号'
         }, md5: {
             type: DataTypes.STRING
             , allowNull: false

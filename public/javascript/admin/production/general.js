@@ -54,8 +54,8 @@ const Editor = window.wangEditor
     // 生成分类列表
     setCatalogs: (catalogs, type = 'list')=> {
         let str = '';
-        const cid = parseInt($('#p_catalog_id_val').val())
-            , getSelect = second=>`${second.id === cid ? 'selected' : ''}`;
+        const sci = parseInt($('#p_sci_val').val())
+            , getSelect = second=>`${second.id === sci ? 'selected' : ''}`;
         catalogs.forEach(first=> {
             if (type === 'list') { // 列表可选择
                 // str += `<option value="${first.id}"> ${first.name}</option>`;
@@ -64,7 +64,10 @@ const Editor = window.wangEditor
             }
             if ('second' in first && Array.isArray(first.second) && first.second.length > 0) {
                 first.second.forEach(second=> {
-                    str += `<option value="${second.id}" ${getSelect(second)}> >> ${second.name}</option>`;
+                    str += '<option value="' + second.id + '" ' + getSelect(second) +
+                        ' data-fci="' + first.id + '" data-sci="' + second.id + '">' +
+                        ' >> ' + second.name +
+                        '</option>';
                 });
             }
             if (type !== 'list') {
@@ -101,7 +104,7 @@ const Editor = window.wangEditor
     , catalogs: ()=>
         Data.catalogs()
             .then(catalogs=> {
-                $('#p_catalog_id').html(Dom.setCatalogs(catalogs, 'add'));
+                $('#p_sci').html(Dom.setCatalogs(catalogs, 'add'));
             })
             .catch(e=> {
                 console.error(e);
@@ -124,6 +127,7 @@ const Editor = window.wangEditor
                 _[_id] = input.val();
             }
         }
+        _.fci = $('#p_sci').find('[data-sci="' + _.sci + '"]').data('fci');
         _.abstract = $('#p_abstract').val();
         return _;
     }
@@ -145,7 +149,7 @@ const Editor = window.wangEditor
 
 // 页面初始化
 $(function () {
-    if ($('#p_catalog_id').length > 0) {
+    if ($('#p_sci').length > 0) {
         Dom.init();
     }
     require('./image')();

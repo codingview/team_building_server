@@ -58,9 +58,15 @@ module.exports = {
     })
 
     // 查：根据分类编号获取商品列表
-    , listByCid: params=>new Promise((resolve, reject)=>
+    , listBySci: params=>new Promise((resolve, reject)=>
         Production
-            .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
+            .findAndCountAll({
+                where: {
+                    second_catalog_id: params.second_catalog_id
+                }
+                , offset: params.offset
+                , limit: params.limit
+            })
             .then(result=> {
                 const rows = result.rows;
                 let results = [];

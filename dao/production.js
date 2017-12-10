@@ -29,7 +29,8 @@ class Production {
         this.name = p.name;
         this.title = p.title;
         this.state = 1;
-        this.catalog_id = parseInt(p.catalog_id);
+        this.first_catalog_id = parseInt(p.fci);
+        this.second_catalog_id = parseInt(p.sci);
         this.abstract = p.abstract;
         this.tags = p.tags;
         this.rich_text = p.rich_text;
@@ -63,7 +64,8 @@ class Production {
         this.state = p.state;
         this.views = p.views;
         this.sequence = p.sequence;
-        this.catalog_id = p.catalog_id;
+        this.fci = p.first_catalog_id;
+        this.sci = p.second_catalog_id;
         this.created_at = p.created_at;
         this.updated_at = p.updated_at;
         return this;
