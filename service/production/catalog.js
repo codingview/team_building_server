@@ -83,6 +83,18 @@ const ProductionCatalogFirst = require('../../models').production_catalog_first
     })
 }, homeCatalogService = { // 首页分类
 
+    // 首页 - 分类 - 列表
+    list: ()=>new Promise((resolve, reject)=> {
+        ProductionCatalogSecond.findAll({
+            where: {home_show: true}
+            , attributes: {
+                exclude: ['created_at', 'updated_at', 'icon']
+            }
+        })
+            .then(resolve)
+            .catch(reject);
+    })
+
 }, catalogService = { // 产品分类
 
     // 查询 - 产品分类 - 列表

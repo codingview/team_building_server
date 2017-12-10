@@ -38,7 +38,7 @@ const Table = {
             {title: '编号', width: '26px', data: 'id'}
             , {title: '产品名称', data: 'name'}
             , {title: '产品标题', data: 'title'}
-            , {title: '产品分类', data: 'catalog_id', render: d=>secondCatalogsList[d]}
+            , {title: '产品二级分类', data: 'catalog_id', render: d=>secondCatalogsList[d]}
             , {
                 title: '产品状态'
                 , data: 'state'
