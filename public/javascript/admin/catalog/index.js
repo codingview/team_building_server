@@ -44,9 +44,9 @@ const $ajax = require('../../general/Ajax.general')
             , data: catalog
             , message: '更新分类'
         })
-    , del: catalog_id=>
+    , del: sci=>
         $ajax({
-            url: '/admin/catalog/' + catalog_id
+            url: '/admin/catalog/' + sci
             , type: 'delete'
             , message: '删除分类'
         })

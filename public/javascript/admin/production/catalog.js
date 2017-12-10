@@ -162,7 +162,6 @@ const $ajax = require('../../general/Ajax.general')
             {title: '编号', width: '26px', data: 'id'}
             , {title: '分类名称', data: 'name'}
             , {title: '排序值', data: 'sequence'}
-            , {title: '首页是否显示', data: 'home_show', render: d=>d ? '是' : '否'}
             , {
                 title: '操作', data: null, render: d=>
                 '<button class="btn btn-info btn-xs ml-1e up-first"' +
