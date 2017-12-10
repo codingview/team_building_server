@@ -7,7 +7,7 @@
             <ul class="nav nav-pills nav-tabs" role="tablist" id="production_catalogs">
                 <% catalogs.forEach(function(catalog){ %>
                 <li role="presentation" class="<%= catalogs.indexOf(catalog) === 0 ? 'active' : '' %>">
-                    <a href="#catalog_<%= catalog.id %>" data-cid="<%= catalog.id %>"
+                    <a href="#catalog_<%= catalog.id %>" data-sci="<%= catalog.id %>"
                        role="tab" data-toggle="tab" data-show="0"><%= catalog.name %></a>
                 </li>
                 <% }); %>
@@ -15,7 +15,7 @@
             <div class="tab-content mt-40">
                 <% catalogs.forEach(function(catalog){ %>
                 <div role="tabpanel" class="tab-pane <%= catalogs.indexOf(catalog) === 0 ? 'active' : '' %>"
-                     id="catalog_<%= catalog.id %>" data-cid="<%= catalog.id %>"></div>
+                     id="catalog_<%= catalog.id %>" data-sci="<%= catalog.id %>"></div>
                 <% }); %>
             </div>
         </div>

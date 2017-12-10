@@ -12,7 +12,7 @@ const express = require('express')
 // 管理端 - 首页 >> 登录
 router.get('/', (req, res)=> {
     if ('session' in req && 'admin' in req.session) {
-        return res.redirect('/admin/option');
+        return res.redirect('/admin/version');
     } else {
         return res.redirect('/admin/login');
     }
