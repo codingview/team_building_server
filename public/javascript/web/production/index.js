@@ -6,7 +6,7 @@
 
 'use strict';
 
-const LENGTH = 20
+const LENGTH = 12
     , Url = require('../../general/Url.frame')
     , Data = {
     // 分页 - 获取 - 分类商品
