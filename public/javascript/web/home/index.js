@@ -94,7 +94,9 @@ const Dom = {
     }
 
     // 注入 - 分类下产品列表
-    , setCatalog: (sci, list)=>$('#catalog_' + sci).html(Dom.setProductionList(list))
+    , setCatalog: (sci, list)=> {
+        $('#catalog_' + sci).html(list.length > 0 ? Dom.setProductionList(list) : '<h2>该分类下无产品</h2>');
+    }
 
     // 初始化 - 第一个分类下产品列表
     , initCatalog: ()=> {

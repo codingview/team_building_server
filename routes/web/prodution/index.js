@@ -20,8 +20,6 @@ router.get('/list', (req, res)=>
             title: '产品列表'
             , active: 'production'
             , catalogs: catalogs
-            // 默认加载的二级分类编号
-            , default_sci: catalogs[0].second[0].id
         }))
         .catch(e=> {
             // todo 错误页面
