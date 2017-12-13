@@ -58,27 +58,29 @@ module.exports = {
     })
 
     // 查：根据分类编号获取商品列表
-    , listBySci: params=>new Promise((resolve, reject)=>
+    , listBySci: params=>new Promise((resolve, reject)=> {
+        let where = {};
+        if ('second_catalog_id' in params) {
+            where = {
+                second_catalog_id: params.second_catalog_id
+            };
+        }
         Production
             .findAndCountAll({
-                where: {
-                    second_catalog_id: params.second_catalog_id
-                }
+                where
                 , offset: params.offset
                 , limit: params.limit
             })
             .then(result=> {
-                const rows = result.rows;
-                let results = [];
+                const {rows, count} = result;
+                let data = [];
                 if (rows && rows instanceof Array && rows.length > 0) {
-                    rows.forEach(row=> results.push(new _Production(row.id).db2Icon(row.dataValues)));
-                    return resolve({results: results, count: result.count});
-                } else {
-                    return resolve({results: [], count: 0});
+                    rows.forEach(row=> data.push(new _Production(row.id).db2Icon(row.dataValues)));
                 }
+                resolve({data, count});
             })
-            .catch(e=>reject(e))
-    )
+            .catch(e=>reject(e));
+    })
 
     // 查：产品详情
     , detail: production_id=>new Promise((resolve, reject)=>

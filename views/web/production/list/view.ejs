@@ -37,11 +37,14 @@
             </div>
         </div>
     </div>
+    <div class="container-pagination">
+        <div class="container ta-c">
+            <ul id="pagination_list"></ul>
+        </div>
+    </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
-<script>
-    var DEFAULT_CATALOG_ID = <%= default_sci %>; // 默认加载的分类编号
-</script>
+<% include ../../../_base/twbs.pagination.js.ejs %>
 <script charset="utf-8" src="/src/production.min.js"></script>
 <% include ../../_base/foot.ejs %>

@@ -14,13 +14,16 @@ const express = require('express')
 router.post('/list', (req, res)=> {
     const body = req.body;
     let _ = {
-        offset: 'offset' in body ? body.offset : 0
-        , limit: 'length' in body ? body.length : 10
+        offset: 'offset' in body ? parseInt(body.offset) : 0
+        , limit: 'limit' in body ? parseInt(body.limit) : 20
     };
     if ('sci' in body) {
-        _.second_catalog_id = parseInt(body.sci);
+        const sci = parseInt(body.sci);
+        if (sci !== -1) {
+            _.second_catalog_id = sci;
+        }
         productionService.production.listBySci(_)
-            .then(data=>res.json(GLO.success(data.results, data.count)))
+            .then(data=>res.json(GLO.success(data.data, data.count)))
             .catch(e=>res.json(GLO.error(e, -99, '根据分类获取商品出错')));
     } else {
         return res.json(GLO.error('未获取到分类编号:cid', -11));
