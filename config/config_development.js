@@ -14,19 +14,21 @@ module.exports = {
     , mysql: {
         read: { // 读写分离
             database: 'team_building'
-            , host: '127.0.0.1'
-            , username: 'root' // 账号
-            , password: 'root' // 密码
+            , host: '192.168.1.101'
+            ,port:3307
+            , username: 'dddev' // 账号
+            , password: '123456' // 密码
             , dialect: 'mysql'
         }, write: {
             database: 'team_building'
-            , host: '127.0.0.1'
-            , username: 'root'
-            , password: 'root'
+            , host: '192.168.1.101'
+            ,port:3307
+            , username: 'dddev'
+            , password: '123456'
             , dialect: 'mysql'
         }
     }, redis: {
-        host: 'localhost'
+        host: '192.168.1.101'
         , port: 6379
         , db: 3
         , ttl: 86000
