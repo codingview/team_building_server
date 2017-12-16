@@ -15,8 +15,8 @@ const packageConfig = require('../../package.json')
     , general: {} // 全局内存存储变量，项目启动时将数据从表中读取到该变量内
     , isDev: ()=>GLO.ENV === 'development' // 是否为开发环境
     , isPro: ()=>GLO.ENV === 'production' // 是否为生产环境
-    , success: (data, count)=> { // 成功的返回
-        if (count) {
+    , success: (data, count = -1)=> { // 成功的返回
+        if (count !== -1) {
             return {status: 1, message: '', data: data, count: count};
         } else {
             return {status: 1, message: '', data: data};
