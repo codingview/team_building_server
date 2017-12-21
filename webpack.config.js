@@ -40,6 +40,10 @@ module.exports = {
         , 'add.example.admin': BASE_URI.admin + '/example/add'
         , 'update.example.admin': BASE_URI.admin + '/example/update'
 
+        , 'resource.admin': BASE_URI.admin + '/resource'
+        , 'add.resource.admin': BASE_URI.admin + '/resource/add'
+        , 'update.resource.admin': BASE_URI.admin + '/resource/update'
+
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {
         path: path.join(__dirname, 'public/src')

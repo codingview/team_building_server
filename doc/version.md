@@ -36,3 +36,4 @@
 |基地页增加搜索栏|module|2||完善基地管理功能模块，提供like搜索||||
 |产品详情页仿七彩TEAM|module|3||参数调整、样式调整|||hr|
 |圆角|css|2||图片切圆角|||hr|
+|header中a标签的link效果|css|3||hover变色|||hr|

@@ -6,7 +6,7 @@
 
 'use strict';
 
-let Type = Type || 1
+let Type = window.type
     , tableApi;
 
 const $ajax = require('../../general/Ajax.general')
