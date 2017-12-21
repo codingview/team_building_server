@@ -19,6 +19,7 @@ module.exports = {
         'home': BASE_URI.web + '/home'
         , 'about': BASE_URI.web + '/about'
         , 'production': BASE_URI.web + '/production'
+        , 'example': BASE_URI.web + '/example'
 
         // 管理端
         , 'login.admin': BASE_URI.admin + '/login'

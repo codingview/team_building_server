@@ -7,17 +7,25 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , catalogService = require('../../../service/catalog')
+    , exampleService = require('../../../service/example');
 
 // 服务案例 - 首页 - 中转
 router.get('/', (req, res)=>res.redirect('/example/list'));
 
 // 服务案例 - 列表 - 页面
 router.get('/list', (req, res)=>
-    res.render('./web/example/list/view', {
-        title: '服务案例'
-        , active: 'example'
-    })
+    catalogService.list(1)
+        .then(catalogs=>
+            res.render('./web/example/list/view', {
+                title: '服务案例'
+                , active: 'example'
+                , catalogs: catalogs
+            }))
+        .catch(e=> {
+            // todo 错误页面
+        })
 );
 
 // 服务案例 - 详情 - 页面

@@ -55,21 +55,25 @@ module.exports = {
     })
 
     // 查：根据分类编号获取商品列表
-    , listByCid: params=>new Promise((resolve, reject)=>
+    , listByCid: params=>new Promise((resolve, reject)=> {
+        let where = {};
+        if ('catalog_id' in params) {
+            where.catalog_id = params.catalog_id;
+        }
         Example
-            .findAndCountAll({where: {catalog_id: params.catalog_id}, offset: params.offset, limit: params.limit})
+            .findAndCountAll({where, offset: params.offset, limit: params.limit})
             .then(result=> {
-                const rows = result.rows;
-                let results = [];
+                const {rows, count} = result;
+                let data = [];
                 if (rows && rows instanceof Array && rows.length > 0) {
-                    rows.forEach(row=> results.push(new _Example(row.id).db2Icon(row.dataValues)));
-                    return resolve({results: results, count: result.count});
+                    rows.forEach(row=> data.push(new _Example(row.id).db2Icon(row.dataValues)));
+                    return resolve({data, count});
                 } else {
                     return resolve({results: [], count: 0});
                 }
             })
-            .catch(e=>reject(e))
-    )
+            .catch(e=>reject(e));
+    })
 
     // 查：案例详情
     , detail: example_id=>new Promise((resolve, reject)=>

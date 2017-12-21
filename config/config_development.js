@@ -15,14 +15,14 @@ module.exports = {
         read: { // 读写分离
             database: 'team_building'
             , host: '192.168.1.101'
-            ,port:3307
+            , port: 3307
             , username: 'dddev' // 账号
             , password: '123456' // 密码
             , dialect: 'mysql'
         }, write: {
             database: 'team_building'
             , host: '192.168.1.101'
-            ,port:3307
+            , port: 3307
             , username: 'dddev'
             , password: '123456'
             , dialect: 'mysql'

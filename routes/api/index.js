@@ -15,6 +15,9 @@ router.use('/home', require('./home'));
 // 产品 - 接口
 router.use('/production', require('./production'));
 
+// 案例 - 接口
+router.use('/example', require('./example'));
+
 // 反馈 - 接口
 router.use('/feedback', require('./feedback'));
 
