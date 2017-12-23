@@ -12,7 +12,7 @@ const Resource = require('../../models').resource
     , _redis = require('../../utils/redis');
 
 module.exports = {
-    // 新增 - 服务案例
+    // 新增 - 基地资源
     create: example=> new Promise((resolve, reject)=> {
         const pp = new _Resource().form2Db(example);
         _image.moveTempImage(pp.md5 + '.jpeg')
@@ -21,7 +21,7 @@ module.exports = {
             .catch(e=>reject(e));
     })
 
-    // 上传 - 案例 - 图片
+    // 上传 - 基地 - 图片
     , image: (req, res)=>new Promise((resolve, reject)=>
         _image.save(req, res)
             .then(body=> {
@@ -31,7 +31,7 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-    // 查：案例列表
+    // 查：基地列表
     , list: ({offset, limit, state, catalog_id})=>new Promise((resolve, reject)=> {
         let _where = {state, catalog_id};
         if (catalog_id === -1) {
@@ -54,7 +54,7 @@ module.exports = {
             .catch(e=>reject(e));
     })
 
-    // 查：根据分类编号获取商品列表
+    // 查：根据分类编号获取基地列表
     , listByCid: params=>new Promise((resolve, reject)=> {
         let where = {};
         if ('catalog_id' in params) {
@@ -75,7 +75,7 @@ module.exports = {
             .catch(e=>reject(e));
     })
 
-    // 查：案例详情
+    // 查：基地详情
     , detail: example_id=>new Promise((resolve, reject)=>
         Resource
             .find({where: {id: example_id}})
@@ -83,10 +83,10 @@ module.exports = {
             .catch(e=>reject(e))
     )
 
-    // 改：案例上/下架
+    // 改：基地上/下架
     , state: (example_id, state)=>Resource.update({state: state}, {where: {id: example_id}})
 
-    // 改：更新案例信息
+    // 改：更新基地信息
     , update: example=>new Promise((resolve, reject)=> {
         const pp = new _Resource().update(example)
             , eid = example.id;
