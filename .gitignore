@@ -30,3 +30,4 @@ public/static/about/*
 public/uploads/banner/*.jpeg
 public/uploads/production/*.jpeg
 public/uploads/example/*.jpeg
+public/uploads/resource/*.jpeg
