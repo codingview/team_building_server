@@ -39,5 +39,5 @@
 |header中a标签的link效果|css|3|hover变色||hr|
 |首页基地分类效果|css|4|样式调整参照天人际|hr|
 |首页基地列表效果|css|4|样式参照天人际|hr|
-|首页基地列表swiper效果|css|4|||
+|首页基地列表swiper效果|css|4|swiper4.x适配||
 |首页新闻列表hover效果|css|4|hover反色||hr|
