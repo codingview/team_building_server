@@ -94,7 +94,14 @@ const LENGTH = 4
     , setResourceList: cid=> {
         Data.resource(cid)
             .then(list=> {
-                $('#resource_catalog_'+cid).html(resourceDom.list(list));
+                const $e = '#resource_catalog_' + cid+'_content';
+                $($e).html(resourceDom.list(list));
+                new Swiper($e, {
+                    slidesPerView: 4
+                    , spaceBetween: 30
+                    , slidesPerGroup: 4
+                    , loop: true
+                });
             })
             .catch(alert);
     }

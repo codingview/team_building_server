@@ -25,8 +25,11 @@ const resourceDom = {
     , tabList: list=> {
         let str = '', i = 0;
         list.forEach(c=> {
-            str += '<div role="tabpanel" class="tab-pane bases-list ' + (i++ === 0 ? 'active' : '') + '"' +
+            str += '<div role="tabpanel" class="tab-pane resource-list ' + (i++ === 0 ? 'active' : '') + '"' +
                 ' id="resource_catalog_' + c.id + '">' +
+                '<div class="swiper-container">' +
+                '<div class="swiper-wrapper" id="resource_catalog_' + c.id + '_content"></div>' +
+                '</div>' +
                 '</div>';
         });
         return str;
@@ -48,12 +51,12 @@ const resourceDom = {
     }
 
     // 基地效果
-    , item: p=>'<div class="col-lg-3 production-item">' +
-    '<div class="production-icon">' +
-    '<img src="' + p.icon + '">' +
-    '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
-    '<div class="production-title">' + p.title + '</div>' +
-    '<div class="production-abstract">' + (p.abstract || '') + '</div>' +
+    , item: r=>'<div class="swiper-slide">' +
+    '<div class="resource-item">' +
+    '<a href="/resource/detail/' + r.id + '?md5=' + r.md5 + '">' +
+    '<div class="resource-icon mt-1e"><img width="100%" src="' + r.icon + '"></div>' +
+    '<div class="resource-title mt-1e"><h2>' + r.title + '</h2></div>' +
+    '<div class="resource-abstract mt-1e">' + r.abstract + '</div>' +
     '</a>' +
     '</div>' +
     '</div>'
