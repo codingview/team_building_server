@@ -44,3 +44,4 @@
 |首页基地列表swiper效果|css|4|swiper4.x适配|2017年12月24日|done|
 |首页新闻列表hover效果|css|4|hover反色||hr|
 |title和abstract多字忽略|css|3|production-item中title和abstract超过一行后忽略||hr|
+|基地资源列表页分类居中|css|3|||hr|
