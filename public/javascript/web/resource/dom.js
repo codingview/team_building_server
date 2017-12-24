@@ -27,7 +27,7 @@ const resourceDom = {
         list.forEach(c=> {
             str += '<div role="tabpanel" class="tab-pane resource-list ' + (i++ === 0 ? 'active' : '') + '"' +
                 ' id="resource_catalog_' + c.id + '">' +
-                '<div class="swiper-container" id="resource_catalog_'+c.id+'_container">' +
+                '<div class="swiper-container" id="resource_catalog_' + c.id + '_container">' +
                 '<div class="swiper-wrapper" id="resource_catalog_' + c.id + '_content"></div>' +
                 '<div class="swiper-pagination"></div>' +
                 '<div class="swiper-button-next"></div>' +
@@ -63,6 +63,23 @@ const resourceDom = {
     '</a>' +
     '</div>' +
     '</div>'
+
+    // 基地列表页基地列表
+    , setResourceList: list=> {
+        let str = '';
+        list.forEach(p=> {
+            str += '<div class="col-lg-3 production-item">' +
+                '<div class="production-icon">' +
+                '<img src="' + p.icon + '">' +
+                '<a href="/resource/detail/' + p.id + '" class="production-layout" target="_blank">' +
+                '<div class="production-title">' + p.title + '</div>' +
+                '<div class="production-abstract">' + (p.abstract || '') + '</div>' +
+                '</a>' +
+                '</div>' +
+                '</div>';
+        });
+        return str;
+    }
 };
 
 
