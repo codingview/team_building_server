@@ -48,8 +48,8 @@ const LENGTH = 4
 
 }
     , Dom = {
-    // 初始化 - 广告位
-    initSwiper: ()=> {
+    // 初始化 - 广告位swiper
+    initNewsSwiper: ()=> {
         const newsSwiper = new Swiper('#news_swiper', {
             slidesPerView: 1
             , loop: true
@@ -144,6 +144,7 @@ const LENGTH = 4
         Data.news({limit: 6})
             .then(list=> {
                 $('#home_news_banner').html(Dom.setNewsBanner(list));
+                Dom.initNewsSwiper();
                 $('#home_news_list').html(Dom.setNewsList(list));
             })
             .catch(e=>alert(e));
@@ -162,7 +163,6 @@ const LENGTH = 4
 
     // 初始化
     , init: function () {
-        this.initSwiper();
         this.initCatalog();
         this.initNews();
         this.initResourceCatalog();
