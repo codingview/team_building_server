@@ -7,7 +7,8 @@
 'use strict';
 
 const express = require('express')
-    , router = new express.Router();
+    , router = new express.Router()
+    , resourceService = require('../../../service/resource');
 
 // 基地资源 - 首页 - 中转
 router.get('/', (req, res)=>res.redirect('/resource/list'));
@@ -21,11 +22,19 @@ router.get('/list', (req, res)=>
 );
 
 // 基地资源 - 详情 - 页面
-router.get('/detail/:rid', (req, res)=>
-    res.render('./web/resource/detail/view', {
-        title: '基地资源详情'
-        , active: 'resource'
-    })
-);
+router.get('/detail/:rid', (req, res)=> {
+    const resource_id = parseInt(req.params.rid);
+    resourceService.view(`p:${resource_id}`); // 浏览次数加1
+    resourceService.detail(resource_id)
+        .then(resource=>
+            res.render('./web/resource/detail/view', {
+                title: '产品详情'
+                , detail: resource
+                , active: 'resource'
+            }))
+        .catch(e=> {
+            // todo 错误页面
+        });
+});
 
 module.exports = router;
