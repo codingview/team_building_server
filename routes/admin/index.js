@@ -39,7 +39,8 @@ router.use('/home', require('./home'));
 // 团建产品
 router.use('/production', require('./production'));
 
-// todo 基地资源
+// 基地资源
+router.use('/resource', require('./resource'));
 
 // 通用分类
 router.use('/catalog', require('./catalog'));

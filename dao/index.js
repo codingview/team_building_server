@@ -21,4 +21,7 @@ module.exports = {
 
     // 案例
     , example: require('./example')
+
+    // 资源
+    , resource: require('./resource')
 };

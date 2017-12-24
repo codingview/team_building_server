@@ -1,6 +1,6 @@
 /**
  * Created by zrz on 2017/8/22.
- * Copyright© 2015-2020 DiandaInfo (https://github.com/codingview)
+ * Copyright© 2015-2020 CodingView (https://github.com/codingview)
  * @version 0.0.1 created
  */
 

@@ -22,7 +22,7 @@
 <% include ../_base/footer.ejs %>
 <% include ../_base/javascript.ejs %>
 <script charset="utf-8">
-    var Type =<%= type %>;
+    window.type = '<%= type %>';
 </script>
 <% include ../../_base/dataTables.js.ejs %>
 <script src="/src/catalog.admin.min.js" charset="utf-8"></script>

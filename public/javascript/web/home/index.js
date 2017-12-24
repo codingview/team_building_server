@@ -6,63 +6,63 @@
 
 'use strict';
 
-let swiper;
 const LENGTH = 4
-    , feedback = require('../frame').feedback;
-
-const Data = {
+    , feedback = require('../frame').feedback
+    , $ajax = require('../../general/Ajax.general')
+    , resourceDom = require('../resource/dom')
+    , Data = {
     // 根据分类获取商品
-    production: data=>new Promise((resolve, reject)=>
-        $.ajax({
+    production: data=>
+        $ajax({
             url: '/api/production/list'
             , type: 'post'
             , data: data
-            , dataType: 'json'
-            , success: json=> {
-                if (json && 'status' in json && json.status > 0) {
-                    resolve(json.data);
-                } else {
-                    reject('message' in json ? json.message : '获取产品列表出错');
-                }
-            }, error: e=> {
-                console.error(e);
-                reject('获取产品列表超时');
-            }
+            , message: '获取产品列表'
         })
-    )
+
     // 获取 - 新闻
-    , news: data=>new Promise((resolve, reject)=>
-        $.ajax({
+    , news: data=>
+        $ajax({
             url: '/api/home/news/list'
             , type: 'get'
             , data: data
-            , dataType: 'json'
-            , success: json=> {
-                if (json && 'status' in json && json.status > 0) {
-                    resolve(json.data);
-                } else {
-                    reject('message' in json ? json.message : '获取新闻列表出错');
-                }
-            }, error: e=> {
-                console.error(e);
-                reject('获取新闻列表超时');
-            }
+            , message: '获取新闻列表'
         })
-    )
-};
 
-const Dom = {
-    // 初始化 - 广告位
-    initSwiper: ()=>
-        swiper = new Swiper('.swiper-container', {
-            direction: 'horizontal'
-            , loop: true
-            // 分页器
-            , pagination: '.swiper-pagination'
-            // 前进后退按钮
-            , nextButton: '.swiper-button-next'
-            , prevButton: '.swiper-button-prev'
+    // 获取 - 基地分类列表
+    , resourceCatalog: ()=>
+        $ajax({
+            url: '/api/home/catalog/list?type=2'
+            , type: 'get'
+            , message: '获取基地分类列表'
         })
+
+    // 获取 - 基地列表
+    , resource: cid=>
+        $ajax({
+            url: '/api/resource/list'
+            , type: 'post'
+            , data: {limit: 12, cid}
+            , message: '获取基地列表'
+        })
+
+}
+    , Dom = {
+    // 初始化 - 广告位swiper
+    initNewsSwiper: ()=> {
+        const newsSwiper = new Swiper('#news_swiper', {
+            slidesPerView: 1
+            , loop: true
+            , pagination: {
+                el: '.swiper-pagination'
+                , clickable: true
+            }
+            , navigation: {
+                nextEl: '.swiper-button-next'
+                , prevEl: '.swiper-button-prev'
+            }
+        });
+    }
 
     // 生成 - 产品列表
     , setProductionList: require('../production/dom')
@@ -93,6 +93,39 @@ const Dom = {
         return str;
     }
 
+    // 获取 - 基地分类下基地列表
+    , setResourceList: cid=> {
+        Data.resource(cid)
+            .then(list=> {
+                const $e = '#resource_catalog_' + cid + '_container';
+                $('#resource_catalog_' + cid + '_content').html(resourceDom.list(list));
+                if (Array.isArray(list) && list.length > 0) {
+                    new Swiper($e, {
+                        slidesPerView: 4
+                        , spaceBetween: 30
+                        , slidesPerGroup: 4
+                        , loop: true
+                        , pagination: {
+                            el: '.swiper-pagination'
+                            , clickable: true
+                        }
+                        , navigation: {
+                            nextEl: '.swiper-button-next'
+                            , prevEl: '.swiper-button-prev'
+                        }
+                    });
+                } else { // 移除翻页
+                    $($e)
+                        .find('.swiper-button-next')
+                        .remove()
+                        .end()
+                        .find('.swiper-button-prev')
+                        .remove();
+                }
+            })
+            .catch(alert);
+    }
+
     // 注入 - 分类下产品列表
     , setCatalog: (sci, list)=> {
         $('#catalog_' + sci).html(list.length > 0 ? Dom.setProductionList(list) : '<h2 class="ta-c">该分类下无产品</h2>');
@@ -103,7 +136,7 @@ const Dom = {
         const sci = parseInt($('#production_catalogs').find('a[data-toggle="tab"]').eq(0).data('sci'));
         Data.production({limit: 3, sci})
             .then(list=>Dom.setCatalog(sci, list))
-            .catch(e=>alert(e));
+            .catch(alert);
     }
 
     // 初始化 - 新闻列表
@@ -111,24 +144,36 @@ const Dom = {
         Data.news({limit: 6})
             .then(list=> {
                 $('#home_news_banner').html(Dom.setNewsBanner(list));
+                Dom.initNewsSwiper();
                 $('#home_news_list').html(Dom.setNewsList(list));
             })
             .catch(e=>alert(e));
     }
 
+    // 初始化 - 基地分类列表
+    , initResourceCatalog: ()=> {
+        Data.resourceCatalog()
+            .then(list=> {
+                $('#resource_catalogs').html(resourceDom.catalogs(list));
+                $('#resource_list').html(resourceDom.tabList(list));
+                Dom.setResourceList(list[0].id);
+            })
+            .catch(alert);
+    }
+
     // 初始化
     , init: function () {
-        this.initSwiper();
         this.initCatalog();
         this.initNews();
+        this.initResourceCatalog();
     }
-};
-
-const Listener = {
+}
+    , Listener = {
     // 分类切换的监听
     catalogChangeListener: ()=> {
-        $('#production_catalogs').on('show.bs.tab', 'a[data-toggle="tab"]', function () {
-            const $p = $(this)
+        // 产品分类切换监听
+        $('#production_catalogs').on('show.bs.tab', 'a[data-toggle="tab"]', event=> {
+            const $p = $(event.target)
                 , isShow = parseInt($p.data('show'))
                 , sci = parseInt($p.data('sci'))
                 ;
@@ -136,6 +181,18 @@ const Listener = {
                 Data.production({limit: LENGTH, sci})
                     .then(list=>Dom.setCatalog(sci, list))
                     .catch(e=>alert(e));
+                $p.data('show', 1);
+            }
+        });
+
+        // 基地分类切换监听
+        $('#resource_catalogs').on('show.bs.tab', 'a[data-toggle="tab"]', event=> {
+            const $p = $(event.target)
+                , isShow = parseInt($p.data('show'))
+                , cid = parseInt($p.data('cid'))
+                ;
+            if (isShow === 0) { // 未显示过
+                Dom.setResourceList(cid);
                 $p.data('show', 1);
             }
         });
