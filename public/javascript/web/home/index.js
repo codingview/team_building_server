@@ -52,6 +52,8 @@ const LENGTH = 4
     initNewsSwiper: ()=> {
         const newsSwiper = new Swiper('#news_swiper', {
             slidesPerView: 1
+            , effect: 'flip'
+            , grabCursor: true
             , loop: true
             , pagination: {
                 el: '.swiper-pagination'
