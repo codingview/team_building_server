@@ -60,7 +60,7 @@ const LENGTH = 12
                         Dom.initCatalog(offset);
                     });
                 } else {
-                    $('#example_list').html('<h2>该分类下无案例</h2>');
+                    $('#example_list').html('<h2 class="ta-c">该分类下无案例</h2>');
                 }
             })
             .catch(e=>alert(e));

@@ -50,14 +50,17 @@ const LENGTH = 4
     , Dom = {
     // 初始化 - 广告位
     initSwiper: ()=> {
-        const swiperNews = new Swiper('#news_swiper', {
-            direction: 'horizontal'
+        const newsSwiper = new Swiper('#news_swiper', {
+            slidesPerView: 1
             , loop: true
-            // 分页器
-            , pagination: '.swiper-pagination'
-            // 前进后退按钮
-            , nextButton: '.swiper-button-next'
-            , prevButton: '.swiper-button-prev'
+            , pagination: {
+                el: '.swiper-pagination'
+                , clickable: true
+            }
+            , navigation: {
+                nextEl: '.swiper-button-next'
+                , prevEl: '.swiper-button-prev'
+            }
         });
     }
 
@@ -94,14 +97,31 @@ const LENGTH = 4
     , setResourceList: cid=> {
         Data.resource(cid)
             .then(list=> {
-                const $e = '#resource_catalog_' + cid+'_content';
-                $($e).html(resourceDom.list(list));
-                new Swiper($e, {
-                    slidesPerView: 4
-                    , spaceBetween: 30
-                    , slidesPerGroup: 4
-                    , loop: true
-                });
+                const $e = '#resource_catalog_' + cid + '_container';
+                $('#resource_catalog_' + cid + '_content').html(resourceDom.list(list));
+                if (Array.isArray(list) && list.length > 0) {
+                    new Swiper($e, {
+                        slidesPerView: 4
+                        , spaceBetween: 30
+                        , slidesPerGroup: 4
+                        , loop: true
+                        , pagination: {
+                            el: '.swiper-pagination'
+                            , clickable: true
+                        }
+                        , navigation: {
+                            nextEl: '.swiper-button-next'
+                            , prevEl: '.swiper-button-prev'
+                        }
+                    });
+                } else { // 移除翻页
+                    $($e)
+                        .find('.swiper-button-next')
+                        .remove()
+                        .end()
+                        .find('.swiper-button-prev')
+                        .remove();
+                }
             })
             .catch(alert);
     }

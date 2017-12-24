@@ -27,8 +27,11 @@ const resourceDom = {
         list.forEach(c=> {
             str += '<div role="tabpanel" class="tab-pane resource-list ' + (i++ === 0 ? 'active' : '') + '"' +
                 ' id="resource_catalog_' + c.id + '">' +
-                '<div class="swiper-container">' +
+                '<div class="swiper-container" id="resource_catalog_'+c.id+'_container">' +
                 '<div class="swiper-wrapper" id="resource_catalog_' + c.id + '_content"></div>' +
+                '<div class="swiper-pagination"></div>' +
+                '<div class="swiper-button-next"></div>' +
+                '<div class="swiper-button-prev"></div>' +
                 '</div>' +
                 '</div>';
         });
@@ -43,8 +46,8 @@ const resourceDom = {
                 str += resourceDom.item(p);
             });
         } else {
-            str = '<div>' +
-                '<h2>该基地分类下无基地</h2>' +
+            str = '<div class="container">' +
+                '<h2 class="ta-c mt-2e">该基地分类下无基地</h2>' +
                 '</div>';
         }
         return str;
