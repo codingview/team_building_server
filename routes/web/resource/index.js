@@ -8,17 +8,23 @@
 
 const express = require('express')
     , router = new express.Router()
-    , resourceService = require('../../../service/resource');
+    , resourceService = require('../../../service/resource')
+    , catalogService = require('../../../service/catalog');
 
 // 基地资源 - 首页 - 中转
 router.get('/', (req, res)=>res.redirect('/resource/list'));
 
 // 基地资源 - 列表 - 页面
 router.get('/list', (req, res)=>
-    res.render('./web/resource/list/view', {
-        title: '基地资源'
-        , active: 'resource'
-    })
+    catalogService.list(2)
+        .then(catalogs=>res.render('./web/resource/list/view', {
+            title: '基地资源'
+            , active: 'resource'
+            , catalogs: catalogs
+        }))
+        .catch(e=> {
+            // todo 错误页面
+        })
 );
 
 // 基地资源 - 详情 - 页面

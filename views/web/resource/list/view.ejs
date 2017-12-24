@@ -5,56 +5,32 @@
 <% include ../../_base/header.ejs %>
 <div class="app-container">
     <div class="container">
-        <div class="resource-catalogs">
+        <div class="container-header">
             <div class="container">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#bjjqjd" aria-controls="bjjqjd" role="tab" data-toggle="tab">北京郊区基地</a>
-                    </li>
+                <ul class="nav nav-pills">
+                    <% catalogs.forEach(function (catalog) { %>
                     <li role="presentation">
-                        <a href="#bjcqjd" aria-controls="bjcqjd" role="tab" data-toggle="tab">北京城区基地</a>
+                        <a href="?cid=<%= catalog.id %>"><%= catalog.name %></a>
                     </li>
-                    <li role="presentation">
-                        <a href="#hbjd" aria-controls="hbjd" role="tab" data-toggle="tab">海边基地</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#cyjd" aria-controls="cyjd" role="tab" data-toggle="tab">草原基地</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#smjd" aria-controls="smjd" role="tab" data-toggle="tab">沙漠基地</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#qgjd" aria-controls="qgjd" role="tab" data-toggle="tab">全国基地</a>
-                    </li>
+                    <% }); %>
                 </ul>
             </div>
         </div>
-        <div class="resource-list">
+        <div class="container-resource">
             <div class="container">
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane bases-list active" id="bjjqjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane bases-list" id="bjcqjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane bases-list" id="hbjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane bases-list" id="cyjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane bases-list" id="smjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
-                    <div role="tabpanel" class="tab-pane bases-list" id="qgjd">
-                        <% include ../../../_static/base.ejs %>
-                    </div>
+                <div class="col-lg-12">
+                    <div class="resource-list" id="resource_list"></div>
                 </div>
+            </div>
+        </div>
+        <div class="container-pagination">
+            <div class="container ta-c">
+                <ul id="pagination_list"></ul>
             </div>
         </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
+<script charset="utf-8" src="/src/resource.min.js"></script>
 <% include ../../_base/foot.ejs %>
