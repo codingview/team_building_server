@@ -6,34 +6,37 @@
 
 'use strict';
 
-const path = require('path');
-
-module.exports = {
-    development: {
-        appenders: {
-            out: { // 控制台输出
-                type: 'stdout'
-            }, app: {// 系统日志
-                type: 'file'
-                , filename: path.join(__dirname, '../logs/app.log')
-            }, http: { // 请求日志
-                type: 'file'
-                , filename: path.join(__dirname, '../logs/http.log')
-            }, error: { // 错误日志
-                type: 'file'
-                , filename: path.join(__dirname, '../logs/error.log')
-            }
-        }, categories: {
-            default: {
-                appenders: ['app', 'out']
-                , level: 'info'
-            }, http: {
-                appenders: ['http', 'out']
-                , level: 'info'
-            }, error: {
-                appenders: ['error', 'out']
-                , level: 'error'
-            }
+const path = require('path')
+    , config = {
+    appenders: {
+        out: { // 控制台输出
+            type: 'stdout'
+        }, app: {// 系统日志
+            type: 'file'
+            , filename: path.join(__dirname, '../logs/app.log')
+        }, http: { // 请求日志
+            type: 'file'
+            , filename: path.join(__dirname, '../logs/http.log')
+        }, error: { // 错误日志
+            type: 'file'
+            , filename: path.join(__dirname, '../logs/error.log')
+        }
+    }, categories: {
+        default: {
+            appenders: ['app', 'out']
+            , level: 'info'
+        }, http: {
+            appenders: ['http', 'out']
+            , level: 'info'
+        }, error: {
+            appenders: ['error', 'out']
+            , level: 'error'
         }
     }
+};
+
+module.exports = {
+    development: config
+    , production: config
+    , test: config
 };
