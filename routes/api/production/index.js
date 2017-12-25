@@ -26,7 +26,7 @@ router.post('/list', (req, res)=> {
             .then(data=>res.json(GLO.success(data.data, data.count)))
             .catch(e=>res.json(GLO.error(e, -99, '根据分类获取商品出错')));
     } else {
-        return res.json(GLO.error('未获取到分类编号:cid', -11));
+        return res.json(GLO.error('未获取到分类编号:sci', -11));
     }
 });
 

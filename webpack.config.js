@@ -19,6 +19,8 @@ module.exports = {
         'home': BASE_URI.web + '/home'
         , 'about': BASE_URI.web + '/about'
         , 'production': BASE_URI.web + '/production'
+        , 'resource': BASE_URI.web + '/resource'
+        , 'example': BASE_URI.web + '/example'
 
         // 管理端
         , 'login.admin': BASE_URI.admin + '/login'
@@ -38,6 +40,10 @@ module.exports = {
         , 'example.admin': BASE_URI.admin + '/example'
         , 'add.example.admin': BASE_URI.admin + '/example/add'
         , 'update.example.admin': BASE_URI.admin + '/example/update'
+
+        , 'resource.admin': BASE_URI.admin + '/resource'
+        , 'add.resource.admin': BASE_URI.admin + '/resource/add'
+        , 'update.resource.admin': BASE_URI.admin + '/resource/update'
 
         , 'about.admin': BASE_URI.admin + '/about'
     }, output: {

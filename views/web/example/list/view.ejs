@@ -4,14 +4,34 @@
 <% include ../../_base/container.ejs %>
 <% include ../../_base/header.ejs %>
 <div class="app-container">
-    <div class="container-example">
+    <div class="container-header">
+        <div class="container">
+            <nav class="navbar navbar-inverse">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <% catalogs.forEach(function (catalog) { %>
+                        <li><a href="?cid=<%= catalog.id %>"><%= catalog.name %></a></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container-production">
         <div class="container">
             <div class="col-lg-12">
-                <% include ../../../_static/example.ejs %>
+                <div class="example-list" id="example_list"></div>
             </div>
+        </div>
+    </div>
+    <div class="container-pagination">
+        <div class="container ta-c">
+            <ul id="pagination_list"></ul>
         </div>
     </div>
 </div>
 <% include ../../_base/footer.ejs %>
 <% include ../../_base/javascript.ejs %>
+<% include ../../../_base/twbs.pagination.js.ejs %>
+<script charset="utf-8" src="/src/example.min.js"></script>
 <% include ../../_base/foot.ejs %>

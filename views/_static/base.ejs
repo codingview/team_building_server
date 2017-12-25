@@ -2,38 +2,5 @@
     <% for (let i = 0, l = 4; i < l; i++) {
         const jj = parseInt(Math.random() * 4) + 1;
     %>
-    <div class="col-lg-3">
-        <div class="base-item">
-            <a href="/resource/detail/1">
-                <div class="base-icon mt-1e"><img width="100%" src="/_static/resource.icon<%= jj %>.jpg"></div>
-                <div class="base-title mt-1e">
-                    <h2>
-                        <% if(jj == 1){ %>
-                        颐和园
-                        <% }else if(jj == 2){ %>
-                        承德避暑山庄
-                        <% }else if(jj == 3){ %>
-                        喜马拉雅山脉
-                        <% }else if(jj == 4){ %>
-                        张家界
-                        <% } %>
-                    </h2>
-                </div>
-                <div class="base-abstract mt-1e">
-                    <% if(jj == 1){ %>
-                    颐和园，中国清朝时期皇家园林，前身为清漪园，坐落在北京西郊，距城区十五公里，占地约二百九十公顷，与圆明园毗邻。
-                    <% }else if(jj == 2){ %>
-                    承德避暑山庄又名“承德离宫”或“热河行宫”，位于河北省承德市中心北部，武烈河西岸一带狭长的谷地上，是清代皇帝夏天避暑和处理政务的场所。
-                    <% }else if(jj == 3){ %>
-                    喜马拉雅山脉 （梵语：hima alaya，意为雪域），藏语意为“雪的故乡”。
-                    位于青藏高原南巅边缘，是世界海拔最高的山脉，其中有110多座山峰高达或超过海拔7350米。
-                    <% }else if(jj == 4){ %>
-                    张家界是湖南省辖地级市，原名大庸市，辖2个市辖区（永定区、武陵源区）、2个县（慈利县、桑植县）。位于湖南西北部，澧水中上游，属武陵山区腹地。
-                    张家界因旅游建市，是中国最重要的旅游城市之一，是湘鄂渝黔革命根据地的发源地和中心区域。
-                    <% } %>
-                </div>
-            </a>
-        </div>
-    </div>
     <% } %>
 </div>

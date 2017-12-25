@@ -9,11 +9,11 @@
             <ol class="breadcrumb">
                 <li><a href="/">首页</a></li>
                 <li><a href="/resource">基地资源</a></li>
-                <li class="active">北京郊区基地</li>
+                <li class="active"><%= detail.title %></li>
             </ol>
         </div>
         <div class="container-content">
-            <% include ../../../_static/base.detail.ejs %>
+            <%- detail.rich_text %>
         </div>
     </div>
 </div>
