@@ -38,7 +38,8 @@
           left: 0;
           color: #fff;
           background: #030303;
-          animation: 0.5s enlarge;
+          animation: 0.5s enlarge infinite;
+          animation-direction:alternate;
         }
       }
     }
