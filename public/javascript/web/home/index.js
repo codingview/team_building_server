@@ -52,6 +52,8 @@ const LENGTH = 4
     initNewsSwiper: ()=> {
         const newsSwiper = new Swiper('#news_swiper', {
             slidesPerView: 1
+            , effect: 'flip'
+            , grabCursor: true
             , loop: true
             , pagination: {
                 el: '.swiper-pagination'
@@ -99,12 +101,11 @@ const LENGTH = 4
             .then(list=> {
                 const $e = '#resource_catalog_' + cid + '_container';
                 $('#resource_catalog_' + cid + '_content').html(resourceDom.list(list));
-                if (Array.isArray(list) && list.length > 0) {
+                if (Array.isArray(list) && list.length > 1) {
                     new Swiper($e, {
                         slidesPerView: 4
                         , spaceBetween: 30
                         , slidesPerGroup: 4
-                        , loop: true
                         , pagination: {
                             el: '.swiper-pagination'
                             , clickable: true
