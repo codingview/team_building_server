@@ -4,43 +4,44 @@
 @import "container";
 @import "footer";
 
+$border-radius: 12px;
 // 商品的样式
 .container-production {
   .production-item {
     margin-bottom: 2em;
     .production-icon {
+      border-radius: $border-radius;
       position: relative;
       background: #787878;
       img {
         width: 100%;
+        border-radius: $border-radius;
       }
       .production-layout {
+        border-radius: $border-radius;
         opacity: 0.5;
         position: absolute;
-        display: none;
         width: 0;
         height: 0;
-      }
-      @keyframes enlarge {
-        0% {
-          transform: scale(0);
-        }
-        100% {
-          transform: scale(1);
-        }
+        left: 50%;
+        top: 50%;
+        color: #fff;
+        background: #030303;
       }
       &:hover {
         .production-layout {
           display: block;
-          height: 100%;
-          width: 100%;
-          top: 0;
-          left: 0;
-          color: #fff;
-          background: #030303;
-          animation: 0.5s enlarge infinite;
-          animation-direction:alternate;
         }
+      }
+      .production-title {
+        margin: 10px;
+        // todo 超出部分省略
+        display: none;
+      }
+      .production-abstract {
+        margin: 10px;
+        // todo 超出部分省略
+        display: none;
       }
     }
   }

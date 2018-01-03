@@ -6,6 +6,8 @@
 
 'use strict';
 
+require('../production/animate'); // 产品的动画效果
+
 const LENGTH = 4
     , feedback = require('../frame').feedback
     , $ajax = require('../../general/Ajax.general')

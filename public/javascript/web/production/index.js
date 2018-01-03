@@ -6,6 +6,8 @@
 
 'use strict';
 
+require('./animate');
+
 const LENGTH = 12
     , Url = require('../../general/Url.frame')
     , Data = {
