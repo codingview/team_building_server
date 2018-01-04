@@ -5,6 +5,13 @@
 @import "footer";
 
 $border-radius: 12px;
+
+.swiper-pagination-bullet { // swiper分页器大小
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
 // 商品的样式
 .container-production {
   .production-item {

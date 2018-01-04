@@ -30,8 +30,8 @@ const resourceDom = {
                 '<div class="swiper-container" id="resource_catalog_' + c.id + '_container">' +
                 '<div class="swiper-wrapper" id="resource_catalog_' + c.id + '_content"></div>' +
                 '<div class="swiper-pagination"></div>' +
-                '<div class="swiper-button-next"></div>' +
-                '<div class="swiper-button-prev"></div>' +
+                // '<div class="swiper-button-next"></div>' +
+                // '<div class="swiper-button-prev"></div>' +
                 '</div>' +
                 '</div>';
         });

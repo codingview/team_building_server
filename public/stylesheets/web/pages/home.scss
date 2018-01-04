@@ -29,15 +29,42 @@
   }
 }
 
-#home_news_list {
-  a {
-    margin-bottom: 2px;// 新闻间隔
+.container-production {
+
+}
+
+.container-resource {
+  .swiper-container {
+    width: 98%;
+    margin: 0 auto;
+  }
+}
+
+.container-news { // 新闻
+  .swiper-pagination { // swiper分页器
+    top: 66%;
+    width: 100%;
+  }
+  .swiper-container { // swiper主体
+    .swiper-slide {
+      .news-icon {
+
+      }
+      .news-name {
+
+      }
+    }
+  }
+  #home_news_list {
+    a {
+      margin-bottom: 20px; // 新闻列表间隔
+    }
   }
 }
 
 //首页基地资源
-.resource-catalogs{
-   a{
+.resource-catalogs {
+  a {
     font-size: 12px;
     font-weight: 600;
   }
