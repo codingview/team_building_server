@@ -29,15 +29,87 @@
   }
 }
 
-#home_news_list {
-  a {
-    margin-bottom: 2px;// 新闻间隔
+.container-production {
+
+}
+
+.container-resource {
+  background-color: rgba(201, 190, 171, 0.1);
+  padding: $padding 0 $padding 0;
+  .resource-catalogs {
+    margin: 10px auto;
+    text-align: center;
+    ul {
+      display: inline-block;
+      border: 0;
+      li {
+        a {
+          border: 0 !important;
+          border-radius: 4px;
+          font-size: 20px;
+          color: $background-color;
+          background-color: $white;
+          margin-right: 1em;
+          &:hover {
+            border: 0;
+            background-color: $background-color;
+            color: $white;
+          }
+        }
+        &.active a {
+          background-color: $background-color;
+          color: $white;
+        }
+      }
+    }
+  }
+  .resource-list {
+    .swiper-container {
+      width: 98%;
+      margin: 0 auto;
+      .resource-item {
+        padding: $padding;
+        background-color: $white;
+        color: $font-color;
+        .resource-title {
+          h2 {
+            @include auto-omitted;
+          }
+        }
+        .resource-abstract {
+          @include auto-omitted;
+        }
+      }
+    }
+  }
+}
+
+.container-news { // 新闻
+  .swiper-pagination { // swiper分页器
+    top: 66%;
+    width: 100%;
+  }
+  .swiper-container { // swiper主体
+    .swiper-slide {
+      .news-icon {
+      }
+      .news-name {
+        h3 {
+          @include auto-omitted;
+        }
+      }
+    }
+  }
+  #home_news_list {
+    a {
+      margin-bottom: 20px; // 新闻列表间隔
+    }
   }
 }
 
 //首页基地资源
-.resource-catalogs{
-   a{
+.resource-catalogs {
+  a {
     font-size: 12px;
     font-weight: 600;
   }

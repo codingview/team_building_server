@@ -61,10 +61,6 @@ const LENGTH = 4
                 el: '.swiper-pagination'
                 , clickable: true
             }
-            , navigation: {
-                nextEl: '.swiper-button-next'
-                , prevEl: '.swiper-button-prev'
-            }
         });
     }
 
@@ -82,15 +78,16 @@ const LENGTH = 4
         });
         return str;
     }
+
     // 写入 - 新闻列表
     , setNewsBanner: array=> {
         let str = '';
         array.forEach(a=> {
             str += `<div class="swiper-slide">
     <a href="/news/detail/${a.id}">
-        <div class=""><img src="/uploads${a.icon}" width="100%"></div>
-        <div class="mt-1e"><h3>${a.name}</h3></div>
-        <div class="mt-1e" style="font-size:16px;"><h4>${a.abstract}</h4></div>
+        <div class="news-icon"><img src="/uploads${a.icon}" width="100%"></div>
+        <div class="news-name mt-1e"><h3>${a.name}</h3></div>
+        <div class="news-abstract mt-1e" style="font-size:16px;"><h4>${a.abstract}</h4></div>
     </a>
 </div>`;
         });
@@ -111,10 +108,9 @@ const LENGTH = 4
                         , pagination: {
                             el: '.swiper-pagination'
                             , clickable: true
-                        }
-                        , navigation: {
-                            nextEl: '.swiper-button-next'
-                            , prevEl: '.swiper-button-prev'
+                            // }, navigation: {
+                            //     nextEl: '.swiper-button-next'
+                            //     , prevEl: '.swiper-button-prev'
                         }
                     });
                 } else { // 移除翻页
@@ -132,6 +128,27 @@ const LENGTH = 4
     // 注入 - 分类下产品列表
     , setCatalog: (sci, list)=> {
         $('#catalog_' + sci).html(list.length > 0 ? Dom.setProductionList(list) : '<h2 class="ta-c">该分类下无产品</h2>');
+    }
+
+    // 初始化 - banner的swiper
+    , initBannerSwiper: ()=> {
+        const bannerSwiper = new Swiper('#banner_swiper', {
+            slidesPerView: 1
+            , effect: 'cube' // 切换效果
+            , grabCursor: true
+            , loop: true
+            , pagination: {
+                el: '.swiper-pagination'
+                , clickable: true
+            }, navigation: { // 翻页按钮
+                nextEl: '.swiper-button-next'
+                , prevEl: '.swiper-button-prev'
+            }, autoplay: { // 自动播放
+                delay: 5000
+                , stopOnLastSlide: false
+                , disableOnInteraction: true
+            }
+        });
     }
 
     // 初始化 - 第一个分类下产品列表
@@ -169,6 +186,7 @@ const LENGTH = 4
         this.initCatalog();
         this.initNews();
         this.initResourceCatalog();
+        this.initBannerSwiper();
     }
 }
     , Listener = {

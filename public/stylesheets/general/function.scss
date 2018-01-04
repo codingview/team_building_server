@@ -1,0 +1,21 @@
+/**
+ * function/mixin 方法集
+ *
+ */
+
+/* 常量 */
+// 颜色常量
+$red: #ff0000;
+$white: white;
+$background-color: #f3883c;
+$font-color: #373636;
+// 盒模型常量
+$padding: 20px;
+
+@mixin auto-omitted {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
