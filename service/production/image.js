@@ -30,7 +30,7 @@ const fs = require('fs')
     // 图片转换尺寸,同步方法
     , transform: body=>
         images(body.image)
-            .size(320, 240)
+            .size(640, 480)
             .save(body.image) // 调用fs的writeFileSync方法
 
     // 删除临时图片

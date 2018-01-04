@@ -10,7 +10,7 @@
 module.exports = list=> {
     let str = '';
     list.forEach(p=> {
-        str += '<div class="col-lg-3 production-item">' +
+        str += '<div class="col-lg-4 production-item">' +
             '<div class="production-icon">' +
             '<img src="' + p.icon + '">' +
             '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
