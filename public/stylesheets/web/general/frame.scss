@@ -1,5 +1,6 @@
 @import "../../general/reset";
 @import "../../general/lib";
+@import "../../general/function";
 @import "headers";
 @import "container";
 @import "footer";
@@ -10,6 +11,10 @@ $border-radius: 12px;
   width: 15px;
   height: 15px;
   margin-right: 10px;
+}
+
+.swiper-pagination-bullet-active { // 激活的swiper分页器
+  background-color: $background-color;
 }
 
 // 商品的样式
@@ -26,7 +31,7 @@ $border-radius: 12px;
       }
       .production-layout {
         border-radius: $border-radius;
-        opacity: 0.5;
+        opacity: 0.8;
         position: absolute;
         width: 0;
         height: 0;
