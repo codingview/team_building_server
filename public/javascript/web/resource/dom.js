@@ -54,21 +54,25 @@ const resourceDom = {
     }
 
     // 基地效果
-    , item: r=>'<div class="swiper-slide">' +
-    '<div class="resource-item">' +
-    '<a href="/resource/detail/' + r.id + '?md5=' + r.md5 + '">' +
-    '<div class="resource-icon mt-1e"><img width="100%" src="' + r.icon + '"></div>' +
-    '<div class="resource-title mt-1e"><h2>' + r.title + '</h2></div>' +
-    '<div class="resource-abstract mt-1e">' + r.abstract + '</div>' +
-    '</a>' +
-    '</div>' +
-    '</div>'
+    , item: r=> {
+        const setItem = (hover = '')=>
+        '<div class="resource-item' + hover + '">' +
+        '<a href="/resource/detail/' + r.id + '?md5=' + r.md5 + '">' +
+        '<div class="resource-icon mt-1e"><img width="100%" src="' + r.icon + '"></div>' +
+        '<div class="resource-title mt-1e"><h2>' + r.title + '</h2></div>' +
+        '<div class="resource-abstract mt-1e">' + r.abstract + '</div>' +
+        '</a>' +
+        '</div>';
+        return '<div class="swiper-slide">' + setItem()
+            // + setItem('-hover')
+            + '</div>';
+    }
 
     // 基地列表页基地列表
     , setResourceList: list=> {
         let str = '';
         list.forEach(p=> {
-            str += '<div class="col-lg-3 production-item">' +
+            str += '<div class="col-lg-4 production-item">' +
                 '<div class="production-icon">' +
                 '<img src="' + p.icon + '">' +
                 '<a href="/resource/detail/' + p.id + '" class="production-layout" target="_blank">' +

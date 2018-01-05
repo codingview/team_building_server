@@ -219,9 +219,29 @@ const LENGTH = 4
         });
     }
 
+    // 基地的动画效果
+    , resourceAnimate: ()=> {
+        // const getEle = event=> $(event.target);
+        // $('#resource_list')
+        //     .on('mouseover', '.swiper-slide', event=> {
+        //         getEle(event)
+        //             .parents('.swiper-slide')
+        //             .find('.resource-item-hover')
+        //             .show()
+        //             .stop()
+        //             .animate({
+        //                 top: 0
+        //             }, 300);
+        //     })
+        //     .on('mouseout', '.swiper-slide', event=> {
+        //
+        //     });
+    }
+
     // 初始化
     , init: function () {
         this.catalogChangeListener();
+        // this.resourceAnimate();
     }
 };
 

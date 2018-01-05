@@ -1,7 +1,20 @@
 @import "../general/frame";
 
+.title-icon {
+  margin: 20px auto;
+}
+
 .container-banner {
   width: 100%;
+  @media (min-width: 1366px) {
+    height: 320px;
+  }
+  @media (min-width: 1680px) {
+    height: 390px;
+  }
+  @media (min-width: 1920px) {
+    height: 460px;
+  }
   .swiper-container {
     max-height: 360px;
     max-width: 100%;
@@ -29,39 +42,47 @@
   }
 }
 
-.container-production {
+@mixin general-catalog-a {
+  background-color: $background-color;
+  color: $white;
+}
 
+@mixin general-catalogs {
+  margin: 10px auto;
+  text-align: center;
+  ul {
+    display: inline-block;
+    border: 0;
+    li {
+      a {
+        border: 0 !important;
+        border-radius: 4px;
+        font-size: 20px;
+        color: $background-color;
+        background-color: $white;
+        margin-right: 1em;
+        &:hover {
+          @include general-catalog-a;
+        }
+      }
+      &.active a {
+        @include general-catalog-a;
+      }
+    }
+  }
+}
+
+.container-production {
+  .production-catalogs {
+    @include general-catalogs;
+  }
 }
 
 .container-resource {
   background-color: rgba(201, 190, 171, 0.1);
   padding: $padding 0 $padding 0;
   .resource-catalogs {
-    margin: 10px auto;
-    text-align: center;
-    ul {
-      display: inline-block;
-      border: 0;
-      li {
-        a {
-          border: 0 !important;
-          border-radius: 4px;
-          font-size: 20px;
-          color: $background-color;
-          background-color: $white;
-          margin-right: 1em;
-          &:hover {
-            border: 0;
-            background-color: $background-color;
-            color: $white;
-          }
-        }
-        &.active a {
-          background-color: $background-color;
-          color: $white;
-        }
-      }
-    }
+    @include general-catalogs;
   }
   .resource-list {
     .swiper-container {
@@ -70,14 +91,30 @@
       .resource-item {
         padding: $padding;
         background-color: $white;
-        color: $font-color;
         .resource-title {
           h2 {
+            color: $font-color;
             @include auto-omitted;
           }
         }
         .resource-abstract {
+          color: $font-color;
           @include auto-omitted;
+        }
+        &:hover {
+          padding: $padding;
+          background-color: $background-color;
+          //display: none;
+          .resource-title {
+            h2 {
+              color: $white;
+              @include auto-omitted;
+            }
+          }
+          .resource-abstract {
+            color: $white;
+            @include auto-omitted;
+          }
         }
       }
     }
