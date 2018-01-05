@@ -25,7 +25,7 @@ const getEle = event=> $(event.target).parents('.production-icon').find('.produc
     st = setTimeout(()=> {
         ele.find('.production-title').fadeIn(200);
         ele.find('.production-abstract').fadeIn(500);
-    }, 400);
+    }, 300);
 }
     , hide = event=> { // 关闭效果
     clearTimeout(st);
@@ -41,7 +41,7 @@ const getEle = event=> $(event.target).parents('.production-icon').find('.produc
     st = setTimeout(()=> {
         ele.find('.production-title').fadeOut();
         ele.find('.production-abstract').fadeOut();
-    }, 200);
+    }, 100);
 };
 
 $(function () {

@@ -6,6 +6,8 @@
 
 'use strict';
 
+require('../production/animate');
+
 const LENGTH = 12
     , Url = require('../../general/Url.frame')
     , Data = {
@@ -34,7 +36,7 @@ const LENGTH = 12
     setExampleList: list=> {
         let str = '';
         list.forEach(p=> {
-            str += '<div class="col-lg-3 production-item">' +
+            str += '<div class="col-lg-4 production-item">' +
                 '<div class="production-icon">' +
                 '<img src="' + p.icon + '">' +
                 '<a href="/production/detail/' + p.id + '" class="production-layout" target="_blank">' +
