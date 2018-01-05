@@ -12,6 +12,7 @@ $font-color: #373636;
 // 盒模型常量
 $padding: 20px;
 
+// 自动省略
 @mixin auto-omitted {
   display: block;
   white-space: nowrap;
