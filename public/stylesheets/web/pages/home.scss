@@ -6,6 +6,15 @@
 
 .container-banner {
   width: 100%;
+  @media (min-width: 1366px) {
+    height: 320px;
+  }
+  @media (min-width: 1680px) {
+    height: 390px;
+  }
+  @media (min-width: 1920px) {
+    height: 460px;
+  }
   .swiper-container {
     max-height: 360px;
     max-width: 100%;
